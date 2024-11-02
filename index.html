@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="public/assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="public/css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<title>LOGIN</title>
+</head>
+<body class="login_body">
+    <header class="login_header header">
+        <div>
+            <img src="public/assets/favicon.png" alt="">
+            <p>ARTE Y LOZA</p>
+        </div>
+        <h1>Bienvenido al Software de Inventario de Arte y Loza</h1>
+    </header>
+
+    <main class="login_main">
+
+        <form action="dev/modules/login/loginController.php" method="POST" class="login_form" id="loginForm">
+            <h2>Iniciar Sesion</h2>
+            <input type="text" placeholder="Ingresa Usuario" required name="usuario" id="usuario">
+            <input type="password" placeholder="Ingresa Contraseña" required name="contraseña" id="contraseña">
+            <input type="hidden" name="accion" value="iniciarSesion">
+            <input class="submit" type="submit" value="Ingresar">
+            <div>
+                <p>Olvidaste las credenciales ?</p>
+                <a href="">Recuperalas</a>
+            </div>
+        </form>
+        
+    </main>
+    <footer class="footer">
+        <div class="div1">
+            <img src="public/assets/favicon2.png" alt="">
+            <div>
+                <h2>DESARROLLADORES:</h2>
+                <p>- Simon Muñoz Guarin</p>
+                <p>- Andres Felipe Botero</p>
+                <p>- Juan Pablo Gonzales</p>
+            </div>
+            <div>
+                <h2>CONTACTO:</h2>
+                <p>- simonusuario82@gmail.com - 313 6028348</p>
+                <p>- andres@gmail.com - 311 4227954</p>
+                <p>- jpablogo17@gmail.com - 310 5315207</p>
+            </div>
+        </div>
+        <div class="div2">
+            <p>&copy; 2024 <b>LozaSoft</b> - Todos los Derechos Reservados.</p>
+        </div>
+    </footer>
+<script src="dev/modules/login/login.js"></script>
+</body>
+</html>

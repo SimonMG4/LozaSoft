@@ -1,0 +1,19 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    transition: .3s;
+    font-family: Ubuntu, sans-serif;
+}
+:root{
+    --colorverde:#21c73f;
+    --color9:#797F91;
+    --color8:#0c62c5;
+    --color7:#fff;
+    --color6: #091851;
+    --color1: #17295C;
+    --color2: #C02A36;
+    --color4: #999455;
+    --color3: #DF9556;
+    --color5: #C9C8C7;
+}

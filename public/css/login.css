@@ -1,0 +1,245 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    transition: .3s;
+    font-family: Ubuntu, sans-serif;
+}
+:root{
+    --color9:#797F91;
+    --color8:#0c62c5;
+    --color7:#fff;
+    --color6: #091851;
+    --color1: #17295C;
+    --color2: #C02A36;
+    --color4: #999455;
+    --color3: #DF9556;
+    --color5: #C9C8C7;
+}
+
+/* LOGIN */
+
+.login_body{
+    background-color: var(--color5);
+    overflow-x: hidden;
+    position: relative;
+
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.header div{
+    background: var(--color1);
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+.header div p{
+    font-size: 1.75rem;
+    line-height: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--color5);
+    margin-left: 1vh;
+}
+.header div img{
+    height: 3rem;
+    width: 3rem;
+    margin-left: 5vw;
+}
+.header h1{
+    text-align: center;
+    color: var(--color1);
+    font-weight: 700;
+    font-size: 3.5vw;
+    padding-top: 5vh;
+}
+.login_main{
+    position: relative;
+    width: 100%;
+    height: 50vh;
+
+}
+.login_form{
+    max-width: 375px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: var(--color1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+
+}
+.login_form h2{
+    line-height: 1.75rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    color: var(--color4);
+}
+.login_form input{
+    background-color: var(--color7);
+    padding: 1rem;
+    padding-right: 3rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 300px;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+}
+.login_form input::placeholder{
+    color: var(--color1);
+}
+.login_form .submit{
+    display: block;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  background-color: var(--color3);
+  color: var(--color7);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+}
+.login_form div{
+    display: flex;
+    gap: 0.5rem;
+}
+.login_form div a{
+    text-decoration: none;
+    color: var(--color3);
+}
+.login_form .submit:hover, .login_form div a:hover{
+    transform: scale(1.1);
+}
+.login_form p{
+    color: var(--color5);
+}
+.footer{
+    cursor: default;
+    width: 100%;
+    height: 17vh;
+    background: var(--color1);
+    position: absolute;
+    top: 83vh;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+}
+.footer .div1{
+    padding-top: 1em;
+    display: flex;
+    justify-content: space-around;
+    height: 80%;
+    align-items: center;
+}
+.footer .div1 img{
+    width: 110px;
+    height: 110px;
+}
+.footer .div1 div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.footer .div1 div h2{
+    color: var(--color3);
+    font-size: 0.7em;
+}
+.footer .div1 div p{
+    color: var(--color5);
+    font-size: 0.7em;
+
+}
+.footer .div2{
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color6);
+}
+.footer .div2 p{
+    color: var(--color7);
+    font-size: 0.7em;
+}
+/* PRODUCTOS */
+
+.productos_body{
+    background-color: var(--color5);
+    position: relative;
+}
+.productos_body .productos_main{
+    
+    width: 80vw;
+    background-color: var(--color7);
+    margin: 0 auto;
+    margin-top: 10vh;
+    border-radius: 12px;
+    padding: 2em;
+
+}
+.modal_container{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    background-color: rgba(144, 148, 150, 0.8);
+}
+.productos_footer{
+    position: absolute;
+    right: 0;
+    width: 100%;
+    bottom: 0;
+    height: 17vh;
+    display: flex;
+    flex-direction: column;
+}
+.productos_footer .div1{
+    padding-top: 1em;
+    display: flex;
+    justify-content: space-around;
+    height: 80%;
+    align-items: center;
+}
+.productos_footer .div1 img{
+    width: 110px;
+    height: 110px;
+}
+.productos_footer .div1 div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+.productos_footer .div1 div h2{
+    color: var(--color3);
+    font-size: 0.7em;
+}
+.productos_footer .div1 div p{
+    color: var(--color5);
+    font-size: 0.7em;
+
+}
+.productos_footer .div2{
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color6);
+}
+.productos_footer .div2 p{
+    color: var(--color7);
+    font-size: 0.7em;
+}
