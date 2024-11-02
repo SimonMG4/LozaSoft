@@ -13,6 +13,7 @@ if(!isset($_SESSION['id'])){
     <link rel="shortcut icon" href="../../public/assets/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../public/css/main.css">
     <link rel="stylesheet" href="../../public/css/productos.css">
+    <link rel="stylesheet" href="../../public/css/modal.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -35,27 +36,12 @@ if(!isset($_SESSION['id'])){
             <button id="logOut" class="logOut">CERRAR SESION</button>
         </div>
     </header>
-    <div class="modal_container">
-        <div class="content_modal">
-            <form action="" class="formAgregarProducto">
-                <input type="text" name="nombreAgregarProducto" placeholder="Nombre:">
-                <input type="text" name="descripcionAgregarProducto" placeholder="Descripcion:">
-                <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:">
-                <input type="int" name="stockAgregarProducto" placeholder="Stock:">
-                <button class="asd">
-                    <input type="file" name="imgAgregarProducto" placeholder="Imagen:">
-                </button>
-                <input type="submit" name="agregarProducto">
-            </form>
-        </div>
-
-    </div>
     <main class="productos_main">
         <div>
             <button class="btn_agregar" data-id="form-productos">Agregar</button>
             
             <input  class="buscar" type="text" id="buscar" placeholder="Buscar...">
-                
+            
         </div>
         <table id="tablaProductos" class="tabla">
             <thead>
@@ -67,16 +53,16 @@ if(!isset($_SESSION['id'])){
                     <th>Stock</th>
                     <th>Imagen</th>
                     <th>Acciones</th>
-
+                    
                 </tr>
                 <tbody>
                     <?php
                     include('../../dev/config/modelo.php');
-
+                    
                     $filas = tablaProductos();
-
+                    
                     foreach ($filas as $fila):
-                    ?>
+                        ?>
                     <tr>
                         <td><?php echo $fila->id; ?></td>
                         <td><?php echo $fila->nombre; ?></td>
@@ -90,11 +76,11 @@ if(!isset($_SESSION['id'])){
                 </tbody>
 
             </thead>
-
+            
         </table>
     </main>
     
-       
+    
     <footer class="productos_footer">
         <div class="div1">
             <img src="../../public/assets/favicon2.png" alt="">
@@ -115,15 +101,10 @@ if(!isset($_SESSION['id'])){
             <p>&copy; 2024 <b>LozaSoft</b> - Todos los Derechos Reservados.</p>
         </div>
     </footer>
-    <!-- contenedor de las modales -->
-    <section class="modal modal--show">
-        <div class="modal_container">
-            <!-- contenido de la modal -->
-            <h2 class="modal_title">Agregar Resgitro</h2>
-            <!-- formulario dinamico -->
-            
-        </div>
-    </section>
+
+    <div class="modal_container">
+    </div>
+    
     <script src="../../dev/modules/js/logOut.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../dev/modules/productos/productos.js"></script>

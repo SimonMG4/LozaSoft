@@ -214,28 +214,3 @@
 .btn_agregar:hover, .btn_editar:hover, .btn_eliminar:hover, .productos_main div button:hover{
     scale: 1.1;
 }
-.formAgregarProducto{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-.formAgregarProducto input{
-    padding: 1em 0.5em;
-    border-radius: 12px;
-    margin-bottom: 0.5em;
-    border: none;
-    background-color: var(--color5);
-    color: black;
-    font-weight: 500;
-}
-.formAgregarProducto input::placeholder{
-    color: black;
-}
-.formAgregarProducto input[type="submit"]{
-    background-color: var(--color3);
-    color: white;
-}
-.formAgregarProducto input[type="file"]{
-    display: flex;
-}

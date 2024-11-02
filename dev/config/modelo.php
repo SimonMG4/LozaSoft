@@ -98,3 +98,6 @@ function tablaProductos(){
         return false;
     }
 }
+function agregarProducto{
+    abrirConexion()
+}
