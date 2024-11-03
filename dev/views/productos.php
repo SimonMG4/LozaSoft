@@ -71,7 +71,8 @@ if(!isset($_SESSION['id'])){
                         <td><?php echo $fila->precio; ?></td>
                         <td><?php echo $fila->stock; ?></td>
                         <td><img src="<?php echo $fila->imagen; ?>"</td>
-                        <td><button class="btn_eliminar">Eliminar</button><button class="btn_editar" >Editar</button></td>
+                        <td><button class="btn_eliminar">Eliminar</button>
+                        <button class="btn_editar" >Editar</button></td>
                     </tr>
                     <?php endforeach;?>
                 </tbody>
@@ -109,7 +110,6 @@ if(!isset($_SESSION['id'])){
         </div>
     </section>
 
-    <script src="../../dev/modules/js/logOut.js"></script>
     <script src="../../public/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../dev/modules/productos/productos.js"></script>

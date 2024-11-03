@@ -7,15 +7,14 @@
     background-color: #111111bd;
     justify-content: center;
     align-items: center;
-    opacity: 0;
     pointer-events: none; /* Deshabilitado inicialmente */
     z-index: 999;
-    display: flex; /* Añadido flex para centrar el contenido cuando esté visible */
+    display: none; /* Añadido flex para centrar el contenido cuando esté visible */
     transition: opacity 0.3s ease;
 }
 
 .modal--show {
-    opacity: 1;
+    display: flex;
     pointer-events: auto;
 }
 
