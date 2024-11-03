@@ -77,7 +77,7 @@ function cerrarSesion(){
    session_start();
    session_unset();
    session_destroy();
-   header("Location: /LozaSoft/index.html");
+   header("Location: ../../index.html");
 
 }
 function tablaProductos(){
@@ -98,6 +98,32 @@ function tablaProductos(){
         return false;
     }
 }
-function agregarProducto{
-    abrirConexion()
+function agregarProducto($nombre,$descripcion,$precio,$stock,$img){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("INSERT INTO productos (nombre, descripcion, precio, stock, imagen) VALUES ('$nombre', '$descripcion', $precio, $stock, '$img')");
+    $query->execute();
+
+    if ($query->execute()) {
+        $response['status']= 'true';
+         } else {
+        $response['status']= 'false';
+         }
+    cerrarConexion();
+}
+function editarProducto($id,$nombre,$descripcion,$precio,$stock,$img){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("UPDATE productos SET nombre = $nombre, descripcion = $descripcion,
+     precio = $precio, stock = $stock, img = $img WHERE id = $id");
+     $query->execute();
+
+     if ($query->execute()) {
+        return true;
+         } else {
+        return false;
+         }
+    cerrarConexion();
 }

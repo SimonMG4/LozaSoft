@@ -14,6 +14,7 @@ if(!isset($_SESSION['id'])){
     <link rel="stylesheet" href="../../public/css/main.css">
     <link rel="stylesheet" href="../../public/css/productos.css">
     <link rel="stylesheet" href="../../public/css/modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -102,10 +103,33 @@ if(!isset($_SESSION['id'])){
         </div>
     </footer>
 
-    <div class="modal_container">
-    </div>
-    
+    <!-- conteedor de las modales -->
+    <section class="modal">
+        <div class="modal_contenedor">
+            <!-- contenido dinamico del formulario que puede variar -->
+            <div id="form-productos" class="modal_form">
+                <form action="../../dev/modules/productos/productosController.php" method="POST" class="form formAgregarProducto">
+                    <h2>Agregar Producto</h2>
+                <input type="text" name="nombreAgregarProducto" placeholder="Nombre:">
+                    <input type="text" name="descripcionAgregarProducto" placeholder="Descripcion:">
+                    <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:">
+                    <input type="number" name="stockAgregarProducto" placeholder="Stock:">
+                    <label for="imgAgregarProducto" class="custom-file-upload">
+                        <span id="file-chosen">Ningún archivo seleccionado
+                    </label>
+                    <input type="file" id="imgAgregarProducto" name="imgAgregarProducto">
+                    <div>
+                        <input type="hidden" name="accion" value="agregarProducto">
+                        <input type="submit" value="Aceptar">
+                        <button id="cerrarModal" class="cerrarModal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <script src="../../dev/modules/js/logOut.js"></script>
+    <script src="../../public/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../../dev/modules/productos/productos.js"></script>
     

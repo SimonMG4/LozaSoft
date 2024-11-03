@@ -145,6 +145,9 @@
     padding: 1em;
     border-radius: 12px;
     min-height: 50vh;
+    overflow: scroll;
+    height:480px;
+    margin-bottom: 18vh;
 
 }
 .productos_main div{
