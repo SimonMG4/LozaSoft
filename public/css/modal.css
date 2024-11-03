@@ -1,49 +1,61 @@
-/* clases de la modal */
+/* Clases de la modal */
 .modal {
-    position: absolute; 
-    top: 0; left: 0; 
-    width: 100%; 
-    height: 100%; 
+    position: fixed; /* Cambiado a fixed para asegurar que esté siempre visible */
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
     background-color: #111111bd;
     justify-content: center;
-    pointer-events: none;
+    align-items: center;
     opacity: 0;
-    align-items: center; 
+    pointer-events: none; /* Deshabilitado inicialmente */
     z-index: 999;
+    display: flex; /* Añadido flex para centrar el contenido cuando esté visible */
+    transition: opacity 0.3s ease;
 }
 
-.modal--show{
-    pointer-events: unset;
+.modal--show {
     opacity: 1;
+    pointer-events: auto;
 }
 
-.modal_contenedor{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* Formulario específico dentro de la modal */
+.modal_form {
+    display: none; /* Oculto por defecto */
+}
+
+.content--show {
+    display: block; /* Mostrar el formulario activo */
+}
+
+/* Contenedor dentro de la modal */
+.modal_contenedor {
+    position: relative;
     box-shadow: 0 0px 10px 18px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
     width: 25vw;
     background-color: var(--color7);
     border-radius: 12px;
     padding: 1em;
     z-index: 1000;
+    transform: translateY(0); /* Para que no se vea afectado al abrir */
+    transition: transform 0.3s ease;
 }
 
-
-/* clases de los formularios */
-.formAgregarProducto{
+/* Clases de los formularios */
+.formAgregarProducto {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.formAgregarProducto h2{
+
+.formAgregarProducto h2 {
     text-align: center;
     padding-top: 1em;
     margin-bottom: 1em;
     font-weight: 900;
 }
-.formAgregarProducto input{
+
+.formAgregarProducto input {
     padding: 1em 0.5em;
     border-radius: 12px;
     margin-bottom: 0.5em;
@@ -52,14 +64,17 @@
     color: black;
     font-weight: 500;
 }
-.formAgregarProducto input::placeholder{
+
+.formAgregarProducto input::placeholder {
     color: rgba(0, 0, 0, 0.6);
 }
-.formAgregarProducto div{
+
+.formAgregarProducto div {
     align-self: center;
     padding-top: 2em;
 }
-.formAgregarProducto input[type="submit"], .cerrarModal{
+
+.formAgregarProducto input[type="submit"], .cerrarModal {
     background-color: var(--colorverde);
     color: white;
     border: none;
@@ -67,33 +82,38 @@
     border-radius: 12px;
     width: 75px;
     text-transform: uppercase;
-    cursor: pointer; 
+    cursor: pointer;
     font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 500;
     text-align: center;
 }
-.cerrarModal{
+
+.cerrarModal {
     background-color: var(--color5);
 }
-.cerrarModal:hover{
+
+.cerrarModal:hover {
     background-color: var(--color2);
-    scale: 1.1;
+    transform: scale(1.1);
 }
-.formAgregarProducto input[type="submit"]:hover{
-    scale: 1.1;
+
+.formAgregarProducto input[type="submit"]:hover {
+    transform: scale(1.1);
 }
+
 input[type="file"] {
     display: none;
 }
+
 .custom-file-upload {
     border: 2px solid #ccc;
     display: inline-block;
     padding: 12px 24px;
     cursor: pointer;
     font-size: 16px;
-    background-color: #f0f0f0; 
-    border-radius: 12px; 
+    background-color: #f0f0f0;
+    border-radius: 12px;
     margin-top: 10px;
     text-align: center;
 }

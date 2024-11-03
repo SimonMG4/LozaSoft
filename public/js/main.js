@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 modal.classList.remove('modal--show');
+                // Ocultar todos los formularios dentro de la modal
+                document.querySelectorAll('.modal_form').forEach(form => {
+                    form.classList.remove('content--show');
+                });
             });
         });
     } else {
@@ -84,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         confirmButtonText: 'Entendido',
                         confirmButtonColor: '#13A438',
                     }).then(() => {
-                        window.location.reload();x
+                        window.location.reload();
                     });
                 }
             } catch (error) {
