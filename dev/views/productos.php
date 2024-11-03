@@ -39,7 +39,7 @@ if(!isset($_SESSION['id'])){
     </header>
     <main class="productos_main">
         <div>
-            <button class="btn_agregar" data-id="form-productos-agregar">Agregar</button>
+            <button class="btn_agregar" data-url="../../dev/modal/agregarProducto.html">Agregar</button>
             
             <input  class="buscar" type="text" id="buscar" placeholder="Buscar...">
             
@@ -71,7 +71,7 @@ if(!isset($_SESSION['id'])){
                         <td><?php echo $fila->precio; ?></td>
                         <td><?php echo $fila->stock; ?></td>
                         <td><img src="<?php echo $fila->imagen; ?>"</td>
-                        <td><button class="btn_eliminar">Eliminar</button><button class="btn_editar btn_agregar" data-id="form-productos-editar">Editar</button></td>
+                        <td><button class="btn_eliminar">Eliminar</button><button class="btn_editar" >Editar</button></td>
                     </tr>
                     <?php endforeach;?>
                 </tbody>
@@ -106,44 +106,6 @@ if(!isset($_SESSION['id'])){
     <!-- conteedor de las modales -->
     <section class="modal">
         <div class="modal_contenedor">
-            <!-- contenido dinamico del formulario que puede variar -->
-            <div id="form-productos-agregar" class="modal_form">
-                <form action="../../dev/modules/productos/productosController.php" method="POST" class="form formAgregarProducto">
-                    <h2>Agregar Producto</h2>
-                <input type="text" name="nombreAgregarProducto" placeholder="Nombre:">
-                    <input type="text" name="descripcionAgregarProducto" placeholder="Descripcion:">
-                    <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:">
-                    <input type="number" name="stockAgregarProducto" placeholder="Stock:">
-                    <label for="imgAgregarProducto" class="custom-file-upload">
-                        <span id="file-chosen">Ningún archivo seleccionado
-                    </label>
-                    <input type="file" id="imgAgregarProducto" name="imgAgregarProducto">
-                    <div>
-                        <input type="hidden" name="accion" value="agregarProducto">
-                        <input type="submit" value="Aceptar">
-                        <button id="cerrarModal" class="cerrarModal">Cerrar</button>
-                    </div>
-                </form>
-            </div>
-            <!-- contenido dinamico del formulario que puede variar -->
-            <div id="form-productos-editar" class="modal_form">
-                <form action="../../dev/modules/productos/productosController.php" method="POST" class="form formAgregarProducto">
-                    <h2>Editar Producto</h2>
-                <input type="text" name="nombreAgregarProducto" placeholder="Nombre:">
-                    <input type="text" name="descripcionAgregarProducto" placeholder="Descripcion:">
-                    <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:">
-                    <input type="number" name="stockAgregarProducto" placeholder="Stock:">
-                    <label for="imgAgregarProducto" class="custom-file-upload">
-                        <span id="file-chosen">Ningún archivo seleccionado
-                    </label>
-                    <input type="file" id="imgAgregarProducto" name="imgAgregarProducto">
-                    <div>
-                        <input type="hidden" name="accion" value="agregarProducto">
-                        <input type="submit" value="Aceptar">
-                        <button id="cerrarModal" class="cerrarModal">Cerrar</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </section>
 
