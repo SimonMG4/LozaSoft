@@ -46,6 +46,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     modalContent.innerHTML = data;
                     modal.classList.add('modal--show');
 
+                    const inputImg = document.querySelector('.inputImg');
+                    if(inputImg){
+                        inputImg.addEventListener('change', function(event){
+                            const fileName = inputImg.files[0].name;
+
+                            document.getElementById('file-chosen').textContent = fileName;
+
+                        })
+                    }
+                    
+                    
+
                     const form = document.querySelector('.form');
                     if(form){
                         form.addEventListener('submit', async (e)=>{
