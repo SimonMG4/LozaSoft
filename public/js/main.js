@@ -71,6 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                         showConfirmButton: false,
                                         timer: 1000
                                     });
+                                    setTimeout(() => {
+                                        modal.classList.remove('modal--show'); // Cerrar el modal
+                                        modalContent.innerHTML = '';  // Limpiar el contenido del modal
+                                        window.location.reload(); //Recarga pagina para mostrar en la tabla
+                                    }, 1000); // El mismo tiempo que el timer de la alerta
                                 } else {
                                     Swal.fire({
                                         icon: "error",
