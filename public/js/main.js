@@ -36,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     abrirModal.forEach(button => {
         button.addEventListener('click', function() {
+            
+
             const url = this.getAttribute('data-url');
 
             fetch(url)
@@ -43,6 +45,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     modalContent.innerHTML = data;
                     modal.classList.add('modal--show');
+
+                    const form = document.querySelector('.form');
+                    if(form){
+                        form.addEventListener('submit', async (e)=>{
+                            e.preventDefault();
+    
+                            const formData = new FormData(form);
+                            const action = form.getAttribute('action');
+    
+                            try {
+                                const response = await fetch(action, {
+                                    method: 'POST',
+                                    body: formData,
+                                    headers: {
+                                        'X-Requested-With': 'XMLHttpRequest',
+                                    }
+                                });
+                                const data = await response.json();
+                                if (data.status == 'true') {
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "Registro creado exitosamente",
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Error",
+                                        text: "Ha habido un error al crear el registro"
+                                    });
+                                }
+                            } catch (error) {
+                                console.error('Error en el envío del formulario:', error);
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: 'Hubo un problema al procesar la solicitud.'
+                                });
+                            }
+
+                    }
+
+                    );
+                    };
 
                     
                     // Añadir evento para cerrar el modal
@@ -57,50 +104,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //MANEJO DE ENVIO DE FORMULARIOS
-    const forms = document.querySelectorAll('.form');
+    // const forms = document.querySelectorAll('.form');
 
-    forms.forEach(form =>{
-        form.addEventListener('submit', async (e)=>{
-            e.preventDefault();
+    // forms.forEach(form =>{
+    //     form.addEventListener('submit', async (e)=>{
+    //         e.preventDefault();
 
-            const formData = new FormData(form);
-            const action = form.getAttribute('action');
+    //         const formData = new FormData(form);
+    //         const action = form.getAttribute('action');
 
-            try{
-                const response = await fetch(action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if(data.status ==='true'){
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Registro creado exitosamente",
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                    }else{
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "Ha habido un error al crear el registro"
-                        });
-                    }
-                });
-            }catch (error) {
-                console.error('Error en el envío del formulario:', error);
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Hubo un problema al procesar la solicitud.'
-                });
-            }
-        }); 
-    });
+    //         try{
+    //             const response = await fetch(action, {
+    //                 method: 'POST',
+    //                 body: formData,
+    //                 headers: {
+    //                     'X-Requested-With': 'XMLHttpRequest',
+    //                 }
+    //             })
+    //             .then(response => response.json())
+    //             .then(data => {
+    //                 if(data.status ==='true'){
+    //                     Swal.fire({
+    //                         position: "top-end",
+    //                         icon: "success",
+    //                         title: "Registro creado exitosamente",
+    //                         showConfirmButton: false,
+    //                         timer: 1000
+    //                     });
+    //                 }else{
+    //                     Swal.fire({
+    //                         icon: "error",
+    //                         title: "Error",
+    //                         text: "Ha habido un error al crear el registro"
+    //                     });
+    //                 }
+    //             });
+    //         }catch (error) {
+    //             console.error('Error en el envío del formulario:', error);
+    //             Toast.fire({
+    //                 icon: 'error',
+    //                 title: 'Hubo un problema al procesar la solicitud.'
+    //             });
+    //         }
+    //     }); 
+    // });
 
     //ELIMINAR REGISTROS
     const eliminarRegistro = document.querySelectorAll('.btn_eliminar');
