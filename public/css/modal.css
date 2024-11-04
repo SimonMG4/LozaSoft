@@ -115,6 +115,8 @@ input[type="file"] {
     border-radius: 12px;
     margin-top: 10px;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .custom-file-upload:hover {
