@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         
     });
+    
 
 
 
-
-
+    //Mostrar modales
     const abrirModal = document.querySelectorAll('.btn_agregar'); // Corregir el nombre de la clase
     const modal = document.querySelector('.modal'); // Obtener un único elemento modal
     const modalContent = document.querySelector('.modal_contenedor'); // Obtener un único contenedor modal
@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     modalContent.innerHTML = data;
                     modal.classList.add('modal--show');
+
                     
                     // Añadir evento para cerrar el modal
                     const closeModalButton = document.querySelector('#cerrarModal');
@@ -52,6 +53,106 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 })
                 .catch(error => console.error('Error al cargar el modal:', error));
+        });
+    });
+
+    //MANEJO DE ENVIO DE FORMULARIOS
+    const forms = document.querySelectorAll('.form');
+
+    forms.forEach(form =>{
+        form.addEventListener('submit', async (e)=>{
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const action = form.getAttribute('action');
+
+            try{
+                const response = await fetch(action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.status ==='true'){
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Registro creado exitosamente",
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }else{
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Ha habido un error al crear el registro"
+                        });
+                    }
+                });
+            }catch (error) {
+                console.error('Error en el envío del formulario:', error);
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Hubo un problema al procesar la solicitud.'
+                });
+            }
+        }); 
+    });
+
+    //ELIMINAR REGISTROS
+    const eliminarRegistro = document.querySelectorAll('.btn_eliminar');
+
+    eliminarRegistro.forEach(button =>{
+        button.addEventListener('click', function(){
+            const id = this.getAttribute('data-id');
+            const accion = this.getAttribute('data-accion');
+            const controller = this.getAttribute('data-controller');
+
+            Swal.fire({ 
+                title: "¿Estas seguro de eliminar este registro?", 
+                text: "Esta accion es irreversible", 
+                icon: "warning", showCancelButton: true, 
+                confirmButtonColor: "#3085d6", 
+                cancelButtonColor: "#d33", 
+                confirmButtonText: "Sí, Eliminar", 
+                cancelButtonText: "Cancelar"
+            }).then(result => {
+                if (result.isConfirmed){
+                    fetch(controller,{
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams({ 'accion': accion, 'id': id })
+                    })
+                    .then(response=>response.json())
+                    .then(data=>{
+                        if(data.status == 'true'){
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                timer: 500 ,
+                                timerProgressBar: true,
+                                title: "Registro eliminado correctamente",
+                                showConfirmButton: false,
+        
+                            }).then(() => { 
+                                window.location.reload(); // Refresca la página automáticamente 
+                                });
+                        }else{
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Ha habido un error al eliminar el registro"
+                            });
+                        }
+                    })
+                }
+            })
+
+            
+
         });
     });
 });

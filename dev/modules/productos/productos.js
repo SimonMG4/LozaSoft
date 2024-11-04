@@ -25,6 +25,4 @@ document.addEventListener('DOMContentLoaded', function() {
             rows[i].style.display = match ? '' : 'none';
         }
     }
-
-    const agregarProducto = document.getElementById('btn_agregar');
 });

@@ -41,20 +41,20 @@
 }
 
 /* Clases de los formularios */
-.formAgregarProducto {
+.form {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.formAgregarProducto h2 {
+.form h2 {
     text-align: center;
     padding-top: 1em;
     margin-bottom: 1em;
     font-weight: 900;
 }
 
-.formAgregarProducto input {
+.form input {
     padding: 1em 0.5em;
     border-radius: 12px;
     margin-bottom: 0.5em;
@@ -64,16 +64,16 @@
     font-weight: 500;
 }
 
-.formAgregarProducto input::placeholder {
+.form input::placeholder {
     color: rgba(0, 0, 0, 0.6);
 }
 
-.formAgregarProducto div {
+.form div {
     align-self: center;
     padding-top: 2em;
 }
 
-.formAgregarProducto input[type="submit"], .cerrarModal {
+.form input[type="submit"], .cerrarModal {
     background-color: var(--colorverde);
     color: white;
     border: none;
@@ -97,7 +97,7 @@
     transform: scale(1.1);
 }
 
-.formAgregarProducto input[type="submit"]:hover {
+.form input[type="submit"]:hover {
     transform: scale(1.1);
 }
 

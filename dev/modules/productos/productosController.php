@@ -18,6 +18,16 @@ if (isset($_REQUEST['accion'])) {
         $sesion= agregarProducto($nombre, $descripcion, $precio, $stock,$img);
 
         echo json_encode($sesion);
+        break;
+        
+    case 'eliminarProducto':
+        $id = $_POST['id'];
+
+        $sesion= eliminarProducto($id);
+        
+        echo json_encode($sesion);
+
+        break;
         
     }
     }

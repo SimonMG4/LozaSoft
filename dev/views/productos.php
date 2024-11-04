@@ -71,7 +71,7 @@ if(!isset($_SESSION['id'])){
                         <td><?php echo $fila->precio; ?></td>
                         <td><?php echo $fila->stock; ?></td>
                         <td><img src="<?php echo $fila->imagen; ?>"</td>
-                        <td><button class="btn_eliminar">Eliminar</button>
+                        <td><button class="btn_eliminar" data-id="<?php echo $fila->id?>" data-accion="eliminarProducto" data-controller='../../dev/modules/productos/productosController.php'>Eliminar</button>
                         <button class="btn_editar" >Editar</button></td>
                     </tr>
                     <?php endforeach;?>
@@ -80,6 +80,23 @@ if(!isset($_SESSION['id'])){
             </thead>
             
         </table>
+
+        <!-- <form action="../../dev/modules/productos/productosController.php" method="POST" class="form">
+                    <h2>Agregar Producto</h2>
+                    <input type="text" name="nombreAgregarProducto" placeholder="Nombre:">
+                    <input type="text" name="descripcionAgregarProducto" placeholder="Descripcion:">
+                    <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:">
+                    <input type="number" name="stockAgregarProducto" placeholder="Stock:">
+                    <label for="imgAgregarProducto" class="custom-file-upload">
+                        <span id="file-chosen">Ningún archivo seleccionado
+                    </label>
+                    <input type="file" id="imgAgregarProducto" name="imgAgregarProducto">
+                    <div>
+                        <input type="hidden" name="accion" value="agregarProducto">
+                        <input type="submit" name="agregarProducto" value="Aceptar">
+                        <button id="cerrarModal" class="cerrarModal">Cerrar</button>
+                    </div>
+                </form> -->
     </main>
     
     
@@ -103,6 +120,7 @@ if(!isset($_SESSION['id'])){
             <p>&copy; 2024 <b>LozaSoft</b> - Todos los Derechos Reservados.</p>
         </div>
     </footer>
+    
 
     <!-- conteedor de las modales -->
     <section class="modal">

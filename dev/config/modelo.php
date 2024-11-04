@@ -98,6 +98,7 @@ function tablaProductos(){
         return false;
     }
 }
+
 function agregarProducto($nombre,$descripcion,$precio,$stock,$img){
     abrirConexion();
     global $conexion;
@@ -105,13 +106,15 @@ function agregarProducto($nombre,$descripcion,$precio,$stock,$img){
     $query = $conexion->prepare("INSERT INTO productos (nombre, descripcion, precio, stock, imagen) VALUES ('$nombre', '$descripcion', $precio, $stock, '$img')");
     $query->execute();
 
-    if ($query->execute()) {
+    if ($query) {
         $response['status']= 'true';
-         } else {
+        } else {
         $response['status']= 'false';
-         }
+        }
+    return $response;
     cerrarConexion();
 }
+
 function editarProducto($id,$nombre,$descripcion,$precio,$stock,$img){
     abrirConexion();
     global $conexion;
@@ -125,5 +128,20 @@ function editarProducto($id,$nombre,$descripcion,$precio,$stock,$img){
          } else {
         return false;
          }
+    cerrarConexion();
+}
+function eliminarProducto($id){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("DELETE FROM productos WHERE id= $id");
+    $query->execute();
+
+    if ($query) {
+        $response['status']= 'true';
+         } else {
+        $response['status']= 'false';
+         }
+    return $response;
     cerrarConexion();
 }

@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 } else if(data.status === 'error1'){
                     Swal.fire({
                         title: "Contraseña incorrecta",
-              text: 'Intenta nuevamente',
-              icon: "error"
-            });
+                        text: 'Intenta nuevamente',
+                        icon: "error"
+                    });
         } else{
             Swal.fire({
                 title: "Usuario no encontrado",
@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', function(){
     .catch(error => {
         console.error('Error:', error);
         Swal.fire({
-          title: "Error",
-          text: "Error en el servidor. Inténtelo de nuevo más tarde.",
-          icon: "error"
+            title: "Error",
+            text: "Error en el servidor. Inténtelo de nuevo más tarde.",
+            icon: "error"
         });
     });
 });
