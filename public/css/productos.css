@@ -217,3 +217,8 @@
 .btn_agregar:hover, .btn_editar:hover, .btn_eliminar:hover, .productos_main div button:hover{
     scale: 1.1;
 }
+.imgTabla{
+    width: 65px;
+    height: 65px;
+    border-radius: 12px;
+}

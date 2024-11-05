@@ -8,28 +8,41 @@ if (isset($_REQUEST['accion'])) {
 
     switch($accion){
 
-    case 'agregarProducto':
-        $nombre = $_POST['nombreAgregarProducto'];
-        $descripcion = $_POST['descripcionAgregarProducto'];
-        $precio = $_POST['precioAgregarProducto'];
-        $stock = $_POST['stockAgregarProducto'];
-
-        if (isset($_FILES['imgAgregarProducto']) && $_FILES['imgAgregarProducto']['error'] == UPLOAD_ERR_OK) {
-            $img = $_FILES['imgAgregarProducto']['name']; // Nombre del archivo
-            // Aquí deberías mover el archivo a una carpeta adecuada y actualizar $img con la ruta
-            $ruta_destino = '../../uploads/' . basename($img);
-            move_uploaded_file($_FILES['imgAgregarProducto']['tmp_name'], $ruta_destino);
-        } else {
-            // Manejar el error o asignar un valor por defecto
-            $img = null; // O alguna lógica para manejar la ausencia del archivo
-        }
+        case 'agregarProducto':
+            $nombre = $_POST['nombreAgregarProducto'];
+            $descripcion = $_POST['descripcionAgregarProducto'];
+            $precio = $_POST['precioAgregarProducto'];
+            $stock = $_POST['stockAgregarProducto'];
         
-    
-
-        $sesion= agregarProducto($nombre, $descripcion, $precio, $stock,$img);
-
-        echo json_encode($sesion);
-        break;
+            // Ruta del directorio donde se almacenarán las imágenes
+            $ruta_directorio = $_SERVER['DOCUMENT_ROOT'] . '/lozasoft/public/assets/images/';
+            $img = null;
+        
+            if (isset($_FILES['imgAgregarProducto'])) {
+                $fileTmpPath = $_FILES['imgAgregarProducto']['tmp_name'];
+                $fileName = $_FILES['imgAgregarProducto']['name'];
+                $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        
+                // Extensiones permitidas para imágenes
+                $allowedExtensions = ['jpg', 'jpeg', 'png'];
+        
+                // Validación de tipo de archivo
+                if (in_array($fileExtension, $allowedExtensions)) {
+                    // Renombrar el archivo con un identificador único
+                    $newFileName = uniqid('prod_', true) . '.' . $fileExtension;
+                    $ruta_destino = '/public/assets/images/' . $newFileName;
+        
+                    if (move_uploaded_file($fileTmpPath, $ruta_directorio.$newFileName)) {
+                        $img = $ruta_destino; // Guardar la ruta completa en la base de datos
+                    }
+                }
+            }
+        
+            // Llamada a la función para agregar producto con la imagen
+            $sesion = agregarProducto($nombre, $descripcion, $precio, $stock, $img);
+            echo json_encode($sesion);
+            break;
+        
         
     case 'eliminarProducto':
         $id = $_POST['id'];

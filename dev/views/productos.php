@@ -69,7 +69,7 @@ if(!isset($_SESSION['id'])){
                         <td><?php echo $fila->descripcion; ?></td>
                         <td><?php echo $fila->precio; ?></td>
                         <td><?php echo $fila->stock; ?></td>
-                        <td><img src="<?php echo $fila->imagen; ?>"</td>
+                        <td><img class="imgTabla" src="http://localhost/lozasoft<?php echo $fila->imagen; ?>"</td>
                         <td><button class="btn_eliminar" data-id="<?php echo $fila->id?>" data-accion="eliminarProducto" data-controller='../../dev/modules/productos/productosController.php'>Eliminar</button>
                         <button class="btn_editar" >Editar</button></td>
                     </tr>
