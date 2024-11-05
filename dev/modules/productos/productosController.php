@@ -52,6 +52,25 @@ if (isset($_REQUEST['accion'])) {
         echo json_encode($sesion);
 
         break;
+
+    case 'obtenerProducto':
+        $id = $_POST['id'];
+
+        $sesion = obtenerProducto($id);
+
+        if($sesion){
+            echo json_encode([
+                'status' => 'success',
+                'data' => $sesion
+            ]);
+        }else{
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Producto no encontrado o error en la consulta.'
+            ]);
+        }
+
+        break;
         
     }
     }

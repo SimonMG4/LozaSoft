@@ -97,6 +97,23 @@ function tablaProductos(){
     }else {
         return false;
     }
+    cerrarConexion();
+}
+function obtenerProducto($id){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("SELECT * FROM productos WHERE id = $id");
+    $query ->execute();
+    $resultado=$query->get_result();
+
+    if($resultado){
+        $producto = $resultado->fetch_assoc();
+        return $producto;
+    }else{
+        return null;
+    }
+    cerrarConexion();
 }
 
 function agregarProducto($nombre,$descripcion,$precio,$stock,$img){

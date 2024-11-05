@@ -1,17 +1,17 @@
 
-                <form action="../../dev/modules/productos/productosController.php" method="POST" class="form" enctype="multipart/form-data">
-                    <h2>Agregar Producto</h2>
-                    <input type="text" name="nombreAgregarProducto" placeholder="Nombre:">
-                    <input type="text" name="descripcionAgregarProducto" placeholder="Descripcion:">
-                    <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:">
-                    <input type="number" name="stockAgregarProducto" placeholder="Stock:">
-                    <label for="imgAgregarProducto" class="custom-file-upload">
-                        <span id="file-chosen">Ningún archivo seleccionado
-                    </label>
-                    <input type="file" id="imgAgregarProducto" name="imgAgregarProducto" accept="image/*" class="inputImg">
-                    <div>
-                        <input type="hidden" name="accion" value="agregarProducto">
-                        <input type="submit" name="agregarProducto" value="Aceptar">
-                        <button id="cerrarModal" class="cerrarModal">Cerrar</button>
-                    </div>
-                </form>
+ <form action="../../dev/modules/productos/productosController.php" method="POST" class="form" enctype="multipart/form-data">
+    <h2>Agregar Producto</h2>
+    <input type="text" name="nombreAgregarProducto" placeholder="Nombre:">
+    <input type="text" name="descripcionAgregarProducto" placeholder="Descripcion:">
+    <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:">
+    <input type="number" name="stockAgregarProducto" placeholder="Stock:">
+    <label for="imgAgregarProducto" class="custom-file-upload">
+        <span id="file-chosen">Ningún archivo seleccionado
+    </label>
+    <input type="file" id="imgAgregarProducto" name="imgAgregarProducto" accept="image/*" class="inputImg">
+    <div>
+        <input type="hidden" name="accion" value="agregarProducto">
+        <input type="submit" name="agregarProducto" value="Aceptar">
+        <button id="cerrarModal" class="cerrarModal">Cerrar</button>
+    </div>
+</form>

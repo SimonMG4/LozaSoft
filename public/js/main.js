@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    //Mostrar modales
+    //Mostrar modales agregar
     const abrirModal = document.querySelectorAll('.btn_agregar'); // Corregir el nombre de la clase
     const modal = document.querySelector('.modal'); // Obtener un único elemento modal
     const modalContent = document.querySelector('.modal_contenedor'); // Obtener un único contenedor modal
@@ -120,51 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    //MANEJO DE ENVIO DE FORMULARIOS
-    // const forms = document.querySelectorAll('.form');
-
-    // forms.forEach(form =>{
-    //     form.addEventListener('submit', async (e)=>{
-    //         e.preventDefault();
-
-    //         const formData = new FormData(form);
-    //         const action = form.getAttribute('action');
-
-    //         try{
-    //             const response = await fetch(action, {
-    //                 method: 'POST',
-    //                 body: formData,
-    //                 headers: {
-    //                     'X-Requested-With': 'XMLHttpRequest',
-    //                 }
-    //             })
-    //             .then(response => response.json())
-    //             .then(data => {
-    //                 if(data.status ==='true'){
-    //                     Swal.fire({
-    //                         position: "top-end",
-    //                         icon: "success",
-    //                         title: "Registro creado exitosamente",
-    //                         showConfirmButton: false,
-    //                         timer: 1000
-    //                     });
-    //                 }else{
-    //                     Swal.fire({
-    //                         icon: "error",
-    //                         title: "Error",
-    //                         text: "Ha habido un error al crear el registro"
-    //                     });
-    //                 }
-    //             });
-    //         }catch (error) {
-    //             console.error('Error en el envío del formulario:', error);
-    //             Toast.fire({
-    //                 icon: 'error',
-    //                 title: 'Hubo un problema al procesar la solicitud.'
-    //             });
-    //         }
-    //     }); 
-    // });
 
     //ELIMINAR REGISTROS
     const eliminarRegistro = document.querySelectorAll('.btn_eliminar');
@@ -219,4 +174,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
     });
+
+    //Mostrar modal editar
+
+    const abrirModal2 = document.querySelectorAll('.btn_editar');
+
+    abrirModal2.forEach(button =>{
+        button.addEventListener('click', function(){
+            
+            const url = this.getAttribute('data-url');
+            const id = this.getAttribute('data-id');
+            const accion1 = this.getAttribute('data-accion1');
+            const accion2 = this.getAttribute('data-accion2');
+            const controller = this.getAttribute('data-controller');
+
+            fetch(url)
+            .then(response => response.text())
+                .then(data => {
+                    modalContent.innerHTML = data;
+                    modal.classList.add('modal--show');
+
+                    const form = document.querySelector('.form');
+
+                    fetch(controller,{
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `accion=${accion1}&id=${id}`
+                    })
+                    .then(response=>response.json())
+                    .then(data=>{
+                        if(data.status == 'success'){
+                            
+                        }
+                    })
+
+
+                    // Añadir evento para cerrar el modal
+                    const closeModalButton = document.querySelector('#cerrarModal');
+                    closeModalButton.addEventListener('click', function() {
+                            modal.classList.remove('modal--show');
+                            modalContent.innerHTML = ''; // Limpiar el contenido del modal
+                    });
+
+
+                })
+
+
+                
+
+        })
+    })
 });

@@ -180,9 +180,9 @@
 }
 .tabla,  td{
     padding: 1em 0;
- border-bottom: 1px solid var(--color5); 
- border-collapse: collapse;
- text-align: center;
+    border-bottom: 1px solid var(--color5); 
+    border-collapse: collapse;
+    text-align: center;
 }
 .tabla, th{
     border-bottom: 2px solid var(--color5);
@@ -221,4 +221,8 @@
     width: 65px;
     height: 65px;
     border-radius: 12px;
+}
+.td-descripcion{
+    width: 100px;
+    overflow: hidden;
 }

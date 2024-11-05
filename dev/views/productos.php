@@ -66,12 +66,12 @@ if(!isset($_SESSION['id'])){
                     <tr>
                         <td><?php echo $fila->id; ?></td>
                         <td><?php echo $fila->nombre; ?></td>
-                        <td><?php echo $fila->descripcion; ?></td>
+                        <td class="td-descripcion"><?php echo $fila->descripcion; ?></td>
                         <td><?php echo $fila->precio; ?></td>
                         <td><?php echo $fila->stock; ?></td>
                         <td><img class="imgTabla" src="http://localhost/lozasoft<?php echo $fila->imagen; ?>"</td>
                         <td><button class="btn_eliminar" data-id="<?php echo $fila->id?>" data-accion="eliminarProducto" data-controller='../../dev/modules/productos/productosController.php'>Eliminar</button>
-                        <button class="btn_editar" >Editar</button></td>
+                        <button class="btn_editar" data-id="<?php echo $fila->id?>" data-accion1="obtenerProducto"data-accion2="editarProducto" data-controller='../../dev/modules/productos/productosController.php' data-url="../../dev/modal/editarProducto.html">Editar</button></td>
                     </tr>
                     <?php endforeach;?>
                 </tbody>
@@ -80,22 +80,6 @@ if(!isset($_SESSION['id'])){
             
         </table>
 
-        <!-- <form action="../../dev/modules/productos/productosController.php" method="POST" class="form">
-                    <h2>Agregar Producto</h2>
-                    <input type="text" name="nombreAgregarProducto" placeholder="Nombre:">
-                    <input type="text" name="descripcionAgregarProducto" placeholder="Descripcion:">
-                    <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:">
-                    <input type="number" name="stockAgregarProducto" placeholder="Stock:">
-                    <label for="imgAgregarProducto" class="custom-file-upload">
-                        <span id="file-chosen">Ningún archivo seleccionado
-                    </label>
-                    <input type="file" id="imgAgregarProducto" name="imgAgregarProducto">
-                    <div>
-                        <input type="hidden" name="accion" value="agregarProducto">
-                        <input type="submit" name="agregarProducto" value="Aceptar">
-                        <button id="cerrarModal" class="cerrarModal">Cerrar</button>
-                    </div>
-                </form> -->
     </main>
     
     

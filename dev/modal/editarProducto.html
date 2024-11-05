@@ -1,0 +1,17 @@
+
+<form action="../../dev/modules/productos/productosController.php" method="POST" class="form" enctype="multipart/form-data">
+    <h2>Editar Productos</h2>
+    <input type="text" name="nombreEditarProducto" placeholder="Nombre:">
+    <input type="text" name="descripcionEditarProducto" placeholder="Descripcion:">
+    <input type="number" name="precioEditarProducto" step="0.01" placeholder="Precio:">
+    <input type="number" name="stockEditarProducto" placeholder="Stock:">
+    <label for="imgEditarProducto" class="custom-file-upload">
+        <span id="file-chosen">Ningún archivo seleccionado
+    </label>
+    <input type="file" id="imgEditarProducto" name="imgEditarProducto" accept="image/*" class="inputImg">
+    <div>
+        <input type="hidden" name="accion" value="EditarProducto">
+        <input type="submit" name="EditarProducto" value="Aceptar">
+        <button id="cerrarModal" class="cerrarModal">Cerrar</button>
+    </div>
+</form>
