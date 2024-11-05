@@ -111,7 +111,7 @@ if(!isset($_SESSION['id'])){
             <div>
                 <h2>CONTACTO:</h2>
                 <p>- simonusuario82@gmail.com - 313 6028348</p>
-                <p>- andres@gmail.com - 311 4227954</p>
+                <p>- pipebg03@gmail.com - 311 4227954</p>
                 <p>- jpablogo17@gmail.com - 310 5315207</p>
             </div>
         </div>
