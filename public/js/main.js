@@ -186,7 +186,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = this.getAttribute('data-id');
             const accion1 = this.getAttribute('data-accion1');
             const accion2 = this.getAttribute('data-accion2');
-            const controller = this.getAttribute('data-controller');
 
             fetch(url)
             .then(response => response.text())
@@ -194,9 +193,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     modalContent.innerHTML = data;
                     modal.classList.add('modal--show');
 
-                    const form = document.querySelector('.form');
+                    const inputImg = document.querySelector('.inputImg');
+                    if(inputImg){
+                        inputImg.addEventListener('change', function(event){
+                            const fileName = inputImg.files[0].name;
 
-                    fetch(controller,{
+                            document.getElementById('file-chosen').textContent = fileName;
+
+                        })
+                    }
+
+                    const form = document.querySelector('.form');
+                    const action = form.getAttribute('action');
+                    
+                    fetch(action,{
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded'
@@ -206,7 +216,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(response=>response.json())
                     .then(data=>{
                         if(data.status == 'success'){
-                            
+                            document.querySelector('.inputNombre').value = data.data.nombre;
+                            document.querySelector('.inputDescripcion').value = data.data.descripcion;
+                            document.querySelector('.inputPrecio').value = data.data.precio;
+                            document.querySelector('.inputStock').value = data.data.stock;
                         }
                     })
 

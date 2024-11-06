@@ -71,6 +71,9 @@ if (isset($_REQUEST['accion'])) {
         }
 
         break;
+    
+    case 'editarProducto':
+        $id
         
     }
     }
