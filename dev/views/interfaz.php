@@ -2,7 +2,7 @@
 session_start();
 
 if(!isset($_SESSION['id'])){
-    header("location: index.html");
+    header("location: /lozasoft/index.html");
 }
 ?>
 <!DOCTYPE html>
@@ -97,6 +97,6 @@ if(!isset($_SESSION['id'])){
             <p>&copy; 2024 <b>LozaSoft</b> - Todos los Derechos Reservados.</p>
         </div>
     </footer>
-<script src="../../dev/modules/js/logOut.js"></script>
+    <script src="../../public/js/main.js"></script>
 </body>
 </html>

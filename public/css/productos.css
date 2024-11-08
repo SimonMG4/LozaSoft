@@ -1,15 +1,17 @@
-.header{
+.header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
 }
-.header div{
+
+.header div {
     background: var(--color1);
     display: flex;
     align-items: center;
 }
-.header div p{
+
+.header div p {
     font-size: 1.75rem;
     line-height: 3rem;
     font-weight: 700;
@@ -17,12 +19,14 @@
     color: var(--color5);
     margin-left: 1vh;
 }
-.header div img{
+
+.header div img {
     height: 3rem;
     width: 3rem;
     margin-left: 5vw;
 }
-.header h1{
+
+.header h1 {
     text-align: center;
     color: var(--color1);
     font-weight: 700;
@@ -30,19 +34,19 @@
     padding-top: 5vh;
 }
 
-/* INTERFAZ */
-
-.interfaz_body{
+.interfaz_body {
     background-color: var(--color5);
     position: relative;
     height: 100vh;
 }
-.interfaz_header div{
+
+.interfaz_header div {
     display: flex;
     justify-content: space-between;
     height: 80px;
 }
-.interfaz_header div .logOut{
+
+.interfaz_header div .logOut {
     background-color: transparent;
     border: none;
     color: var(--color9);
@@ -57,17 +61,20 @@
     font-size: 1vw;
     cursor: pointer;
 }
-.interfaz_header div .div1{
+
+.interfaz_header div .div1 {
     max-width: 350px;
     min-width: 280px;
     padding-right: 10px;
 }
-.interfaz_header div .div2{
+
+.interfaz_header div .div2 {
     display: flex;
     justify-content: space-around;
     width: 50%;
 }
-.interfaz_header div .div2 a{
+
+.interfaz_header div .div2 a {
     text-decoration: none;
     background-color: transparent;
     border: none;
@@ -79,17 +86,19 @@
     max-width: 150px;
     font-weight: 900;
     font-size: 1vw;
-    
 }
-.interfaz_header div .div2 a:hover, .interfaz_header div .logOut:hover{
+
+.interfaz_header div .div2 a:hover, .interfaz_header div .logOut:hover {
     scale: 1.1;
     color: var(--color3);
 }
-.productos_body{
+
+.productos_body {
     min-height: 100vh;
     position: relative;
 }
-.productos_footer{
+
+.productos_footer {
     cursor: default;
     width: 100%;
     height: 17vh;
@@ -99,43 +108,50 @@
     position: absolute;
     bottom: 0;
 }
-.productos_footer .div1{
+
+.productos_footer .div1 {
     padding-top: 1em;
     display: flex;
     justify-content: space-around;
     height: 80%;
     align-items: center;
 }
-.productos_footer .div1 img{
+
+.productos_footer .div1 img {
     width: 110px;
     height: 110px;
 }
-.productos_footer .div1 div{
+
+.productos_footer .div1 div {
     display: flex;
     flex-direction: column;
     gap: 0.5em;
 }
-.productos_footer .div1 div h2{
+
+.productos_footer .div1 div h2 {
     color: var(--color3);
     font-size: 0.7em;
 }
-.productos_footer .div1 div p{
+
+.productos_footer .div1 div p {
     color: var(--color5);
     font-size: 0.7em;
-
 }
-.productos_footer .div2{
+
+.productos_footer .div2 {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--color6);
     height: 20%;
 }
-.productos_footer .div2 p{
+
+.productos_footer .div2 p {
     color: var(--color7);
     font-size: 0.7em;
 }
-.productos_main{
+
+.productos_main {
     width: 90%;
     margin: 0 auto;
     display: flex;
@@ -148,25 +164,27 @@
     overflow: scroll;
     height:480px;
     margin-bottom: 18vh;
-
 }
-.productos_main div{
+
+.productos_main div {
     display: flex;
     justify-content: space-between;
     padding-bottom: 1em;
 }
-.btn_agregar{
-  background-color: var(--colorverde);
-  color: var(--color7);
-  font-size: 0.875rem;
-  font-weight: 500;
-  border-radius: 0.5rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  border: none;
-  height: 60px;
-  width: 100px;
+
+.btn_agregar {
+    background-color: var(--colorverde);
+    color: var(--color7);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    height: 60px;
+    width: 100px;
 }
+
 .buscar {
     background-color: var(--color7);
     padding: 1rem;
@@ -178,29 +196,33 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     height: 60px;
 }
-.tabla,  td{
+
+.tabla, td {
     padding: 1em 0;
-    border-bottom: 1px solid var(--color5); 
+    border-bottom: 1px solid var(--color5);
     border-collapse: collapse;
     text-align: center;
 }
-.tabla, th{
+
+.tabla, th {
     border-bottom: 2px solid var(--color5);
     padding-bottom: 1em;
 }
-.btn_eliminar{
- background-color: var(--color2);
-  color: var(--color7);
-  font-size: 0.875rem;
-  font-weight: 500;
-  border-radius: 0.5rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  border: none;
-  height: 40px;
-  width: 70px;
+
+.btn_eliminar {
+    background-color: var(--color2);
+    color: var(--color7);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    height: 40px;
+    width: 70px;
 }
-.btn_editar{
+
+.btn_editar {
     background-color: var(--color3);
     color: var(--color7);
     font-size: 0.875rem;
@@ -214,15 +236,19 @@
     margin-left: 2px;
 }
 
-.btn_agregar:hover, .btn_editar:hover, .btn_eliminar:hover, .productos_main div button:hover{
+.btn_agregar:hover, .btn_editar:hover, .btn_eliminar:hover, .productos_main div button:hover {
     scale: 1.1;
 }
-.imgTabla{
+
+.imgTabla {
     width: 65px;
     height: 65px;
     border-radius: 12px;
 }
-.td-descripcion{
-    width: 100px;
+
+.td-descripcion {
+    max-width: 100px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
