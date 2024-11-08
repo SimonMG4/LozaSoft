@@ -66,7 +66,7 @@ if(!isset($_SESSION['id'])){
                     <tr>
                         <td><?php echo $fila->id; ?></td>
                         <td><?php echo $fila->nombre; ?></td>
-                        <td class="td-descripcion"><?php echo $fila->descripcion; ?>mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</td>
+                        <td class="td-descripcion"><?php echo $fila->descripcion; ?></td>
                         <td><?php echo $fila->precio; ?></td>
                         <td><?php echo $fila->stock; ?></td>
                         <td><img class="imgTabla" src="http://localhost/lozasoft<?php echo $fila->imagen; ?>"</td>
