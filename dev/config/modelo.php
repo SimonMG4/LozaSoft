@@ -132,19 +132,36 @@ function agregarProducto($nombre,$descripcion,$precio,$stock,$img){
     cerrarConexion();
 }
 
-function editarProducto($id,$nombre,$descripcion,$precio,$stock,$img){
+function editarProducto1($id,$nombre,$descripcion,$precio,$stock,$img){
     abrirConexion();
     global $conexion;
 
-    $query = $conexion->prepare("UPDATE productos SET nombre = $nombre, descripcion = $descripcion,
-     precio = $precio, stock = $stock, img = $img WHERE id = $id");
+    $query = $conexion->prepare("UPDATE productos SET nombre = '$nombre', descripcion = '$descripcion',
+     precio = $precio, stock = $stock, imagen = '$img' WHERE id = $id");
      $query->execute();
 
      if ($query->execute()) {
-        return true;
+        $response['status']= 'success';
          } else {
-        return false;
+            $response['status']= 'error';
          }
+    return $response;
+    cerrarConexion();
+}
+function editarProducto2($id,$nombre,$descripcion,$precio,$stock){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("UPDATE productos SET nombre = '$nombre', descripcion = '$descripcion',
+     precio = $precio, stock = $stock  WHERE id = $id");
+     $query->execute();
+
+     if ($query->execute()) {
+        $response['status']= 'success';
+         } else {
+            $response['status']= 'error';
+         }
+    return $response;
     cerrarConexion();
 }
 function eliminarProducto($id){
@@ -160,5 +177,22 @@ function eliminarProducto($id){
         $response['status']= 'false';
          }
     return $response;
+    cerrarConexion();
+}
+function obtenerImagen($id){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("SELECT imagen FROM productos WHERE id = $id");
+    $query->execute();
+    $resultado=$query->get_result();
+    if($resultado){
+        if($row = $resultado->fetch_assoc()){
+            $rutaImagen = $row['imagen'];
+            return $rutaImagen;
+        }
+    }else{
+        return null;
+    }
     cerrarConexion();
 }

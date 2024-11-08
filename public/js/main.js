@@ -220,8 +220,59 @@ document.addEventListener('DOMContentLoaded', () => {
                             document.querySelector('.inputDescripcion').value = data.data.descripcion;
                             document.querySelector('.inputPrecio').value = data.data.precio;
                             document.querySelector('.inputStock').value = data.data.stock;
+                            document.querySelector('.inputId').value = data.data.id;
                         }
                     })
+                    if(form){
+                        form.addEventListener('submit', async (e)=>{
+                            e.preventDefault();
+
+                            const formData = new FormData(form);
+                            const action = form.getAttribute('action');
+
+                            try{
+                                const response = await fetch(action, {
+                                    method: 'POST',
+                                    body: formData,
+                                    headers: {
+                                        'X-Requested-With': 'XMLHttpRequest',
+                                    }
+                                });
+                                const data = await response.json();
+                                if(data.status == 'success'){
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "Datos actualizados exitosamente",
+                                        showConfirmButton: false,
+                                        timer: 1000
+                                    });
+                                    setTimeout(() => {
+                                        modal.classList.remove('modal--show'); 
+                                        modalContent.innerHTML = '';  
+                                        window.location.reload(); 
+                                    }, 1000); 
+
+                                }else{
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Error",
+                                        text: "Ha habido un error al crear el registro"
+                                    });
+                                }
+
+                            }catch (error){
+                                console.error('Error en el envío del formulario:', error);
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: 'Hubo un problema al procesar la solicitud.'
+                                });
+                            }
+
+                        })
+                    }
+
+
 
 
                     // Añadir evento para cerrar el modal
