@@ -48,7 +48,7 @@ if(!isset($_SESSION['id'])){
                <p class="card_description">Podras ver tus productos con sus existencias, agregar, editar y eliminarlos.</p>
              </div>
             </a>
-            <a href="" class="card">
+            <a href="ventas.php" class="card">
                 <div class="card_content">
                     <h1 class="card_tittle">VENTAS</h1>
                     <img src="../../public/assets/ventas.svg" alt="">
@@ -57,7 +57,7 @@ if(!isset($_SESSION['id'])){
                <p class="card_description">Podras ver las ventas realizadas por la empresa, agregar, editar y eliminarlas.</p>
              </div>
             </a>
-            <a href="" class="card">
+            <a href="compras.php" class="card">
                 <div class="card_content">
                     <h1 class="card_tittle">COMPRAS</h1>
                     <img src="../../public/assets/compras.svg" alt="">
@@ -66,7 +66,7 @@ if(!isset($_SESSION['id'])){
                <p class="card_description">Podras ver las compras realizadas por la empresa, agregar, editar y eliminarlas.</p>
              </div>
             </a>
-            <a href="" class="card">
+            <a href="informes.php" class="card">
                 <div class="card_content">
                     <h1 class="card_tittle">INFORMES</h1>
                     <img src="../../public/assets/informes.svg" alt="">

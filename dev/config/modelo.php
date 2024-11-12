@@ -80,6 +80,8 @@ function cerrarSesion(){
    header("Location: ../../index.html");
 
 }
+
+//PRODUCTOS
 function tablaProductos(){
     abrirConexion();
     global $conexion;
@@ -195,4 +197,27 @@ function obtenerImagen($id){
         return null;
     }
     cerrarConexion();
+}
+
+//COMPRAS
+
+function tablaCompras(){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("SELECT * FROM compras");
+    $query->execute();
+    $resultado=$query->get_result();
+
+    if($resultado){
+        $filas = []; 
+        while ($fila = $resultado->fetch_object()) 
+        { $filas[] = $fila;
+        }
+        return $filas;
+    }else {
+        return false;
+    }
+    cerrarConexion();
+
 }

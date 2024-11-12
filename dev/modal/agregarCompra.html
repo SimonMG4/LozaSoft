@@ -1,0 +1,13 @@
+
+<form action="../../dev/modules/compras/comprasController.php" method="POST" class="form" enctype="multipart/form-data">
+    <h2>Agregar Compra</h2>
+    <label for="fechaAgregarCompra"">Ingresa la fecha: </label>
+    <input type="date" name="fechaAgregarCompra" placeholder="fecha:" required>
+    <button class="add-button" data-add="compra">Agregar Articulo</button>
+    <div class="contenedor-art"></div>
+    <div>
+        <input type="hidden" name="accion" value="agregarCompra">
+        <input type="submit" name="agregarCompra" value="Aceptar">
+        <button id="cerrarModal" class="cerrarModal">Cerrar</button>
+    </div>
+</form>

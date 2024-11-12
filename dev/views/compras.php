@@ -17,7 +17,7 @@ if(!isset($_SESSION['id'])){
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-<title>PRODUCTOS</title>
+<title>COMPRAS</title>
 </head>
 <body class="productos_body">
     <header class="interfaz_header header">
@@ -38,7 +38,7 @@ if(!isset($_SESSION['id'])){
     </header>
     <main class="productos_main">
         <div>
-            <button class="btn_agregar" data-url="../../dev/modal/agregarProducto.html">Agregar</button>
+            <button class="btn_agregar" data-url="../../dev/modal/agregarCompra.html">Agregar</button>
             
             <input  class="buscar" type="text" id="buscar" placeholder="Buscar...">
             
@@ -47,11 +47,8 @@ if(!isset($_SESSION['id'])){
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    <th>Imagen</th>
+                    <th>Fecha</th>
+                    <th>Total-Perdida</th>
                     <th>Acciones</th>
                     
                 </tr>
@@ -59,17 +56,14 @@ if(!isset($_SESSION['id'])){
                     <?php
                     include('../../dev/config/modelo.php');
                     
-                    $filas = tablaProductos();
+                    $filas = tablaCompras();
                     
                     foreach ($filas as $fila):
                         ?>
                     <tr>
                         <td><?php echo $fila->id; ?></td>
-                        <td><?php echo $fila->nombre; ?></td>
-                        <td class="td-descripcion"><?php echo $fila->descripcion; ?></td>
-                        <td><?php echo $fila->precio; ?></td>
-                        <td><?php echo $fila->stock; ?></td>
-                        <td><img class="imgTabla" src="http://localhost/lozasoft<?php echo $fila->imagen; ?>"</td>
+                        <td><?php echo $fila->fecha; ?></td>
+                        <td><?php echo $fila->total_perdida; ?></td>
                         <td><button class="btn_eliminar" data-id="<?php echo $fila->id?>" data-accion="eliminarProducto" data-controller='../../dev/modules/productos/productosController.php'>Eliminar</button>
                         <button class="btn_editar" data-id="<?php echo $fila->id?>" data-accion1="obtenerProducto"data-accion2="editarProducto" data-url="../../dev/modal/editarProducto.html">Editar</button></td>
                     </tr>
@@ -108,12 +102,11 @@ if(!isset($_SESSION['id'])){
     <!-- conteedor de las modales -->
     <section class="modal">
         <div class="modal_contenedor">
+            
         </div>
     </section>
 
     <script src="../../public/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../../dev/modules/productos/productos.js"></script>
-    
 </body>
 </html>

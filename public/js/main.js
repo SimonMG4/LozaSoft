@@ -34,8 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.querySelector('.modal'); // Obtener un único elemento modal
     const modalContent = document.querySelector('.modal_contenedor'); // Obtener un único contenedor modal
 
+    let contador = 0;
+
     abrirModal.forEach(button => {
         button.addEventListener('click', function() {
+            contador = 0;
             
 
             const url = this.getAttribute('data-url');
@@ -45,6 +48,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(data => {
                     modalContent.innerHTML = data;
                     modal.classList.add('modal--show');
+
+                    const add_button = document.querySelector('.add-button');
+                    const contenedor = document.querySelector('.contenedor-art');
+
+                    if(add_button){
+                        const inputContador = document.createElement('input');
+                        inputContador.type = 'hidden';
+                        inputContador.name = 'contador';
+                        inputContador.value = contador;
+                        contenedor.appendChild(inputContador);
+                        add_button.addEventListener('click', function(){
+
+                            const nuevaFila = `
+                            <div class="articulo-fila">
+                            <button type="button" class="eliminarFila">X</button>
+                              <input type="text" name="articulos[${contador}][nombre]" placeholder="Nombre del Artículo" required>
+                              <input type="number" name="articulos[${contador}][cantidad]" placeholder="Cantidad" min="1" required>
+                              <input type="number" name="articulos[${contador}][precio]" placeholder="Precio Unitario" min="0" step="0.01" required>
+                            </div>
+                          `;
+
+                          contenedor.insertAdjacentHTML('beforeend', nuevaFila);
+
+                          contador++;
+                          inputContador.value = contador;
+                        })
+
+                        contenedor.addEventListener('click',function(event){
+                            if(event.target.classList.contains('eliminarFila')){
+                                const fila = event.target.closest('.articulo-fila');
+                                if(fila){
+                                    fila.remove();
+                                }
+                            }
+                        })
+                    }
 
                     const inputImg = document.querySelector('.inputImg');
                     if(inputImg){
