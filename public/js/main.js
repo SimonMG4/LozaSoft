@@ -80,9 +80,22 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const fila = event.target.closest('.articulo-fila');
                                 if(fila){
                                     fila.remove();
+                                    contador--;
+                                    actualizarIndices();
                                 }
                             }
                         })
+                        function actualizarIndices() {
+                            const filas = document.querySelectorAll('.articulo-fila');
+                            filas.forEach((fila, index) => {
+                                // Actualizamos los nombres de los inputs con el índice correcto
+                                fila.querySelector('input[name*="[nombre]"]').setAttribute('name', `articulos[${index}][nombre]`);
+                                fila.querySelector('input[name*="[cantidad]"]').setAttribute('name', `articulos[${index}][cantidad]`);
+                                fila.querySelector('input[name*="[precio]"]').setAttribute('name', `articulos[${index}][precio]`);
+                            });
+                        
+                            contador = filas.length;
+                        }
                     }
 
                     const inputImg = document.querySelector('.inputImg');

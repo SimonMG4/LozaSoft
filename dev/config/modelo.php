@@ -117,7 +117,6 @@ function obtenerProducto($id){
     }
     cerrarConexion();
 }
-
 function agregarProducto($nombre,$descripcion,$precio,$stock,$img){
     abrirConexion();
     global $conexion;
@@ -133,7 +132,6 @@ function agregarProducto($nombre,$descripcion,$precio,$stock,$img){
     return $response;
     cerrarConexion();
 }
-
 function editarProducto1($id,$nombre,$descripcion,$precio,$stock,$img){
     abrirConexion();
     global $conexion;
@@ -218,6 +216,56 @@ function tablaCompras(){
     }else {
         return false;
     }
+    cerrarConexion();
+
+}
+function agregarCompra($fecha,$totalCompra){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("INSERT INTO compras(fecha,total_perdida) VALUES ('$fecha','$totalCompra')");
+    $query->execute();
+
+    if($query){
+        $idCompra = $conexion->insert_id;
+        cerrarConexion();
+        return $idCompra;
+    }else{
+        cerrarConexion();
+        return false;
+    }
+
+
+}
+function agregarDetalleCompra($id,$nombre,$cantidad,$precio,$total){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("INSERT INTO detallecompra(id_compra,nombre_articulo,cantidad,precio_unitario,total) VALUES ('$id','$nombre','$cantidad','$precio','$total')");
+    $query->execute();
+
+    if($query){
+        return true;
+        
+    }else{
+        return false;
+    }
+    
+    cerrarConexion();
+}
+function eliminarCompra($id){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("DELETE FROM compras WHERE id= $id");
+    $query->execute();
+
+    if ($query) {
+        $response['status']= 'true';
+         } else {
+        $response['status']= 'false';
+         }
+    return $response;
     cerrarConexion();
 
 }
