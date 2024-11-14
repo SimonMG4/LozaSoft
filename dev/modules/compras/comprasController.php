@@ -57,6 +57,15 @@ if (isset($_REQUEST['accion'])) {
             echo json_encode($sesion);
     
             break;
+
+        case 'obtenerCompra':
+            $id = $_POST['id'];
+
+            $sesion= obtenerCompra($id);
+
+            echo json_encode($sesion);
+
+            break;
     }
 }
 

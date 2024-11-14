@@ -269,3 +269,39 @@ function eliminarCompra($id){
     cerrarConexion();
 
 }
+function obtenerCompra($id){
+    abrirConexion();
+    global $conexion;
+
+    //Primer query, trae la fecha de compras
+
+    $query1= $conexion->prepare("SELECT fecha FROM compras WHERE id = $id");
+    $query1 ->execute();
+    $resultado1=$query1->get_result();
+
+
+    if ($resultado1->num_rows > 0) {
+        $compra = $resultado1->fetch_assoc();
+        $respuesta['fecha'] = $compra['fecha'];
+    }
+
+    //Segundo query, trae los detalles de los productos
+
+    $query2= $conexion->prepare("SELECT * FROM detallecompra WHERE id_compra = $id");
+    $query2->execute();
+    $resultado2=$query2->get_result();
+
+    $detalles = [];
+    while ($detalle = $resultado2->fetch_assoc()) {
+        $detalles[] = $detalle;
+    }
+
+    $respuesta['detalles'] = $detalles;
+
+    $query1->close();
+    $query2->close();
+    cerrarConexion();
+
+    return $respuesta;
+
+}
