@@ -43,7 +43,7 @@ if(!isset($_SESSION['id'])){
             <input  class="buscar" type="text" id="buscar" placeholder="Buscar...">
             
         </div>
-        <table id="tablaProductos" class="tabla">
+        <table id="tabla" class="tabla">
             <thead>
                 <tr>
                     <th>ID</th>

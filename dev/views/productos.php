@@ -43,7 +43,7 @@ if(!isset($_SESSION['id'])){
             <input  class="buscar" type="text" id="buscar" placeholder="Buscar...">
             
         </div>
-        <table id="tablaProductos" class="tabla">
+        <table id="tabla" class="tabla">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -113,7 +113,6 @@ if(!isset($_SESSION['id'])){
 
     <script src="../../public/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../../dev/modules/productos/productos.js"></script>
     
 </body>
 </html>
