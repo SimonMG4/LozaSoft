@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         
     });
+
     
 
 
@@ -35,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalContent = document.querySelector('.modal_contenedor'); // Obtener un único contenedor modal
 
     let contador = 0;
+
+    const idsParaEliminar = [];
 
     abrirModal.forEach(button => {
         button.addEventListener('click', function() {
@@ -140,6 +143,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                         modalContent.innerHTML = '';  // Limpiar el contenido del modal
                                         window.location.reload(); //Recarga pagina para mostrar en la tabla
                                     }, 1000); // El mismo tiempo que el timer de la alerta
+                                }else if(data.status == '0articulo'){
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Error",
+                                        text: "Debes de ingresar minimo un articulo"
+                                    });
+
                                 } else {
                                     Swal.fire({
                                         icon: "error",
@@ -234,6 +244,10 @@ document.addEventListener('DOMContentLoaded', () => {
     abrirModal2.forEach(button =>{
         button.addEventListener('click', function(){
             
+            contador = 0;
+            idsParaEliminar.length = 0;
+
+            
             const url = this.getAttribute('data-url');
             const id = this.getAttribute('data-id');
             const accion1 = this.getAttribute('data-accion1');
@@ -246,6 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(data => {
                         modalContent.innerHTML = data;
                         modal.classList.add('modal--show');
+                        
     
                         const inputImg = document.querySelector('.inputImg');
                         if(inputImg){
@@ -359,10 +374,173 @@ document.addEventListener('DOMContentLoaded', () => {
                             if(data){
                                 const contenedor = document.querySelector('.contenedor-art');
                                 const fecha = document.getElementById('fecha');
+                                const inputID = document.querySelector('.inputIdModulo');
+
+                                inputID.value = id;
 
                                 fecha.value = data.fecha;
 
-                                const cantidadArticulos = data.detalles.length;
+
+                                for (let count = 0; count < data.detalles.length; count++) {
+                                    const nuevaFila = `
+                                        <div class="articulo-fila">
+                                            <button type="button" class="eliminarFila">X</button>
+                                           <input type="hidden" name="articulos[${contador}][id]">
+                                            <input type="text" name="articulos[${count}][nombre]" placeholder="Nombre del Artículo" required>
+                                            <input type="number" name="articulos[${count}][cantidad]" placeholder="Cantidad" min="1" required>
+                                            <input type="number" name="articulos[${count}][precio]" placeholder="Precio Unitario" min="0" step="0.01" required>
+                                        </div>
+                                    `;
+                                    
+                                    contenedor.insertAdjacentHTML('beforeend', nuevaFila);  
+                                    
+                                    const id = document.querySelector(`[name="articulos[${count}][id]"]`)
+                                    const nombre = document.querySelector(`[name="articulos[${count}][nombre]"]`);
+                                    const cantidad = document.querySelector(`[name="articulos[${count}][cantidad]"]`);
+                                    const precio = document.querySelector(`[name="articulos[${count}][precio]"]`);
+                                    
+                                    id.value = data.detalles[count].id_detalle_compra;
+                                    nombre.value = data.detalles[count].nombre_articulo;
+                                    cantidad.value = data.detalles[count].cantidad;
+                                    precio.value = data.detalles[count].precio_unitario;
+
+                                    contador++;
+                                }
+                                const add_button = document.querySelector('.add-button');
+                                if(add_button){
+                                    add_button.addEventListener('click', function(){
+                                        
+
+                                        const nuevaFila = `
+                                        <div class="articulo-fila">
+                                        <button type="button" class="eliminarFila">X</button>
+                                          <input type="text" name="articulos[${contador}][nombre]" placeholder="Nombre del Artículo" required>
+                                          <input type="number" name="articulos[${contador}][cantidad]" placeholder="Cantidad" min="1" required>
+                                          <input type="number" name="articulos[${contador}][precio]" placeholder="Precio Unitario" min="0" step="0.01" required>
+                                        </div>
+                                      `;
+
+                                      contenedor.insertAdjacentHTML('beforeend', nuevaFila);
+
+                                      contador++;
+            
+                                    })
+
+                                }
+                                contenedor.addEventListener('click',function(event){
+                                    if(event.target.classList.contains('eliminarFila')){
+                                        Swal.fire({ 
+                                            title: "Eliminar Articulo", 
+                                            text: "¿Estás seguro que deseas eliminar este articulo?", 
+                                            icon: "warning", showCancelButton: true, 
+                                            confirmButtonColor: "#3085d6", 
+                                            cancelButtonColor: "#d33", 
+                                            confirmButtonText: "Sí, eliminar", 
+                                            cancelButtonText: "Cancelar"
+                                        }).then(result=>{
+                                            if(result.isConfirmed){
+                                                const fila = event.target.closest('.articulo-fila');
+                                                if(fila){
+
+                                                    const inputId = fila.querySelector('input[type="hidden"]');
+                                                    const idArticulo = inputId.value;
+
+                                                    if (idArticulo) {
+                                                        idsParaEliminar.push(idArticulo);
+                                                    }
+                                                    inputId.remove();
+
+                                                    document.getElementById('idsParaEliminar').value = JSON.stringify(idsParaEliminar);
+
+                                                    fila.remove();
+                                                    contador--;
+                                                    actualizarIndices();
+                                                }
+                                            }
+                                        })
+                                    }
+                                })
+                                function actualizarIndices() {
+                                    const filas = document.querySelectorAll('.articulo-fila');
+                                    filas.forEach((fila, index) => {
+                                        // Actualizamos los nombres de los inputs con el índice correcto
+                                        fila.querySelector('input[type="hidden"]').setAttribute('name', `articulos[${index}][id]`);
+                                        fila.querySelector('input[name*="[nombre]"]').setAttribute('name', `articulos[${index}][nombre]`);
+                                        fila.querySelector('input[name*="[cantidad]"]').setAttribute('name', `articulos[${index}][cantidad]`);
+                                        fila.querySelector('input[name*="[precio]"]').setAttribute('name', `articulos[${index}][precio]`);
+                                    });
+                                
+                                    contador = filas.length;
+                                }
+                                if(form){
+                                    form.addEventListener('submit', async (e)=>{
+                                        e.preventDefault();
+            
+                                        const formData = new FormData(form);
+                                        const action = form.getAttribute('action');
+            
+                                        try{
+                                            const response = await fetch(action, {
+                                                method: 'POST',
+                                                body: formData,
+                                                headers: {
+                                                    'X-Requested-With': 'XMLHttpRequest',
+                                                }
+                                            });
+                                            const data = await response.json();
+                                            if(data.status == 'success'){
+                                                Swal.fire({
+                                                    position: "top-end",
+                                                    icon: "success",
+                                                    title: "Datos actualizados exitosamente",
+                                                    showConfirmButton: false,
+                                                    timer: 1500
+                                                });
+                                                setTimeout(() => {
+                                                    modal.classList.remove('modal--show'); 
+                                                    modalContent.innerHTML = '';  
+                                                    window.location.reload(); 
+                                                }, 1500); 
+            
+                                            }else if(data.status == '0articulo'){
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Error",
+                                                    text: "Debes de tener minimo un articulo",
+                                                    showConfirmButton: false,
+                                                    timer: 1000
+                                                });
+                                                setTimeout(() => {
+                                                    modal.classList.remove('modal--show'); 
+                                                    modalContent.innerHTML = '';  
+                                                    window.location.reload(); 
+                                                }, 1000); 
+
+            
+                                            }else{
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Error",
+                                                    text: "Ha habido un error al crear el registro"
+                                                });
+                                            }
+            
+                                        }catch (error){
+                                            console.error('Error en el envío del formulario:', error);
+                                            Toast.fire({
+                                                icon: 'error',
+                                                title: 'Hubo un problema al procesar la solicitud.'
+                                            });
+                                        }
+            
+                                    })
+                                }
+                                
+
+ 
+                              
+
+
 
                                 
 

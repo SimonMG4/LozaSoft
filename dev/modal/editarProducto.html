@@ -2,10 +2,10 @@
 <form action="../../dev/modules/productos/productosController.php" method="POST" class="form" enctype="multipart/form-data">
     <h2>Editar Productos</h2>
     <input type="hidden" name="idEditarProducto" class="inputId">
-    <input type="text" name="nombreEditarProducto" placeholder="Nombre:" class="inputNombre">
+    <input type="text" name="nombreEditarProducto" placeholder="Nombre:" class="inputNombre" required>
     <input type="text" name="descripcionEditarProducto" placeholder="Descripcion:" class="inputDescripcion">
-    <input type="number" name="precioEditarProducto" step="0.01" placeholder="Precio:" class="inputPrecio">
-    <input type="number" name="stockEditarProducto" placeholder="Stock:" class="inputStock">
+    <input type="number" name="precioEditarProducto" step="0.01" placeholder="Precio:" class="inputPrecio" min="1"  required>
+    <input type="number" name="stockEditarProducto" placeholder="Stock:" class="inputStock" min="0"  required>
     <label for="imgEditarProducto" class="custom-file-upload">
         <span id="file-chosen">Actualizar imagen
     </label>

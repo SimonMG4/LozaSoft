@@ -305,3 +305,112 @@ function obtenerCompra($id){
     return $respuesta;
 
 }
+
+function EditarCompra($actualizarCompra, $actualizarArticulos, $nuevosArticulos, $idsParaEliminar) {
+    abrirConexion();
+    global $conexion;
+
+    $resultados = [
+        'actualizarCompra' => true,
+        'actualizarArticulos' => true,
+        'nuevosArticulos' => true,
+        'idEliminar' => true
+    ];
+
+    // 1. Actualizar la compra
+    if (isset($actualizarCompra['idCompra']) && isset($actualizarCompra['fecha']) && isset($actualizarCompra['totalCompra'])) {
+        $idCompra = $actualizarCompra['idCompra'];
+        $fecha = $actualizarCompra['fecha'];
+        $totalCompra = $actualizarCompra['totalCompra'];
+
+        // Concatenando directamente los valores en la consulta
+        $query1 = "UPDATE compras SET fecha = '$fecha', total_perdida = $totalCompra WHERE id = $idCompra";
+        $resultado1 = $conexion->query($query1);
+
+        if (!$resultado1) {
+            $resultados['actualizarCompra'] = false;
+        }
+    }
+
+    // 2. Actualizar los artículos existentes
+    if (!empty($actualizarArticulos)) {
+        $todosActualizados = true;
+        foreach ($actualizarArticulos as $articulo) {
+            $idArticulo = $articulo['id'];
+            $nombre = $articulo['nombre'];
+            $cantidad = $articulo['cantidad'];
+            $precio = $articulo['precio'];
+            $total = $articulo['total'];
+
+            // Concatenando directamente los valores en la consulta
+            $query2 = "UPDATE detallecompra SET nombre_articulo = '$nombre', cantidad = $cantidad, precio_unitario = $precio, total = $total WHERE id_detalle_compra = $idArticulo";
+            $resultado2 = $conexion->query($query2);
+
+            if (!$resultado2) {
+                $todosActualizados = false;
+                break;
+            }
+        }
+
+        $resultados['actualizarArticulos'] = $todosActualizados ? true : false;
+    }
+
+    // 3. Insertar nuevos artículos
+    if (!empty($nuevosArticulos)) {
+        $todosInsertados = true;
+        foreach ($nuevosArticulos as $articulo) {
+            $idCompra = $articulo['idCompra'];
+            $nombre = $articulo['nombre'];
+            $cantidad = $articulo['cantidad'];
+            $precio = $articulo['precio'];
+            $total = $articulo['total'];
+
+            // Concatenando directamente los valores en la consulta
+            $query3 = "INSERT INTO detallecompra (id_compra, nombre_articulo, cantidad, precio_unitario, total) VALUES ($idCompra, '$nombre', $cantidad, $precio, $total)";
+            $resultado3 = $conexion->query($query3);
+
+            if (!$resultado3) {
+                $todosInsertados = false;
+                break;
+            }
+        }
+
+        $resultados['nuevosArticulos'] = $todosInsertados ? true : false;
+    }
+
+    
+    // 4. Eliminar artículos
+    if (!empty($idsParaEliminar)) {
+    // Verificar si idsParaEliminar es una cadena JSON y decodificarla en caso de que lo sea
+    if (is_string($idsParaEliminar)) {
+        $idsParaEliminar = json_decode($idsParaEliminar, true);  // Decodificar si es un string JSON
+    }
+
+    if (is_array($idsParaEliminar)) {
+        $todosEliminados = true;
+        foreach ($idsParaEliminar as $id) {
+
+
+        
+            $query4 = "DELETE FROM detallecompra WHERE id_detalle_compra = $id";
+            $resultado4 = $conexion->query($query4);
+
+            if (!$resultado4) {
+                $todosEliminados = false;
+                break;
+            }
+        }
+
+        $resultados['idEliminar'] = $todosEliminados ? true : false;
+    } else {
+        // Si no es un array o string JSON válido, marcar como false
+        $resultados['idEliminar'] = false;
+    }
+ }
+
+
+    cerrarConexion();
+
+    return $resultados;
+}
+

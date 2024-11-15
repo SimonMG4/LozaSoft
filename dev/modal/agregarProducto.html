@@ -1,10 +1,10 @@
 
  <form action="../../dev/modules/productos/productosController.php" method="POST" class="form" enctype="multipart/form-data">
     <h2>Agregar Producto</h2>
-    <input type="text" name="nombreAgregarProducto" placeholder="Nombre:">
+    <input type="text" name="nombreAgregarProducto" placeholder="Nombre:" required>
     <input type="text" name="descripcionAgregarProducto" placeholder="Descripcion:">
-    <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:">
-    <input type="number" name="stockAgregarProducto" placeholder="Stock:">
+    <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:" min="1"  required>
+    <input type="number" name="stockAgregarProducto" placeholder="Stock:" min="0"  required>
     <label for="imgAgregarProducto" class="custom-file-upload">
         <span id="file-chosen">Ningún archivo seleccionado
     </label>
