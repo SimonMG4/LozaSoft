@@ -530,4 +530,19 @@ function obtenerStock($id){
     return $stock;
 
 }
+function restarStock($stockRestado,$id){
+    abrirConexion();
+    global $conexion;
+
+    $query=("UPDATE productos SET stock='$stockRestado' WHERE id='$id'");
+    $resultado=$conexion->query($query);
+
+    if($resultado){
+        return true;
+    }else{
+        return false;
+    }
+    cerrarConexion();
+
+}
 

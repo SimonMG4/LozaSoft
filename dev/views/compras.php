@@ -48,7 +48,7 @@ if(!isset($_SESSION['id'])){
                 <tr>
                     <th>ID</th>
                     <th>Fecha</th>
-                    <th>Total-Perdida</th>
+                    <th>Total</th>
                     <th>Acciones</th>
                     
                 </tr>
