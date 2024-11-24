@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     logOut.addEventListener('click', function(event) {
         Swal.fire({ 
             title: "Salir", 
-            text: "¿Estás seguro que deseas salir de la sesión?", 
+            text: "¿Estás seguro de que deseas cerrar sesión?", 
             icon: "question", showCancelButton: true, 
             confirmButtonColor: "#3085d6", 
             cancelButtonColor: "#d33", 
-            confirmButtonText: "Sí, Salir", 
+            confirmButtonText: "Sí, ", 
             cancelButtonText: "Cancelar"
         }).then(result => {
             if(result.isConfirmed){
@@ -16,11 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     title: 'Has cerrado sesion correctamente',
                     text: 'Nos vemos pronto',
                     icon: 'success',
-                }).then(result => {
-                    if(result.isConfirmed){
-                        window.location.href = '../../dev/modules/logOut.php?accion=cerrarSesion';
-                    }
-                })
+                    showCancelButton: false,
+                    showConfirmButton: false
+                });
+                setTimeout(() => {
+                    window.location.href = '../../dev/modules/logOut.php?accion=cerrarSesion';
+                      
+                }, 1500);
             }
         })
         

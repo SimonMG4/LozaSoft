@@ -18,11 +18,13 @@ document.addEventListener('DOMContentLoaded', function(){
                         title: 'Credenciales validas',
                         text: 'Inicio de sesion exitoso',
                         icon: 'success',
-                    }).then(result => {
-                        if (result.isConfirmed) {
-                            window.location.href = 'dev/views/interfaz.php';
-                        }
+                        showCancelButton: false,
+                        showConfirmButton: false
                     });
+                    setTimeout(() => {
+                        window.location.href = 'dev/views/interfaz.php';
+                          
+                    }, 1500);
                 } else if(data.status === 'error1'){
                     Swal.fire({
                         title: "Contraseña incorrecta",
