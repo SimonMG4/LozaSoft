@@ -138,10 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const nuevaFila = `
                                 <div class="articulo-fila">
                                 <button type="button" class="eliminarFila">X</button>
-                                  <input type="text" class="product-search" placeholder="Nombre del Producto" required>
+                                <div>
+                                <input type="text" class="product-search" placeholder="Nombre del Producto" required>
+                                <ul class="dropdown" style="display: none;"></ul>
+                                </div>
                                   <input type="hidden" name="productos[${contador}][id]" class="product-id">
                                   <input type="number" name="productos[${contador}][cantidad]" placeholder="Cantidad" min="1" required>
-                                  <ul class="dropdown" style="display: none;"></ul>
                                 </div>
                               `;
     
@@ -201,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                 obtenerProductos();
                                 
-                                searchInput.addEventListener('keyup',()=>{
+                                searchInput.addEventListener('input',()=>{
                                     const query = searchInput.value.toLowerCase().trim();
                                     dropdown.innerHTML= '';
 
@@ -240,6 +242,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             
                                     })
 
+                                })
+
+                                searchInput.addEventListener('blur',()=>{
+                                    const productIdInput = fila.querySelector('.product-id');
+                                    const query = searchInput.value.trim().toLowerCase();
+
+                                    if (!productos.some(producto => producto.nombre.toLowerCase() === query)){
+                                        productIdInput.value = '';
+                                    }
                                 })
                               }
                             })
