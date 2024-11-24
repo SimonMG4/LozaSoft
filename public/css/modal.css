@@ -156,3 +156,39 @@ input[type="file"] {
     transition: .2s;
     height: 20px;
 }
+.dropdown {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--color2);
+    max-height: 150px;
+    overflow-y: auto;
+    display: none;
+    position: absolute;
+    background: white;
+    width: 92%;
+    z-index: 1000;
+    border-radius: 12px;
+  }
+  .dropdown .listItem {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+
+    img{
+        width: 20px;
+        height: 20px;
+    }
+    p{
+        color: black;
+    }
+  }
+  .listItem:hover{
+    background-color: #555;
+    p{
+        color: white;
+    }
+  }
+  

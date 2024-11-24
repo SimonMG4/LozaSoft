@@ -86,48 +86,163 @@ document.addEventListener('DOMContentLoaded', () => {
                     const contenedor = document.querySelector('.contenedor-art');
 
                     if(add_button){
-                        const inputContador = document.createElement('input');
-                        inputContador.type = 'hidden';
-                        inputContador.name = 'contador';
-                        inputContador.value = contador;
-                        contenedor.appendChild(inputContador);
-                        add_button.addEventListener('click', function(){
-
-                            const nuevaFila = `
-                            <div class="articulo-fila">
-                            <button type="button" class="eliminarFila">X</button>
-                              <input type="text" name="articulos[${contador}][nombre]" placeholder="Nombre del Artículo" required>
-                              <input type="number" name="articulos[${contador}][cantidad]" placeholder="Cantidad" min="1" required>
-                              <input type="number" name="articulos[${contador}][precio]" placeholder="Precio Unitario" min="0" step="0.01" required>
-                            </div>
-                          `;
-
-                          contenedor.insertAdjacentHTML('beforeend', nuevaFila);
-
-                          contador++;
-                          inputContador.value = contador;
-                        })
-
-                        contenedor.addEventListener('click',function(event){
-                            if(event.target.classList.contains('eliminarFila')){
-                                const fila = event.target.closest('.articulo-fila');
-                                if(fila){
-                                    fila.remove();
-                                    contador--;
-                                    actualizarIndices();
+                        const data = add_button.getAttribute('data-add');
+                        if(data == 'compra'){
+                            const inputContador = document.createElement('input');
+                            inputContador.type = 'hidden';
+                            inputContador.name = 'contador';
+                            inputContador.value = contador;
+                            contenedor.appendChild(inputContador);
+                            add_button.addEventListener('click', function(){
+    
+                                const nuevaFila = `
+                                <div class="articulo-fila">
+                                <button type="button" class="eliminarFila">X</button>
+                                  <input type="text" name="articulos[${contador}][nombre]" placeholder="Nombre del Artículo" required>
+                                  <input type="number" name="articulos[${contador}][cantidad]" placeholder="Cantidad" min="1" required>
+                                  <input type="number" name="articulos[${contador}][precio]" placeholder="Precio Unitario" min="0" step="0.01" required>
+                                </div>
+                              `;
+    
+                              contenedor.insertAdjacentHTML('beforeend', nuevaFila);
+    
+                              contador++;
+                              inputContador.value = contador;
+                            })
+    
+                            contenedor.addEventListener('click',function(event){
+                                if(event.target.classList.contains('eliminarFila')){
+                                    const fila = event.target.closest('.articulo-fila');
+                                    if(fila){
+                                        fila.remove();
+                                        contador--;
+                                        actualizarIndices();
+                                    }
                                 }
+                            })
+                            function actualizarIndices() {
+                                const filas = document.querySelectorAll('.articulo-fila');
+                                filas.forEach((fila, index) => {
+                                    // Actualizamos los nombres de los inputs con el índice correcto
+                                    fila.querySelector('input[name*="[nombre]"]').setAttribute('name', `articulos[${index}][nombre]`);
+                                    fila.querySelector('input[name*="[cantidad]"]').setAttribute('name', `articulos[${index}][cantidad]`);
+                                    fila.querySelector('input[name*="[precio]"]').setAttribute('name', `articulos[${index}][precio]`);
+                                });
+                            
+                                contador = filas.length;
                             }
-                        })
-                        function actualizarIndices() {
-                            const filas = document.querySelectorAll('.articulo-fila');
-                            filas.forEach((fila, index) => {
-                                // Actualizamos los nombres de los inputs con el índice correcto
-                                fila.querySelector('input[name*="[nombre]"]').setAttribute('name', `articulos[${index}][nombre]`);
-                                fila.querySelector('input[name*="[cantidad]"]').setAttribute('name', `articulos[${index}][cantidad]`);
-                                fila.querySelector('input[name*="[precio]"]').setAttribute('name', `articulos[${index}][precio]`);
-                            });
-                        
-                            contador = filas.length;
+
+                        }else if (data == 'venta'){
+                            add_button.addEventListener('click', function(){
+    
+                                const nuevaFila = `
+                                <div class="articulo-fila">
+                                <button type="button" class="eliminarFila">X</button>
+                                  <input type="text" class="product-search" placeholder="Nombre del Producto" required>
+                                  <input type="hidden" name="productos[${contador}][id]" class="product-id">
+                                  <input type="number" name="productos[${contador}][cantidad]" placeholder="Cantidad" min="1" required>
+                                  <ul class="dropdown" style="display: none;"></ul>
+                                </div>
+                              `;
+    
+                              contenedor.insertAdjacentHTML('beforeend', nuevaFila);
+    
+                              contador++;
+                            })
+                            contenedor.addEventListener('click',function(event){
+                                if(event.target.classList.contains('eliminarFila')){
+                                    const fila = event.target.closest('.articulo-fila');
+                                    if(fila){
+                                        fila.remove();
+                                        contador--;
+                                        actualizarIndices();
+                                    }
+                                }
+                            })
+                            function actualizarIndices() {
+                                const filas = document.querySelectorAll('.articulo-fila');
+                                filas.forEach((fila, index) => {
+                                    // Actualizamos los nombres de los inputs con el índice correcto
+                                    fila.querySelector('input[name*="[id]"]').setAttribute('name', `articulos[${index}][id]`);
+                                    fila.querySelector('input[name*="[cantidad]"]').setAttribute('name', `articulos[${index}][cantidad]`);
+                                });
+                            
+                                contador = filas.length;
+                            }
+
+                            contenedor.addEventListener('click', (e)=>{
+                                if(e.target.classList.contains('product-search')){
+                                    const searchInput = e.target;
+
+                                    const fila = searchInput.closest('.articulo-fila');
+                                    const dropdown = fila.querySelector('.dropdown');
+
+                                   let productos= [];
+                                   async function obtenerProductos() {
+                                    try {
+                                        const response = await fetch("../../dev/modules/ventas/ventasController.php", {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/x-www-form-urlencoded'
+                                            },
+                                            body: `accion=tablaProductos`
+                                        });
+                                
+                                        if (!response.ok) {
+                                            throw new Error('Error al obtener los productos');
+                                        }
+                                
+                                        productos = await response.json(); 
+
+                                    } catch (error) {
+                                        console.error('Error:', error);
+                                    }
+                                }
+
+                                obtenerProductos();
+                                
+                                searchInput.addEventListener('keyup',()=>{
+                                    const query = searchInput.value.toLowerCase().trim();
+                                    dropdown.innerHTML= '';
+
+
+                                    const productosAMostrar = query === '' 
+                                    ? productos 
+                                    : productos.filter(producto => producto.nombre.toLowerCase().includes(query));
+
+                                    productosAMostrar.forEach(producto=>{
+
+                                        const itemList = `
+                                        <li class="listItem" data-id="${producto.id}">
+                                            <img src="http://localhost/lozasoft${producto.imagen}" >
+                                            <p>${producto.nombre}</p>
+                                        </li>
+                                    `;
+
+
+                                    dropdown.insertAdjacentHTML('beforeend', itemList);
+
+                                    dropdown.style.display = productosAMostrar.length > 0 ? 'block' : 'none';
+
+                                    const listItems = dropdown.querySelectorAll('.listItem');
+
+                                    listItems.forEach(item=>{
+                                        item.addEventListener('click',()=>{
+                                            const selectedId = item.dataset.id;
+                                            const selectedName = item.querySelector('p').textContent;
+
+                                            searchInput.value = selectedName;
+                                            fila.querySelector('.product-id').value = selectedId;
+                                            dropdown.style.display = 'none';
+                                        })
+                                    })
+
+                            
+                                    })
+
+                                })
+                              }
+                            })
                         }
                     }
 
@@ -164,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     Swal.fire({
                                         position: "top-end",
                                         icon: "success",
-                                        title: "Registro creado exitosamente",
+                                        title: "El registro se ha creado exitosamente.",
                                         showConfirmButton: false,
                                         timer: 1000
                                     });
@@ -177,14 +292,29 @@ document.addEventListener('DOMContentLoaded', () => {
                                     Swal.fire({
                                         icon: "error",
                                         title: "Error",
-                                        text: "Debes de ingresar minimo un articulo"
+                                        text: "Por favor, asegúrate de agregar al menos un artículo antes de proceder."
                                     });
 
-                                } else {
+                                }else if(data.status == 'productoInvalido'){
                                     Swal.fire({
                                         icon: "error",
                                         title: "Error",
-                                        text: "Ha habido un error al crear el registro"
+                                        text: "Por favor, verifica que los productos seleccionados sean válidos."
+                                    });
+
+                                } else if(data.status == 'noStock'){
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Error",
+                                        text: "No hay suficiente stock para uno o más productos seleccionados.",
+                                        footer: '<a href="../../dev/views/productos.php">Por favor, verifica las cantidades disponibles e intenta nuevamente.</a>'
+                                      });
+                                }
+                                else {
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Error",
+                                        text: "Ocurrió un error al intentar crear el registro."
                                     });
                                 }
                             } catch (error) {
@@ -223,8 +353,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const controller = this.getAttribute('data-controller');
 
             Swal.fire({ 
-                title: "¿Estas seguro de eliminar este registro?", 
-                text: "Esta accion es irreversible", 
+                title: "¿Estás seguro de que deseas eliminar este registro?", 
+                text: "Esta acción no se puede deshacer.", 
                 icon: "warning", showCancelButton: true, 
                 confirmButtonColor: "#3085d6", 
                 cancelButtonColor: "#d33", 
@@ -245,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 icon: "success",
                                 timer: 500 ,
                                 timerProgressBar: true,
-                                title: "Registro eliminado correctamente",
+                                title: "El registro se ha eliminado exitosamente.",
                                 showConfirmButton: false,
         
                             }).then(() => { 

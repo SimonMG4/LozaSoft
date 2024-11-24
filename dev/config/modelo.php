@@ -86,7 +86,7 @@ function tablaProductos(){
     abrirConexion();
     global $conexion;
 
-    $query = $conexion->prepare("SELECT * FROM productos");
+    $query = $conexion->prepare("SELECT * FROM productos WHERE activo = 1");
     $query->execute();
     $resultado=$query->get_result();
 
@@ -168,7 +168,7 @@ function eliminarProducto($id){
     abrirConexion();
     global $conexion;
 
-    $query = $conexion->prepare("DELETE FROM productos WHERE id= $id");
+    $query = $conexion->prepare("UPDATE productos SET activo=0 WHERE id= $id");
     $query->execute();
 
     if ($query) {
@@ -305,7 +305,6 @@ function obtenerCompra($id){
     return $respuesta;
 
 }
-
 function EditarCompra($actualizarCompra, $actualizarArticulos, $nuevosArticulos, $idsParaEliminar) {
     abrirConexion();
     global $conexion;
@@ -387,7 +386,7 @@ function EditarCompra($actualizarCompra, $actualizarArticulos, $nuevosArticulos,
     }
 
     if (is_array($idsParaEliminar)) {
-        $todosEliminados = true;
+        $todosEliminados = true; 
         foreach ($idsParaEliminar as $id) {
 
 
@@ -412,5 +411,123 @@ function EditarCompra($actualizarCompra, $actualizarArticulos, $nuevosArticulos,
     cerrarConexion();
 
     return $resultados;
+}
+
+//VENTAS
+function tablaVentas(){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("SELECT * FROM ventas");
+    $query->execute();
+    $resultado=$query->get_result();
+
+    if($resultado){
+        $filas = []; 
+        while ($fila = $resultado->fetch_object()) 
+        { $filas[] = $fila;
+        }
+        return $filas;
+    }else {
+        return false;
+    }
+    cerrarConexion();
+}
+function obtenerPrecio($id){
+    abrirConexion();
+    global $conexion;
+
+    $query= $conexion->prepare("SELECT precio FROM productos WHERE id=$id");
+    $query->execute();
+
+    $result = $query->get_result();
+
+    if ($result->num_rows > 0) {
+        
+        $row = $result->fetch_assoc();
+        $precio = $row['precio'];
+    
+        
+    } else {
+        $precio = false;
+    }
+    
+    
+    cerrarConexion();
+    return $precio;
+}
+function agregarVenta($fecha,$totalVenta){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("INSERT INTO ventas(fecha,total_ganancia) VALUES ('$fecha','$totalVenta')");
+    $query->execute();
+
+    if($query){
+        $idCompra = $conexion->insert_id;
+        cerrarConexion();
+        return $idCompra;
+    }else{
+        cerrarConexion();
+        return false;
+    }
+
+}
+function agregarDetalleVenta($idCompra,$id,$cantidad,$total){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("INSERT INTO detalleventa(id_venta,id_producto,cantidad,total) VALUES ('$idCompra','$id','$cantidad','$total')");
+    $query->execute();
+
+    if($query){
+        return true;
+        
+    }else{
+        return false;
+    }
+    
+    cerrarConexion();
+
+}
+function eliminarVenta($id){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("DELETE FROM ventas WHERE id= $id");
+    $query->execute();
+
+    if ($query) {
+        $response['status']= 'true';
+         } else {
+        $response['status']= 'false';
+         }
+    return $response;
+    cerrarConexion();
+
+}
+function obtenerStock($id){
+    abrirConexion();
+    global $conexion;
+
+    $query= $conexion->prepare("SELECT stock FROM productos WHERE id=$id");
+    $query->execute();
+
+    $result = $query->get_result();
+
+    if ($result->num_rows > 0) {
+        
+        $row = $result->fetch_assoc();
+        $stock = $row['stock'];
+    
+        
+    } else {
+        $stock = false;
+    }
+    
+    
+    cerrarConexion();
+    return $stock;
+
 }
 

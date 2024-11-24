@@ -39,6 +39,7 @@ if(!isset($_SESSION['id'])){
     <main class="productos_main">
         <div>
             <button class="btn_agregar" data-url="../../dev/modal/agregarProducto.html">Agregar</button>
+
             
             <input  class="buscar" type="text" id="buscar" placeholder="Buscar...">
             
