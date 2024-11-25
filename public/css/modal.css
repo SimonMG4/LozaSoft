@@ -141,11 +141,11 @@ input[type="file"] {
 .contenedor-art{
     width: 100%;
 }
-.articulo-fila{
+.articulo-fila,.producto-fila{
     display: flex;
     flex-direction: column;
 }
-.articulo-fila div{
+.articulo-fila div, .producto-fila div{
     position: relative;
     width: 100%;
     input{

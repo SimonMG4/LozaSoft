@@ -74,7 +74,8 @@ if (isset($_REQUEST['accion'])) {
         case 'obtenerCompra':
             $id = $_POST['id'];
 
-            //Ejecutamos la function de obtener una sola compra
+            //Ejecutamos function que nos devuelve la fecha de la compra y
+            //los detallesCompra relacionados al id de esa compra
             $sesion= obtenerCompra($id);
 
             echo json_encode($sesion);

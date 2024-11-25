@@ -1,0 +1,14 @@
+<form action="../../dev/modules/ventas/ventasController.php" method="POST" class="form" enctype="multipart/form-data">
+    <h2>Editar Venta</h2>
+    <label for="fechaAgregarVenta"">Ingresa la fecha: </label>
+    <input type="date" name="fechaEditarVenta" placeholder="fecha:" id="fecha" required>
+    <button class="add-button" data-add="venta" type="button">Agregar Articulo</button>
+    <div class="contenedor-art"></div>
+    <div>
+        <input type="hidden" name="idVenta" class="inputIdModulo">
+        <input type="hidden" name="accion" value="editarVenta">
+        <input type="hidden" name="idsParaEliminar" id="idsParaEliminar">
+        <input type="submit" name="editarVenta" value="Guardar">
+        <button id="cerrarModal" class="cerrarModal">Cancelar</button>
+    </div>
+</form>

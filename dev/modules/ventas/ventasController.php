@@ -96,6 +96,14 @@ if (isset($_REQUEST['accion'])) {
             echo json_encode($sesion);
     
             break;
+        case 'obtenerVenta':
+            $id=$_POST['id'];
+
+            //Ejecutamos funcion que retorna la fecha de la venta y los detallesventa relacionados
+            $sesion = obtenerVenta($id);
+
+            echo json_encode($sesion);
+            break;
     }
         
     }
