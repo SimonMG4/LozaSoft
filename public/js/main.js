@@ -832,6 +832,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <input type="text" class="product-search" name="productos[${count}][nombre]" placeholder="Nombre del Producto" required>
                                     <ul class="dropdown" style="display: none;"></ul>
                                     </div>
+                                      <input type="hidden" name="productos[${count}][detalleventa-id]" class="detalleventa-id">
                                       <input type="hidden" name="productos[${count}][id]" class="product-id">
                                       <input type="number" name="productos[${count}][cantidad]" placeholder="Cantidad" min="1" required>
                                     </div>
@@ -840,12 +841,14 @@ document.addEventListener('DOMContentLoaded', () => {
                                     contenedor.insertAdjacentHTML('beforeend', nuevaFila);  
                                     
                                     //Las const de los input que nos inserta la const nuevaFila
+                                    const detalleventaID = document.querySelector(`[name="productos[${count}][detalleventa-id]"]`)
                                     const id = document.querySelector(`[name="productos[${count}][id]"]`)
                                     const nombre = document.querySelector(`[name="productos[${count}][nombre]"]`);
                                     const cantidad = document.querySelector(`[name="productos[${count}][cantidad]"]`);
                                     
                                     //Le agregamos a los inputs de cada fila el value que nos devuelve el fetch
-                                    id.value = data.detalles[count].id_detalle_venta;
+                                    detalleventaID.value = data.detalles[count].id_detalle_venta;
+                                    id.value = data.detalles[count].id_producto;
                                     nombre.value = data.detalles[count].nombre;
                                     cantidad.value = data.detalles[count].cantidad;
 
@@ -966,7 +969,60 @@ document.addEventListener('DOMContentLoaded', () => {
                                         //verificamos si el product-id tiene value
                                         const inputHidden = fila.querySelector('.product-id')
                                         if(inputHidden.value){
-                                            
+                                            const eventos=['click','input'];
+
+                                            eventos.forEach(evento=>{
+                                                searchInput.addEventListener(evento,()=>{
+                                                //Normalizamos lo que el usuario ha escrito
+                                                const query = searchInput.value.toLowerCase().trim();
+
+                                                //Limpiamos el contenedor de los productos filtrados
+                                                dropdown.innerHTML= '';
+
+                                                //Si no hay nada escrito en el input, se muestran todos los productos
+                                                //Si hay algo escrito se filtran los productos
+                                                const productosAMostrar = query === '' 
+                                                ? productos 
+                                                : productos.filter(producto => producto.nombre.toLowerCase().includes(query));
+
+                                                productosAMostrar.forEach(producto=>{
+                                                    //Puedes alterar esto para mostrar lo que gustes
+                                                    const itemList = `
+                                                    <li class="listItem" data-id="${producto.id}">
+                                                        <img src="http://localhost/lozasoft${producto.imagen}" >
+                                                        <p>${producto.nombre}</p>
+                                                    </li>
+                                                `;
+            
+            
+                                                dropdown.insertAdjacentHTML('beforeend', itemList);
+                                                //Si hay productos a mostrar cambiamos el contenedor de los productos de none a block o viceversa
+                                                dropdown.style.display = productosAMostrar.length > 0 ? 'block' : 'none';
+            
+                                                //Const con cada producto que se muestra en la lista
+                                                const listItems = dropdown.querySelectorAll('.listItem');
+            
+                                                //Le agregamos evento de click a cada producto que se muestra
+                                                listItems.forEach(item=>{
+                                                    item.addEventListener('click',()=>{
+                                                        //Guardamos el id del producto
+                                                        const selectedId = item.dataset.id;
+                                                        //Guardamos el nombre del producto
+                                                        const selectedName = item.querySelector('p').textContent;
+                                                        //Le cambiamos value al filtrador para que el usuario vea que se escogio correctamente
+                                                        searchInput.value = selectedName;
+                                                        //Le agregamos el value del id seleccionado al input product-id de la fila
+                                                        fila.querySelector('.product-id').value = selectedId;
+                                                        //Despues de que se clickeo un producto(Se eligio) se deja de mostrar el contenedor 
+                                                        dropdown.style.display = 'none';
+                                                    })
+                                                })
+            
+                                        
+                                                })
+
+                                                });
+                                            })
 
                                         }else{
                                             //Le agregamos un evento de input para que detecte cuando se escribe(Puedes cambiarlo a keyup)
@@ -1041,6 +1097,77 @@ document.addEventListener('DOMContentLoaded', () => {
                                      })
                                   }
                                 })
+
+                                //Envio del formulario
+                                if(form){
+                                    form.addEventListener('submit', async (e)=>{
+                                        e.preventDefault();
+            
+                                        const formData = new FormData(form);
+                                        const action = form.getAttribute('action');
+            
+                                        try{
+                                            const response = await fetch(action, {
+                                                method: 'POST',
+                                                body: formData,
+                                                headers: {
+                                                    'X-Requested-With': 'XMLHttpRequest',
+                                                }
+                                            });
+                                            const data = await response.json();
+                                            if (data.status == 'success') {
+                                                Swal.fire({
+                                                    position: "top-end",
+                                                    icon: "success",
+                                                    title: "El registro se ha creado exitosamente.",
+                                                    showConfirmButton: false,
+                                                    timer: 1000
+                                                });
+                                                setTimeout(() => {
+                                                    modal.classList.remove('modal--show'); 
+                                                    modalContent.innerHTML = '';  
+                                                    window.location.reload(); 
+                                                }, 1000); // El mismo tiempo que el timer de la alerta
+                                            }else if(data.status == '0articulo'){
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Error",
+                                                    text: "Por favor, asegúrate de agregar al menos un artículo antes de proceder."
+                                                });
+            
+                                            }else if(data.status == 'productoInvalido'){
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Error",
+                                                    text: "Por favor, verifica que los productos seleccionados sean válidos."
+                                                });
+            
+                                            } else if(data.status == 'noStock'){
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Error",
+                                                    text: "No hay suficiente stock para uno o más productos seleccionados.",
+                                                    footer: '<a href="../../dev/views/productos.php">Por favor, verifica las cantidades disponibles e intenta nuevamente.</a>'
+                                                  });
+                                            }
+                                            else {
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Error",
+                                                    text: "Ocurrió un error al intentar crear el registro."
+                                                });
+                                            }
+            
+                                        }catch (error){
+                                            console.error('Error en el envío del formulario:', error);
+                                            Toast.fire({
+                                                icon: 'error',
+                                                title: 'Hubo un problema al procesar la solicitud.'
+                                            });
+                                        }
+            
+                                    })
+                                }
 
 
 

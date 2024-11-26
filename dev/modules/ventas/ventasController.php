@@ -104,6 +104,99 @@ if (isset($_REQUEST['accion'])) {
 
             echo json_encode($sesion);
             break;
+        case 'editarVenta':
+            $fecha = $_POST['fechaEditarVenta'];
+            //Ids que se van a eliminar
+            $idsEliminar = $_POST['idsParaEliminar'];
+            //Id de la Venta
+            $idVenta = $_POST['idVenta'];
+            //Comprobamos que haya minimo un producto
+            if(isset($_POST['productos'])){
+                $productos = $_POST['productos'];
+
+                //Creamos 2 arrays, los productos a actualizar y los que son a agregar
+                $actualizarProductos = [];
+                $nuevosProductos = [];
+                $totalVenta = 0;
+
+                //Creamos un array asociativo para actualizar la compra
+                $actualizarVenta = [
+                    'idVenta' => $idVenta,
+                    'fecha' => $fecha,
+                    'totalVenta' => 0 
+                ];
+    
+                foreach($productos as $producto){
+                    
+                    if (!isset($producto['id']) || empty($producto['id'])) {
+                        echo json_encode(['status' => 'productoInvalido']);
+                        return; // Detiene completamente el flujo
+                    }
+                    
+                    $idProducto = $producto['id'];
+                    $cantidad = $producto['cantidad'];
+                    $precio = obtenerPrecio($idProducto);
+
+                    $stockProducto = obtenerStock($idProducto);
+                    //Validamos que haya suficiente stock de los productos para la cantidad seleccionada
+                    if($stockProducto-$cantidad < 0){
+                        echo json_encode(['status'=>'noStock']);
+                        return;
+                    }
+                    $stockRestado= $stockProducto - $cantidad;
+
+                    $detalle2 = restarStock($stockRestado,$idProducto);
+
+                    //Calculamos total de cada detalleCompra
+                    $totalProducto = $cantidad * $precio;
+                    //Calculamos el total de toda la compra
+                    $totalVenta += $totalProducto;
+                    //Almacenamos el total de la compra en nuestro array asociativo de actualizar compra
+                    $actualizarVenta['totalVenta'] = $totalVenta;
+
+                    //Si el producto trae el campo id, es porque es para actualizar
+                    //Si no lo trae es para agregar, aqui comprobamos si tiene o no
+                    //para saber a que array agregarlo
+                    if (isset($producto['detalleventa-id']) && !empty($producto['detalleventa-id'])) {
+                        //Si tiene id, el producto ya existe en la base de datos
+                        //se agrega al array de actualizar
+                        $actualizarProductos[] = [
+                            'idDetalleVenta' => $producto['detalleventa-id'],
+                            'idProducto'=>$idProducto,
+                            'cantidad' => $cantidad,
+                            'total' => $totalProducto
+                        ];
+                    } else {
+                        // Si no tiene, es nuevo, no existe en la base de datos
+                        //Se agrega al array de agregar detalleCompra
+                        $nuevosProductos[] = [
+                            'idVenta' => $idVenta,
+                            'idProducto'=>$idProducto,
+                            'cantidad' => $cantidad,
+                            'total' => $totalProducto
+                        ];
+                    }
+                }
+                //Ejecutamos la function de editar compra con todos los arreglos
+                $sesion = editarVenta($actualizarVenta,$actualizarProductos,$nuevosProductos,$idsEliminar);
+
+                //El $sesion retorna un arreglo con 4 datos, uno por cada arreglo que le enviamos
+                if (in_array(false, $sesion)) {
+                    // Si algún resultado es false, retornar un error
+                    echo json_encode(['status' => 'error']);
+                } else {
+                    // Si todos son true, retornar éxito
+                    echo json_encode(['status' => 'success']);
+                }
+
+
+
+            }else{
+                //Si no se ingreso ningun producto, retorna una alerta
+                //"Debes ingresar minimo un producto"
+                echo json_encode(['status' => '0articulo']);
+            }
+            break;
     }
         
     }

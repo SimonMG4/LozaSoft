@@ -563,7 +563,7 @@ function obtenerVenta($id){
 
     //Segundo query, trae los detalles de los productos
 
-    $query2= $conexion->prepare("SELECT id_detalle_venta,cantidad,nombre FROM detalleventa LEFT JOIN productos ON productos.id = detalleventa.id_producto WHERE id_venta = $id");
+    $query2= $conexion->prepare("SELECT id_detalle_venta,id_producto,cantidad,nombre FROM detalleventa LEFT JOIN productos ON productos.id = detalleventa.id_producto WHERE id_venta = $id");
     $query2->execute();
     $resultado2=$query2->get_result();
 
@@ -579,5 +579,110 @@ function obtenerVenta($id){
     cerrarConexion();
 
     return $respuesta;
+}
+function editarVenta($actualizarVenta,$actualizarProductos,$nuevosProductos,$idsEliminar){
+    abrirConexion();
+    global $conexion;
+
+    $resultados = [
+        'actualizarVenta' => true,
+        'actualizarProductos' => true,
+        'nuevosProductos' => true,
+        'idEliminar' => true
+    ];
+
+    // 1. Actualizar la compra
+    if (isset($actualizarVenta['idVenta']) && isset($actualizarVenta['fecha']) && isset($actualizarVenta['totalVenta'])) {
+        $idVenta = $actualizarVenta['idVenta'];
+        $fecha = $actualizarVenta['fecha'];
+        $totalVenta = $actualizarVenta['totalVenta'];
+
+        // Concatenando directamente los valores en la consulta
+        $query1 = "UPDATE ventas SET fecha = '$fecha', total_ganancia = $totalVenta WHERE id = $idVenta";
+        $resultado1 = $conexion->query($query1);
+
+        if (!$resultado1) {
+            $resultados['actualizarVenta'] = false;
+        }
+    }
+
+    // 2. Actualizar los artículos existentes
+    if (!empty($actualizarProductos)) {
+        $todosActualizados = true;
+        foreach ($actualizarProductos as $producto) {
+            $idDetalleVenta = $producto['idDetalleVenta'];
+            $idProducto = $producto['idProducto'];
+            $cantidad = $producto['cantidad'];
+            $total = $producto['total'];
+
+            // Concatenando directamente los valores en la consulta
+            $query2 = "UPDATE detalleventa SET id_producto = '$idProducto', cantidad = $cantidad, total = $total WHERE id_detalle_venta = $idDetalleVenta";
+            $resultado2 = $conexion->query($query2);
+
+            if (!$resultado2) {
+                $todosActualizados = false;
+                break;
+            }
+        }
+
+        $resultados['actualizarProductos'] = $todosActualizados ? true : false;
+    }
+
+    // 3. Insertar nuevos artículos
+    if (!empty($nuevosProductos)) {
+        $todosInsertados = true;
+        foreach ($nuevosProductos as $producto) {
+            $idVenta = $producto['idVenta'];
+            $idProducto = $producto['idProducto'];
+            $cantidad = $producto['cantidad'];
+            $total = $producto['total'];
+
+            // Concatenando directamente los valores en la consulta
+            $query3 = "INSERT INTO detalleventa (id_venta, id_producto, cantidad, total) VALUES ($idVenta, $idProducto, $cantidad, $total)";
+            $resultado3 = $conexion->query($query3);
+
+            if (!$resultado3) {
+                $todosInsertados = false;
+                break;
+            }
+        }
+
+        $resultados['nuevosArticulos'] = $todosInsertados ? true : false;
+    }
+
+    
+    // 4. Eliminar artículos
+    if (!empty($idsEliminar)) {
+    // Verificar si idsParaEliminar es una cadena JSON y decodificarla en caso de que lo sea
+    if (is_string($idsEliminar)) {
+        $idsEliminar = json_decode($idsEliminar, true);  // Decodificar si es un string JSON
+    }
+
+    if (is_array($idsEliminar)) {
+        $todosEliminados = true; 
+        foreach ($idsEliminar as $id) {
+
+
+        
+            $query4 = "DELETE FROM detalleventa WHERE id_detalle_venta = $id";
+            $resultado4 = $conexion->query($query4);
+
+            if (!$resultado4) {
+                $todosEliminados = false;
+                break;
+            }
+        }
+
+        $resultados['idEliminar'] = $todosEliminados ? true : false;
+    } else {
+        // Si no es un array o string JSON válido, marcar como false
+        $resultados['idEliminar'] = false;
+    }
+ }
+
+
+    cerrarConexion();
+
+    return $resultados;
 }
 
