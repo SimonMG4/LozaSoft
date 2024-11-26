@@ -147,6 +147,15 @@ if (isset($_REQUEST['accion'])) {
         
 
         break;
+
+        case 'activarProducto':
+
+            $id = $_POST['id'];
+
+            $sesion = activarProducto($id);
+            echo json_encode($sesion);
+
+            break;
         
     }
     }

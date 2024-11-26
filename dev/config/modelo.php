@@ -101,6 +101,25 @@ function tablaProductos(){
     }
     cerrarConexion();
 }
+function tablaProductos2(){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("SELECT * FROM productos WHERE activo = 0");
+    $query->execute();
+    $resultado=$query->get_result();
+
+    if($resultado){
+        $filas = []; 
+        while ($fila = $resultado->fetch_object()) 
+        { $filas[] = $fila;
+        }
+        return $filas;
+    }else {
+        return false;
+    }
+    cerrarConexion();
+}
 function obtenerProducto($id){
     abrirConexion();
     global $conexion;
@@ -168,10 +187,16 @@ function eliminarProducto($id){
     abrirConexion();
     global $conexion;
 
+    $null=null;
+
     $query = $conexion->prepare("UPDATE productos SET activo=0 WHERE id= $id");
     $query->execute();
 
-    if ($query) {
+    $query2=$conexion->prepare("UPDATE productos SET imagen = '$null' WHERE id=$id");
+    $query2->execute();
+
+
+    if ($query && $query2) {
         $response['status']= 'true';
          } else {
         $response['status']= 'false';
@@ -194,6 +219,21 @@ function obtenerImagen($id){
     }else{
         return null;
     }
+    cerrarConexion();
+}
+function activarProducto($id){
+    abrirConexion();
+    global $conexion;
+
+    $query=("UPDATE productos SET activo=1 WHERE id=$id");
+    $resultado=$conexion->query($query);
+
+    if ($resultado) {
+        $response['status']= 'true';
+    } else {
+        $response['status']= 'false';
+    }
+    return $response;
     cerrarConexion();
 }
 

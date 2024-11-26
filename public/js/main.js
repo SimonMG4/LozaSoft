@@ -403,45 +403,91 @@ document.addEventListener('DOMContentLoaded', () => {
             const accion = this.getAttribute('data-accion');
             const controller = this.getAttribute('data-controller');
 
-            Swal.fire({ 
-                title: "¿Estás seguro de que deseas eliminar este registro?", 
-                text: "Esta acción no se puede deshacer.", 
-                icon: "warning", showCancelButton: true, 
-                confirmButtonColor: "#3085d6", 
-                cancelButtonColor: "#d33", 
-                confirmButtonText: "Sí, Eliminar", 
-                cancelButtonText: "Cancelar"
-            }).then(result => {
-                if (result.isConfirmed){
-                    fetch(controller,{
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: new URLSearchParams({ 'accion': accion, 'id': id })
-                    })
-                    .then(response=>response.json())
-                    .then(data=>{
-                        if(data.status == 'true'){
-                            Swal.fire({
-                                position: "top-end",
-                                icon: "success",
-                                timer: 500 ,
-                                timerProgressBar: true,
-                                title: "El registro se ha eliminado exitosamente.",
-                                showConfirmButton: false,
-        
-                            }).then(() => { 
-                                window.location.reload(); 
+            if(accion=='eliminarProducto'){
+                Swal.fire({ 
+                    title: "¿Estás seguro de que deseas desactivar este producto?", 
+                    text: "No podras usar este producto hasta que se active nuevamente",
+                    icon: "warning", showCancelButton: true, 
+                    confirmButtonColor: "#3085d6", 
+                    cancelButtonColor: "#d33", 
+                    confirmButtonText: "Sí, Desactivar", 
+                    cancelButtonText: "Cancelar"
+                }).then(result => {
+                    if (result.isConfirmed){
+                        fetch(controller,{
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: new URLSearchParams({ 'accion': accion, 'id': id })
+                        })
+                        .then(response=>response.json())
+                        .then(data=>{
+                            if(data.status == 'true'){
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    timer: 500 ,
+                                    timerProgressBar: true,
+                                    title: "El producto se ha desactivado exitosamente.",
+                                    showConfirmButton: false,
+            
+                                }).then(() => { 
+                                    window.location.reload(); 
+                                    });
+                            }else{
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Ha habido un error al desactivar el producto"
                                 });
-                        }else{
-                            Swal.fire({
-                                icon: "error",
-                                title: "Error",
-                                text: "Ha habido un error al eliminar el registro"
-                            });
-                        }
-                    })
-                }
-            })
+                            }
+                        })
+                    }
+                })
+                
+
+            }else{
+                
+                Swal.fire({ 
+                    title: "¿Estás seguro de que deseas eliminar este registro?", 
+                    text: "Esta acción no se puede deshacer.", 
+                    icon: "warning", showCancelButton: true, 
+                    confirmButtonColor: "#3085d6", 
+                    cancelButtonColor: "#d33", 
+                    confirmButtonText: "Sí, Eliminar", 
+                    cancelButtonText: "Cancelar"
+                }).then(result => {
+                    if (result.isConfirmed){
+                        fetch(controller,{
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: new URLSearchParams({ 'accion': accion, 'id': id })
+                        })
+                        .then(response=>response.json())
+                        .then(data=>{
+                            if(data.status == 'true'){
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    timer: 500 ,
+                                    timerProgressBar: true,
+                                    title: "El registro se ha eliminado exitosamente.",
+                                    showConfirmButton: false,
+            
+                                }).then(() => { 
+                                    window.location.reload(); 
+                                    });
+                            }else{
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Ha habido un error al eliminar el registro"
+                                });
+                            }
+                        })
+                    }
+                })
+            }
+
 
             
 

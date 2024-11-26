@@ -39,8 +39,7 @@ if(!isset($_SESSION['id'])){
     <main class="productos_main">
         <div>
             <div>
-                <button class="btn_agregar" data-url="../../dev/modal/agregarProducto.html">Agregar</button>
-                <a href="../../dev/views/productosInactivos.php">Ver Inactivos</a>
+                <a href="../../dev/views/productos.php">Ver Activos</a>
             </div>
 
 
@@ -64,7 +63,7 @@ if(!isset($_SESSION['id'])){
                     <?php
                     include('../../dev/config/modelo.php');
                     
-                    $filas = tablaProductos();
+                    $filas = tablaProductos2();
                     
                     foreach ($filas as $fila):
                         ?>
@@ -75,7 +74,7 @@ if(!isset($_SESSION['id'])){
                         <td><?php echo $fila->precio; ?></td>
                         <td><?php echo $fila->stock; ?></td>
                         <td><img class="imgTabla" src="http://localhost/lozasoft<?php echo $fila->imagen; ?>"</td>
-                        <td><button class="btn_eliminar" data-id="<?php echo $fila->id?>" data-accion="eliminarProducto" data-controller='../../dev/modules/productos/productosController.php'>Desactivar</button>
+                        <td><button class="btn_activar" data-id="<?php echo $fila->id?>" data-controller='../../dev/modules/productos/productosController.php'>Activar</button>
                         <button class="btn_editar" data-id="<?php echo $fila->id?>" data-accion1="obtenerProducto"data-accion2="editarProducto" data-url="../../dev/modal/editarProducto.html">Editar</button></td>
                     </tr>
                     <?php endforeach;?>
@@ -118,6 +117,7 @@ if(!isset($_SESSION['id'])){
 
     <script src="../../public/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../dev/modules/productos/productos.js"></script>
     
 </body>
 </html>

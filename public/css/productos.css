@@ -170,6 +170,24 @@
     display: flex;
     justify-content: space-between;
     padding-bottom: 1em;
+
+    div{
+        gap: 10px;
+        display: flex;
+        align-items: center;
+        a:hover{
+            scale: 1.1;
+        }
+        a{
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: var(--color7);
+            background-color: var(--color8);
+            padding: 1em .5em;
+        }
+    }
 }
 
 .btn_agregar {
@@ -219,7 +237,19 @@
     cursor: pointer;
     border: none;
     height: 40px;
-    width: 70px;
+    width: 90px;
+}
+.btn_activar {
+    background-color: var(--colorverde);
+    color: var(--color7);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    height: 40px;
+    width: 90px;
 }
 
 .btn_editar {
@@ -236,7 +266,7 @@
     margin-left: 2px;
 }
 
-.btn_agregar:hover, .btn_editar:hover, .btn_eliminar:hover, .productos_main div button:hover {
+.btn_agregar:hover, .btn_editar:hover, .btn_eliminar:hover, .productos_main div button:hover, .btn_activar:hover {
     scale: 1.1;
 }
 
@@ -251,4 +281,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.productosInactivos{
+    background-color: var(--color8);
+    color: var(--color7);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    height: 60px;
+    width: 100px;
 }
