@@ -120,6 +120,25 @@ function tablaProductos2(){
     }
     cerrarConexion();
 }
+function tablaProductos3(){
+    abrirConexion();
+    global $conexion;
+
+    $query = $conexion->prepare("SELECT * FROM productos WHERE stock = 0");
+    $query->execute();
+    $resultado=$query->get_result();
+
+    if($resultado){
+        $filas = []; 
+        while ($fila = $resultado->fetch_object()) 
+        { $filas[] = $fila;
+        }
+        return $filas;
+    }else {
+        return false;
+    }
+    cerrarConexion();
+}
 function obtenerProducto($id){
     abrirConexion();
     global $conexion;

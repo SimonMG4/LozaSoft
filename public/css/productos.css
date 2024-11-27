@@ -220,12 +220,15 @@
     border-bottom: 1px solid var(--color5);
     border-collapse: collapse;
     text-align: center;
+    padding-right: 50px;
 }
 
 .tabla, th {
     border-bottom: 2px solid var(--color5);
     padding-bottom: 1em;
+    padding-right: 50px;
 }
+
 
 .btn_eliminar {
     background-color: var(--color2);
@@ -277,7 +280,13 @@
 }
 
 .td-descripcion {
-    max-width: 100px;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.td-nombre {
+    max-width: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

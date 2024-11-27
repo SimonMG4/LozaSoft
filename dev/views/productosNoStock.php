@@ -40,8 +40,7 @@ if(!isset($_SESSION['id'])){
         <div>
             <div>
                 <button class="btn_agregar" data-url="../../dev/modal/agregarProducto.html">Agregar</button>
-                <a href="../../dev/views/productosInactivos.php">Ver Inactivos</a>
-                <a href="../../dev/views/productosNoStock.php">Ver sin Stock</a>
+                <a href="../../dev/views/productos.php">Ver todos</a>
             </div>
 
 
@@ -65,7 +64,7 @@ if(!isset($_SESSION['id'])){
                     <?php
                     include('../../dev/config/modelo.php');
                     
-                    $filas = tablaProductos();
+                    $filas = tablaProductos3();
                     
                     foreach ($filas as $fila):
                         ?>

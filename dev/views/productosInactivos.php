@@ -69,7 +69,7 @@ if(!isset($_SESSION['id'])){
                         ?>
                     <tr>
                         <td><?php echo $fila->id; ?></td>
-                        <td><?php echo $fila->nombre; ?></td>
+                        <td class="td-nombre"><?php echo $fila->nombre; ?></td>
                         <td class="td-descripcion"><?php echo $fila->descripcion; ?></td>
                         <td><?php echo $fila->precio; ?></td>
                         <td><?php echo $fila->stock; ?></td>
