@@ -268,8 +268,21 @@
     width: 70px;
     margin-left: 2px;
 }
+.btn_ver {
+    background-color: var(--color8);
+    color: var(--color7);
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    height: 40px;
+    width: 70px;
+    margin-left: 2px;
+}
 
-.btn_agregar:hover, .btn_editar:hover, .btn_eliminar:hover, .productos_main div button:hover, .btn_activar:hover {
+.btn_agregar:hover, .btn_editar:hover, .btn_eliminar:hover, .productos_main div button:hover, .btn_activar:hover, .btn_ver:hover {
     scale: 1.1;
 }
 

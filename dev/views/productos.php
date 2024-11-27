@@ -77,7 +77,8 @@ if(!isset($_SESSION['id'])){
                         <td><?php echo $fila->stock; ?></td>
                         <td><img class="imgTabla" src="http://localhost/lozasoft<?php echo $fila->imagen; ?>"</td>
                         <td><button class="btn_eliminar" data-id="<?php echo $fila->id?>" data-accion="eliminarProducto" data-controller='../../dev/modules/productos/productosController.php'>Desactivar</button>
-                        <button class="btn_editar" data-id="<?php echo $fila->id?>" data-accion1="obtenerProducto"data-accion2="editarProducto" data-url="../../dev/modal/editarProducto.html">Editar</button></td>
+                        <button class="btn_editar" data-id="<?php echo $fila->id?>" data-accion1="obtenerProducto"data-accion2="editarProducto" data-url="../../dev/modal/editarProducto.html">Editar</button>
+                        <button class="btn_ver" data-id="<?php echo $fila->id?>" data-accion="obtenerProducto" data-url="../../dev/modal/verProducto.html"">Ver</button></td>
                     </tr>
                     <?php endforeach;?>
                 </tbody>

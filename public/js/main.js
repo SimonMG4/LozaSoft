@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
             icon: "question", showCancelButton: true, 
             confirmButtonColor: "#3085d6", 
             cancelButtonColor: "#d33", 
-            confirmButtonText: "Sí, ", 
+            confirmButtonText: "Sí, Cerrar ", 
             cancelButtonText: "Cancelar"
         }).then(result => {
             if(result.isConfirmed){
@@ -57,8 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             rows[i].style.display = match ? '' : 'none';
         }
     }
-
-    
 
 
 
@@ -1234,6 +1232,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 
 
+        })
+    })
+
+    //Ver/Inspeccionar modal
+
+    const abrirModal3 = document.querySelectorAll('.btn_ver');
+
+    abrirModal3.forEach(button=>{
+        button.addEventListener('click',function(){
+            const url = this.getAttribute('data-url');
+            const id = this.getAttribute('data-id');
+            const accion = this.getAttribute('data-accion');
+
+            fetch(url)
+            .then(response => response.text())
+                .then(data => {
+                modalContent.innerHTML = data;
+                modal.classList.add('modal--show');
+
+                const form = document.querySelector('.form');
+                const action = form.getAttribute('action');
+
+                fetch(action,{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `accion=${accion}&id=${id}`
+                }).then(response=>response.json())
+                .then(data=>{
+                    if(data.status=='success'){
+                        const src = "http://localhost/lozasoft"+data.data.imagen;
+
+                        document.querySelector('.inputNombre').value = data.data.nombre;
+                        document.querySelector('.inputVerDescripcion').innerHTML = data.data.descripcion;
+                        document.querySelector('.inputPrecio').value = data.data.precio;
+                        document.querySelector('.inputStock').value = data.data.stock;
+                        const imgContenedor = document.querySelector('.containerImg');
+                        const imagen = `<img src="${src}"></img>`;
+
+                        imgContenedor.innerHTML = imagen;
+
+
+                        
+
+
+                    }
+                })
+
+                
+
+
+
+                const closeModalButton = document.querySelector('#cerrarModal');
+                closeModalButton.addEventListener('click', function() {
+                    modal.classList.remove('modal--show');
+                        modalContent.innerHTML = ''; 
+                });
+
+
+            })
+            
         })
     })
 });
