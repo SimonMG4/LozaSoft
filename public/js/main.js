@@ -644,7 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 inputID.value = id;
 
                                 //Ponemos en el input de la fecha la fecha que nos devuelve el fetch
-                                fecha.value = data.fecha;
+                                fecha.value = data.compra[0].fecha;
 
                                 //Se hace un ciclo para insertar una nuevaFila por cada articulo que nos devuelve el fetch
                                 for (let count = 0; count < data.detalles.length; count++) {
@@ -1245,54 +1245,135 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = this.getAttribute('data-id');
             const accion = this.getAttribute('data-accion');
 
-            fetch(url)
-            .then(response => response.text())
-                .then(data => {
-                modalContent.innerHTML = data;
-                modal.classList.add('modal--show');
+            if(accion=='obtenerProducto'){
 
-                const form = document.querySelector('.form');
-                const action = form.getAttribute('action');
+                fetch(url)
+                .then(response => response.text())
+                    .then(data => {
+                    modalContent.innerHTML = data;
+                    modal.classList.add('modal--show');
+    
+                    const form = document.querySelector('.form');
+                    const action = form.getAttribute('action');
+    
+                    fetch(action,{
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `accion=${accion}&id=${id}`
+                    }).then(response=>response.json())
+                    .then(data=>{
+                        if(data.status=='success'){
+                            const src = "http://localhost/lozasoft"+data.data.imagen;
+    
+                            document.querySelector('.inputNombre').value = data.data.nombre;
+                            document.querySelector('.inputVerDescripcion').innerHTML = data.data.descripcion;
+                            document.querySelector('.inputPrecio').value = data.data.precio;
+                            document.querySelector('.inputStock').value = data.data.stock;
+                            const imgContenedor = document.querySelector('.containerImg');
+                            const imagen = `<img src="${src}"></img>`;
+    
+                            imgContenedor.innerHTML = imagen;
+    
+    
+                            
+    
+    
+                        }
+                    })
+    
+                    
+    
+    
+    
+                    const closeModalButton = document.querySelector('#cerrarModal');
+                    closeModalButton.addEventListener('click', function() {
+                        modal.classList.remove('modal--show');
+                            modalContent.innerHTML = ''; 
+                    });
+    
+    
+                })
+            }else{
+                fetch(url)
+                .then(response => response.text())
+                    .then(data => {
+                    modalContent.innerHTML = data;
+                    modal.classList.add('modal--show');
+    
+                    const form = document.querySelector('.form');
+                    const action = form.getAttribute('action');
 
-                fetch(action,{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: `accion=${accion}&id=${id}`
-                }).then(response=>response.json())
-                .then(data=>{
-                    if(data.status=='success'){
-                        const src = "http://localhost/lozasoft"+data.data.imagen;
+                    const contenedorArt = document.querySelector('.contenedor-art');
+    
+                    fetch(action,{
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `accion=${accion}&id=${id}`
+                    }).then(response=>response.json())
+                    .then(data=>{
+                        if(data){
 
-                        document.querySelector('.inputNombre').value = data.data.nombre;
-                        document.querySelector('.inputVerDescripcion').innerHTML = data.data.descripcion;
-                        document.querySelector('.inputPrecio').value = data.data.precio;
-                        document.querySelector('.inputStock').value = data.data.stock;
-                        const imgContenedor = document.querySelector('.containerImg');
-                        const imagen = `<img src="${src}"></img>`;
+                            document.querySelector('.inputId').value = data.compra[0].id;
+                            document.querySelector('.inputFecha').value = data.compra[0].fecha;
+                            document.querySelector('.inputTotal').value = data.compra[0].total_perdida;
 
-                        imgContenedor.innerHTML = imagen;
+                            for (let count = 0; count < data.detalles.length; count++) {
+                                const nuevaFila = `
+                                    <div class="articulo-fila">
+                                        <span>Nombre:</span>
+                                        <input type="text" name="articulos[${count}][nombre]" readonly>
+                                        <span>Cantidad:</span>
+                                        <input type="number" name="articulos[${count}][cantidad]" readonly>
+                                        <span>Precio:</span>
+                                        <input type="number" name="articulos[${count}][precio]" step="0.01" readonly>
+                                        <span>Total:</span>
+                                        <input type="number" name="articulos[${count}][total]" step="0.01" readonly>
+                                    </div>
+                                `;
+                                
+                                contenedorArt.insertAdjacentHTML('beforeend', nuevaFila);  
+                                
+                                //Las const de los input que nos inserta la const nuevaFila
+                                const nombre = document.querySelector(`[name="articulos[${count}][nombre]"]`);
+                                const cantidad = document.querySelector(`[name="articulos[${count}][cantidad]"]`);
+                                const precio = document.querySelector(`[name="articulos[${count}][precio]"]`);
+                                const total = document.querySelector(`[name="articulos[${count}][total]"]`);
+                                
+                                //Le agregamos a los inputs de cada fila el value que nos devuelve el fetch
+                                nombre.value = data.detalles[count].nombre_articulo;
+                                cantidad.value = data.detalles[count].cantidad;
+                                precio.value = data.detalles[count].precio_unitario;
+                                total.value = data.detalles[count].total;
+                            }
 
 
-                        
 
 
-                    }
+    
+                            
+    
+    
+                        }
+                    })
+    
+                    
+    
+    
+    
+                    const closeModalButton = document.querySelector('#cerrarModal');
+                    closeModalButton.addEventListener('click', function() {
+                        modal.classList.remove('modal--show');
+                            modalContent.innerHTML = ''; 
+                    });
+    
+    
                 })
 
-                
-
-
-
-                const closeModalButton = document.querySelector('#cerrarModal');
-                closeModalButton.addEventListener('click', function() {
-                    modal.classList.remove('modal--show');
-                        modalContent.innerHTML = ''; 
-                });
-
-
-            })
+            }
             
         })
     })

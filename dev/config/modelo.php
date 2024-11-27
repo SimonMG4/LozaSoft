@@ -334,14 +334,14 @@ function obtenerCompra($id){
 
     //Primer query, trae la fecha de compras
 
-    $query1= $conexion->prepare("SELECT fecha FROM compras WHERE id = $id");
+    $query1= $conexion->prepare("SELECT * FROM compras WHERE id = $id");
     $query1 ->execute();
     $resultado1=$query1->get_result();
 
 
-    if ($resultado1->num_rows > 0) {
-        $compra = $resultado1->fetch_assoc();
-        $respuesta['fecha'] = $compra['fecha'];
+    $compra = [];
+    while($dato = $resultado1->fetch_assoc()){
+        $compra[] = $dato;
     }
 
     //Segundo query, trae los detalles de los productos
@@ -355,6 +355,7 @@ function obtenerCompra($id){
         $detalles[] = $detalle;
     }
 
+    $respuesta['compra'] = $compra;
     $respuesta['detalles'] = $detalles;
 
     $query1->close();

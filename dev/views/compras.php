@@ -65,7 +65,8 @@ if(!isset($_SESSION['id'])){
                         <td><?php echo $fila->fecha; ?></td>
                         <td><?php echo $fila->total_perdida; ?></td>
                         <td><button class="btn_eliminar" data-id="<?php echo $fila->id?>" data-accion="eliminarCompra" data-controller='../../dev/modules/compras/comprasController.php'>Eliminar</button>
-                        <button class="btn_editar" data-id="<?php echo $fila->id?>" data-accion1="obtenerCompra"data-accion2="editarCompra" data-url="../../dev/modal/editarCompra.html">Editar</button></td>
+                        <button class="btn_editar" data-id="<?php echo $fila->id?>" data-accion1="obtenerCompra"data-accion2="editarCompra" data-url="../../dev/modal/editarCompra.html">Editar</button>
+                        <button class="btn_ver" data-id="<?php echo $fila->id?>" data-accion="obtenerCompra" data-url="../../dev/modal/verCompra.html"">Ver</button></td>
                     </tr>
                     <?php endforeach;?>
                 </tbody>
