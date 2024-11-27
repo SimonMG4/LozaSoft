@@ -866,7 +866,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 inputID.value = id;
 
                                 //Ponemos en el input de la fecha la fecha que nos devuelve el fetch
-                                fecha.value = data.fecha;
+                                fecha.value = data.venta[0].fecha;
                                 //Se hace un ciclo para insertar una nuevaFila por cada articulo que nos devuelve el fetch
                                 for (let count = 0; count < data.detalles.length; count++) {
                                     const nuevaFila = `
@@ -1316,39 +1316,83 @@ document.addEventListener('DOMContentLoaded', () => {
                     }).then(response=>response.json())
                     .then(data=>{
                         if(data){
+                            if(accion=='obtenerCompra'){
 
-                            document.querySelector('.inputId').value = data.compra[0].id;
-                            document.querySelector('.inputFecha').value = data.compra[0].fecha;
-                            document.querySelector('.inputTotal').value = data.compra[0].total_perdida;
+                                document.querySelector('.inputId').value = data.compra[0].id;
+                                document.querySelector('.inputFecha').value = data.compra[0].fecha;
+                                document.querySelector('.inputTotal').value = data.compra[0].total_perdida;
+    
+                                for (let count = 0; count < data.detalles.length; count++) {
+                                    const nuevaFila = `
+                                        <div class="articulo-fila">
+                                            <span>Nombre:</span>
+                                            <input type="text" name="articulos[${count}][nombre]" readonly>
+                                            <span>Cantidad:</span>
+                                            <input type="number" name="articulos[${count}][cantidad]" readonly>
+                                            <span>Precio:</span>
+                                            <input type="number" name="articulos[${count}][precio]" step="0.01" readonly>
+                                            <span>Total:</span>
+                                            <input type="number" name="articulos[${count}][total]" step="0.01" readonly>
+                                        </div>
+                                    `;
+                                    
+                                    contenedorArt.insertAdjacentHTML('beforeend', nuevaFila);  
+                                    
+                                    //Las const de los input que nos inserta la const nuevaFila
+                                    const nombre = document.querySelector(`[name="articulos[${count}][nombre]"]`);
+                                    const cantidad = document.querySelector(`[name="articulos[${count}][cantidad]"]`);
+                                    const precio = document.querySelector(`[name="articulos[${count}][precio]"]`);
+                                    const total = document.querySelector(`[name="articulos[${count}][total]"]`);
+                                    
+                                    //Le agregamos a los inputs de cada fila el value que nos devuelve el fetch
+                                    nombre.value = data.detalles[count].nombre_articulo;
+                                    cantidad.value = data.detalles[count].cantidad;
+                                    precio.value = data.detalles[count].precio_unitario;
+                                    total.value = data.detalles[count].total;
+                                }
+                            }else if(accion =='obtenerVenta'){
 
-                            for (let count = 0; count < data.detalles.length; count++) {
-                                const nuevaFila = `
-                                    <div class="articulo-fila">
-                                        <span>Nombre:</span>
-                                        <input type="text" name="articulos[${count}][nombre]" readonly>
-                                        <span>Cantidad:</span>
-                                        <input type="number" name="articulos[${count}][cantidad]" readonly>
-                                        <span>Precio:</span>
-                                        <input type="number" name="articulos[${count}][precio]" step="0.01" readonly>
-                                        <span>Total:</span>
-                                        <input type="number" name="articulos[${count}][total]" step="0.01" readonly>
-                                    </div>
-                                `;
-                                
-                                contenedorArt.insertAdjacentHTML('beforeend', nuevaFila);  
-                                
-                                //Las const de los input que nos inserta la const nuevaFila
-                                const nombre = document.querySelector(`[name="articulos[${count}][nombre]"]`);
-                                const cantidad = document.querySelector(`[name="articulos[${count}][cantidad]"]`);
-                                const precio = document.querySelector(`[name="articulos[${count}][precio]"]`);
-                                const total = document.querySelector(`[name="articulos[${count}][total]"]`);
-                                
-                                //Le agregamos a los inputs de cada fila el value que nos devuelve el fetch
-                                nombre.value = data.detalles[count].nombre_articulo;
-                                cantidad.value = data.detalles[count].cantidad;
-                                precio.value = data.detalles[count].precio_unitario;
-                                total.value = data.detalles[count].total;
+                                document.querySelector('.inputId').value = data.venta[0].id;
+                                document.querySelector('.inputFecha').value = data.venta[0].fecha;
+                                document.querySelector('.inputTotal').value = data.venta[0].total_ganancia;
+    
+                                for (let count = 0; count < data.detalles.length; count++) {
+                                    const nuevaFila = `
+                                        <div class="articulo-fila">
+                                            <span>Nombre:</span>
+                                            <input type="text" name="articulos[${count}][nombre]" readonly>
+                                            <span>Cantidad:</span>
+                                            <input type="number" name="articulos[${count}][cantidad]" readonly>
+                                            <span>Precio:</span>
+                                            <input type="number" name="articulos[${count}][precio]" step="0.01" readonly>
+                                            <span>Total:</span>
+                                            <input type="number" name="articulos[${count}][total]" step="0.01" readonly>
+                                            <div class="containerImg containerImg${count}"></div>
+                                        </div>
+                                    `;
+                                    
+                                    contenedorArt.insertAdjacentHTML('beforeend', nuevaFila);  
+                                    
+                                    //Las const de los input que nos inserta la const nuevaFila
+                                    const nombre = document.querySelector(`[name="articulos[${count}][nombre]"]`);
+                                    const cantidad = document.querySelector(`[name="articulos[${count}][cantidad]"]`);
+                                    const precio = document.querySelector(`[name="articulos[${count}][precio]"]`);
+                                    const total = document.querySelector(`[name="articulos[${count}][total]"]`);
+                                    const imgContenedor = document.querySelector(`.containerImg${count}`);
+                                    const src = "http://localhost/lozasoft"+data.detalles[count].imagen;
+                                    const imagen = `<img src="${src}"></img>`;
+                                    
+                                    //Le agregamos a los inputs de cada fila el value que nos devuelve el fetch
+                                    nombre.value = data.detalles[count].nombre;
+                                    cantidad.value = data.detalles[count].cantidad;
+                                    precio.value = data.detalles[count].precio;
+                                    total.value = data.detalles[count].total;
+                                    imgContenedor.innerHTML = imagen;
+
+                                }
+
                             }
+
 
 
 
