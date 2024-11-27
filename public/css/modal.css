@@ -49,7 +49,7 @@
     flex-direction: column;
     justify-content: center;
 
-    span{
+    label{
         font-weight: 900;
         color: var(--color3);
     }

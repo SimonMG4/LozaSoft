@@ -1325,13 +1325,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                 for (let count = 0; count < data.detalles.length; count++) {
                                     const nuevaFila = `
                                         <div class="articulo-fila">
-                                            <span>Nombre:</span>
+                                            <label>Nombre:</label>
                                             <input type="text" name="articulos[${count}][nombre]" readonly>
-                                            <span>Cantidad:</span>
+                                            <label>Cantidad:</label>
                                             <input type="number" name="articulos[${count}][cantidad]" readonly>
-                                            <span>Precio:</span>
+                                            <label>Precio:</label>
                                             <input type="number" name="articulos[${count}][precio]" step="0.01" readonly>
-                                            <span>Total:</span>
+                                            <label>Total:</label>
                                             <input type="number" name="articulos[${count}][total]" step="0.01" readonly>
                                         </div>
                                     `;
@@ -1359,13 +1359,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                 for (let count = 0; count < data.detalles.length; count++) {
                                     const nuevaFila = `
                                         <div class="articulo-fila">
-                                            <span>Nombre:</span>
+                                            <label>Nombre:</label>
                                             <input type="text" name="articulos[${count}][nombre]" readonly>
-                                            <span>Cantidad:</span>
+                                            <label>Cantidad:</label>
                                             <input type="number" name="articulos[${count}][cantidad]" readonly>
-                                            <span>Precio:</span>
+                                            <label>Precio:</label>
                                             <input type="number" name="articulos[${count}][precio]" step="0.01" readonly>
-                                            <span>Total:</span>
+                                            <label>Total:</label>
                                             <input type="number" name="articulos[${count}][total]" step="0.01" readonly>
                                             <div class="containerImg containerImg${count}"></div>
                                         </div>
