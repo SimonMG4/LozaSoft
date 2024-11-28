@@ -239,17 +239,16 @@
 
     div{
         width: 20vw;
-        background-color: var(--color7);
         min-height: 200px;
         border-radius: 12px;
-        background-color: #ffffff5f;
+        background-color: var(--color1);
         padding: 2em .5em;
+        border: 2px solid var(--color3);
     }
     .div1{
-        border-left: var(--color1) 4px solid;
-        color: #000;
+        color: var(--color7);
         h2{
-            color: var(--color1);
+            color: var(--color3);
             line-height: 3rem;
             font-weight: 700;
             font-size: 2em;
@@ -260,7 +259,7 @@
     .div2{
         width: 30vw;
         h2{
-            color: var(--color1);
+            color: var(--color7);
             line-height: 3rem;
             font-weight: 700;
             font-size: 1.5em;
