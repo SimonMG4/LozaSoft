@@ -63,7 +63,7 @@ if(!isset($_SESSION['id'])){
                     <tr>
                         <td><?php echo $fila->id; ?></td>
                         <td><?php echo $fila->fecha; ?></td>
-                        <td><?php echo $fila->total_ganancia; ?></td>
+                        <td>$<?php echo $fila->total_ganancia; ?></td>
                         <td><button class="btn_eliminar" data-id="<?php echo $fila->id?>" data-accion="eliminarVenta" data-controller='../../dev/modules/ventas/ventasController.php'>Eliminar</button>
                         <button class="btn_editar" data-id="<?php echo $fila->id?>" data-accion1="obtenerVenta"data-accion2="editarVenta" data-url="../../dev/modal/editarVenta.html">Editar</button>
                         <button class="btn_ver" data-id="<?php echo $fila->id?>" data-accion="obtenerVenta" data-url="../../dev/modal/verVenta.html"">Ver</button></td>

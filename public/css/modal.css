@@ -53,6 +53,10 @@
         font-weight: 900;
         color: var(--color3);
     }
+    .custom-file-upload{
+        font-weight: 500;
+        color: #000;
+    }
 }
 
 .form h2 {
