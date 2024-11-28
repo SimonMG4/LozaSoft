@@ -29,8 +29,8 @@ function insertarCredenciales(){
     $contraseña_encriptada = password_hash($contraseña, PASSWORD_BCRYPT);
 
     abrirConexion();
+    global $conexion;
 
-         global $conexion;
      $query = $conexion->prepare("INSERT INTO admin (usuario, contraseña) VALUES (?, ?)");
      $query->bind_param("ss", $usuario, $contraseña_encriptada);
 
@@ -41,6 +41,22 @@ function insertarCredenciales(){
      }
 
      cerrarConexion();
+}
+function actualizarContraseña($contraseña){
+    abrirConexion();
+    global $conexion;
+    $contraseña_encriptada = password_hash($contraseña, PASSWORD_BCRYPT);
+
+    $query = ("UPDATE admin SET contraseña = '$contraseña_encriptada' WHERE id=1");
+    $resultado= $conexion->query($query);
+
+    if($resultado){
+        $response['status']= true;
+    }else{
+        $response['status']= false;
+    }
+    return $response;
+    cerrarConexion();
 }
 function iniciarSesion($usuario, $contraseña) {
     abrirConexion();
@@ -79,6 +95,24 @@ function cerrarSesion(){
    session_destroy();
    header("Location: ../../index.html");
 
+}
+function recuperarCredenciales(){
+    abrirConexion();
+    global $conexion;
+
+    $query =("SELECT id, usuario, contraseña FROM admin WHERE id = 1");
+    $respuesta = $conexion->query($query);
+
+    if($respuesta->num_rows > 0){
+        $response['status']= true;
+        $response['credenciales'] = $respuesta->fetch_assoc();
+    }else{
+        $response['status'] = false;
+        $response['credenciales'] =  false;
+    }
+
+    return $response;
+    cerrarConexion();
 }
 
 //PRODUCTOS
@@ -651,7 +685,7 @@ function editarVenta($actualizarVenta,$actualizarProductos,$nuevosProductos,$ids
         'idEliminar' => true
     ];
 
-    // 1. Actualizar la compra
+    // 1. Actualizar la venta
     if (isset($actualizarVenta['idVenta']) && isset($actualizarVenta['fecha']) && isset($actualizarVenta['totalVenta'])) {
         $idVenta = $actualizarVenta['idVenta'];
         $fecha = $actualizarVenta['fecha'];

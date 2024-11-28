@@ -3,9 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="shortcut icon" href="public/assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../public/css/main.css">
+    <link rel="stylesheet" href="../../public/css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<title>LOGIN</title>
 </head>
-<body>
-    
+<body class="login_body">
+    <header class="login_header header">
+        <div>
+            <img src="../../public/assets/favicon.png" alt="">
+            <p>ARTE Y LOZA</p>
+        </div>
+    </header>
+
+    <main class="login_main-credenciales">
+        <div class="div1">
+            <h2>¿QUE ES ESTO ?</h2>
+            <p>Esta es una pregunta de seguridad, si la respondes correctamente se te dira el usuario y deberas actualizar la contraseña.</p>
+        </div>
+        <div class="div2">
+            <form action="../../dev/modules/login/loginController.php" method="POST" id="credencialesForm">
+                <h2>¿En que año se fundo Arte y Loza?</h2>
+                <input type="text" placeholder="Tu respuesta" name="respuesta">
+                <input type="hidden" name="accion" value="recuperarCredenciales">
+                <input type="submit" class="submit" value="Enviar">
+            </form>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="div1">
+            <img src="../../public/assets/favicon2.png" alt="">
+            <div>
+                <h2>DESARROLLADORES:</h2>
+                <p>- Simon Muñoz Guarin</p>
+                <p>- Andres Felipe Botero</p>
+                <p>- Juan Pablo Gonzales</p>
+            </div>
+            <div>
+                <h2>CONTACTO:</h2>
+                <p>- simonusuario82@gmail.com - 313 6028348</p>
+                <p>- pipebg03@gmail.com - 311 4227954</p>
+                <p>- jpablogo17@gmail.com - 310 5315207</p>
+            </div>
+        </div>
+        <div class="div2">
+            <p>&copy; 2024 <b>LozaSoft</b> - Todos los Derechos Reservados.</p>
+        </div>
+    </footer>
+<script src="../../dev/modules/login/login.js"></script>
 </body>
 </html>

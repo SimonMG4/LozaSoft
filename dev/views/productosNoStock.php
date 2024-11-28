@@ -39,7 +39,6 @@ if(!isset($_SESSION['id'])){
     <main class="productos_main">
         <div>
             <div>
-                <button class="btn_agregar" data-url="../../dev/modal/agregarProducto.html">Agregar</button>
                 <a href="../../dev/views/productos.php">Ver todos</a>
             </div>
 

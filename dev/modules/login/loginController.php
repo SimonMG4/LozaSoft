@@ -14,6 +14,27 @@ if (isset($_REQUEST['accion'])) {
         $sesion = iniciarSesion($usuario, $contraseña);
 
         echo json_encode($sesion);
+        break;
+
+    case 'recuperarCredenciales':
+        $respuesta = $_POST['respuesta'];
+        if($respuesta=='1966'){
+            $sesion = recuperarCredenciales();
+
+            echo json_encode($sesion);
+
+        }else{
+            echo json_encode(['status' => 'false']);
+        }
+
+        break;
+    case 'actualizarContraseña':
+        $contraseña=$_POST['contraseña'];
+
+        $sesion= actualizarContraseña($contraseña);
+
+        echo json_encode($sesion);
+        break;
         
     }
     }

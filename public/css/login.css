@@ -1,26 +1,10 @@
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    transition: .3s;
-    font-family: Ubuntu, sans-serif;
-}
-:root{
-    --color9:#797F91;
-    --color8:#0c62c5;
-    --color7:#fff;
-    --color6: #091851;
-    --color1: #17295C;
-    --color2: #C02A36;
-    --color4: #999455;
-    --color3: #DF9556;
-    --color5: #C9C8C7;
-}
 
 /* LOGIN */
 
 .login_body{
-    background-color: var(--color5);
+    background: url(../assets/fondo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
     overflow-x: hidden;
     position: relative;
 
@@ -51,10 +35,11 @@
 }
 .header h1{
     text-align: center;
-    color: var(--color1);
+    color: var(--color7);
     font-weight: 700;
     font-size: 3.5vw;
     padding-top: 5vh;
+    -webkit-text-stroke: 0.75px var(--color1);
 }
 .login_main{
     position: relative;
@@ -80,9 +65,9 @@
 }
 .login_form h2{
     line-height: 1.75rem;
-    font-weight: 600;
+    font-weight: 900;
     margin-bottom: .5rem;
-    color: var(--color4);
+    color: var(--color7);
 }
 .login_form input{
     background-color: var(--color7);
@@ -120,7 +105,7 @@
 }
 .login_form div a{
     text-decoration: none;
-    color: var(--color3);
+    color: var(--color4);
 }
 .login_form .submit:hover, .login_form div a:hover{
     transform: scale(1.1);
@@ -242,4 +227,80 @@
 .productos_footer .div2 p{
     color: var(--color7);
     font-size: 0.7em;
+}
+.login_main-credenciales{
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5vw;
+
+    div{
+        width: 20vw;
+        background-color: var(--color7);
+        min-height: 200px;
+        border-radius: 12px;
+        background-color: #ffffff5f;
+        padding: 2em .5em;
+    }
+    .div1{
+        border-left: var(--color1) 4px solid;
+        color: #000;
+        h2{
+            color: var(--color1);
+            line-height: 3rem;
+            font-weight: 700;
+            font-size: 2em;
+        }
+
+        
+    }
+    .div2{
+        width: 30vw;
+        h2{
+            color: var(--color1);
+            line-height: 3rem;
+            font-weight: 700;
+            font-size: 1.5em;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            input{
+                background-color: var(--color7);
+                padding: 1rem;
+                padding-right: 3rem;
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+                border-radius: 0.5rem;
+                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+
+            }
+            .submit{
+                display: block;
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+                background-color: var(--color3);
+                color: var(--color7);
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+                font-weight: 500;
+                border-radius: 0.5rem;
+                text-transform: uppercase;
+                cursor: pointer;
+                border: none;
+                align-self: center;
+
+            }
+            .submit:hover{
+                scale: 1.1;
+            }
+            }
+        }
 }
