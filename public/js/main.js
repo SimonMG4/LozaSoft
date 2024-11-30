@@ -1361,6 +1361,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 document.querySelector('.inputId').value = data.venta[0].id;
                                 document.querySelector('.inputFecha').value = data.venta[0].fecha;
                                 document.querySelector('.inputTotal').value = data.venta[0].total_ganancia;
+                                document.querySelector('.inputTotalBruto').value = data.venta[0].total_bruto;
     
                                 for (let count = 0; count < data.detalles.length; count++) {
                                     const nuevaFila = `
