@@ -222,7 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
                                 
                                 //Le agregamos un evento de input para que detecte cuando se escribe(Puedes cambiarlo a keyup)
                                 //Si lo cambias a keyup no funciona si el usuario pega un texto etc.
-                                searchInput.addEventListener('input',()=>{
+                                const eventos=['click','input'];
+
+                                eventos.forEach(evento=>{
+                                searchInput.addEventListener(evento,()=>{
                                     //Normalizamos lo que el usuario ha escrito
                                     const query = searchInput.value.toLowerCase().trim();
                                     //Limpiamos el contenedor de los productos filtrados
@@ -272,6 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     })
 
                                 })
+                            })
                                 //Esto es para solucionar un error que me salio
                                 //Si el usuario seleccionaba un producto, pero se arrepentia
                                 //y cambiaba lo que habia en el input pero no seleccionaba un producto valido
