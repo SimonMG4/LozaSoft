@@ -474,6 +474,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 }).then(() => { 
                                     window.location.reload(); 
                                     });
+                            }else if(data.status == 'noPermisos'){
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "No tienes permisos para realizar esta accion, contacta con tu superior si deseas realizarla."
+                                });
                             }else{
                                 Swal.fire({
                                     icon: "error",

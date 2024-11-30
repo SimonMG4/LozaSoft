@@ -24,7 +24,7 @@ function cerrarConexion(){
 
 // Insertar Credenciales en la base de datos
 function insertarCredenciales(){
-    $usuario = 'admin';
+    $usuario = 'superAdmin';
     $contraseña = 'arteyloza';
     $contraseña_encriptada = password_hash($contraseña, PASSWORD_BCRYPT);
 
@@ -779,4 +779,3 @@ function editarVenta($actualizarVenta,$actualizarProductos,$nuevosProductos,$ids
 
     return $resultados;
 }
-

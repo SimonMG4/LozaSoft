@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include('../../config/modelo.php'); 
 header('Content-Type: application/json');
 
@@ -88,12 +88,17 @@ if (isset($_REQUEST['accion'])) {
             break;
         
         case 'eliminarVenta':
-            $id = $_POST['id'];
+            if(!isset($_SESSION['id']) || $_SESSION['id']!=2){
+                echo json_encode(['status' => 'noPermisos']);
 
-            //Ejecutamos la funcion de eliminar Venta
-            $sesion= eliminarVenta($id);
-            
-            echo json_encode($sesion);
+            }else{
+                $id = $_POST['id'];
+    
+                //Ejecutamos la funcion de eliminar Venta
+                $sesion= eliminarVenta($id);
+                
+                echo json_encode($sesion);
+            }
     
             break;
         case 'obtenerVenta':
