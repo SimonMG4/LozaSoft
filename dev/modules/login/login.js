@@ -25,19 +25,13 @@ document.addEventListener('DOMContentLoaded', function(){
                         window.location.href = 'dev/views/interfaz.php';
                           
                     }, 1500);
-                } else if(data.status === 'error1'){
+                } else{
                     Swal.fire({
-                        title: "Contraseña incorrecta",
+                        title: "Credenciales Invalidas",
                         text: 'Intenta nuevamente',
                         icon: "error"
                     });
-        } else{
-            Swal.fire({
-                title: "Usuario no encontrado",
-                text: 'Intenta nuevamente',
-                icon: "error"
-            })
-        }
+                 }
     })
     .catch(error => {
         console.error('Error:', error);
