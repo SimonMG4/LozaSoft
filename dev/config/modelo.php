@@ -550,11 +550,11 @@ function obtenerPrecio($id){
     cerrarConexion();
     return $precio;
 }
-function agregarVenta($fecha,$totalVenta){
+function agregarVenta($fecha,$totalNeto,$totalVenta){
     abrirConexion();
     global $conexion;
 
-    $query = $conexion->prepare("INSERT INTO ventas(fecha,total_ganancia) VALUES ('$fecha','$totalVenta')");
+    $query = $conexion->prepare("INSERT INTO ventas(fecha,total_ganancia,total_bruto) VALUES ('$fecha','$totalNeto','$totalVenta')");
     $query->execute();
 
     if($query){
@@ -686,13 +686,14 @@ function editarVenta($actualizarVenta,$actualizarProductos,$nuevosProductos,$ids
     ];
 
     // 1. Actualizar la venta
-    if (isset($actualizarVenta['idVenta']) && isset($actualizarVenta['fecha']) && isset($actualizarVenta['totalVenta'])) {
+    if (isset($actualizarVenta['idVenta']) && isset($actualizarVenta['fecha']) && isset($actualizarVenta['totalNeto']) && isset($actualizarVenta['totalVenta']) ) {
         $idVenta = $actualizarVenta['idVenta'];
         $fecha = $actualizarVenta['fecha'];
+        $totalNeto = $actualizarVenta['totalNeto'];
         $totalVenta = $actualizarVenta['totalVenta'];
 
         // Concatenando directamente los valores en la consulta
-        $query1 = "UPDATE ventas SET fecha = '$fecha', total_ganancia = $totalVenta WHERE id = $idVenta";
+        $query1 = "UPDATE ventas SET fecha = '$fecha', total_ganancia = $totalNeto, total_bruto = $totalVenta WHERE id = $idVenta";
         $resultado1 = $conexion->query($query1);
 
         if (!$resultado1) {
