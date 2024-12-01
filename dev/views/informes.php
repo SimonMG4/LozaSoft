@@ -38,9 +38,10 @@ if(!isset($_SESSION['id'])){
     </header>
     <main class="informes_main">
         <button class="btn-informe" data-type="dia" data-url="../../dev/modal/informeDia.html">Informe Dia</button>
-        <button class="btn-informe" data-type="semana" data-url="">Informe Semana</button>
-        <button class="btn-informe" data-type="año" data-url="">Informe Año</button>
-        <button class="btn-informe" data-type="custom" data-url="">Informe Personalizado</button>
+        <button class="btn-informe" data-type="semana" data-url="../../dev/modal/informeSemana.html"">Informe Semana</button>
+        <button class="btn-informe" data-type="semana" data-url="../../dev/modal/informeMes.html"">Informe Mes</button>
+        <button class="btn-informe" data-type="año" data-url="../../dev/modal/informeAño.html"">Informe Año</button>
+        <button class="btn-informe" data-type="custom" data-url="../../dev/modal/informePersonalizado.html"">Informe Personalizado</button>
     </main>
     
     

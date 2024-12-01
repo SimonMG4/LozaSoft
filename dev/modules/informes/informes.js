@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const contenedor = document.getElementById('informe-contenedor');
 
                                 const inputs =`
-                                    <input type="date" name="informeDia" placeholder>
+                                    <input type="date" name="informeDiaP" placeholder required>
                                     <input type="submit" class="btn-enviarInfo" value="Generar">
                                 `;
                                 contenedor.innerHTML=inputs;
@@ -38,15 +38,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                     fetch(controller,{
                                         method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/x-www-form-urlencoded'
-                                        },
                                         body: formData
                                     })
                                     
 
                                 })
                             }else if(type=='btn-informe-dia'){
+
+                                const formData = new FormData(form);
+
+                                fetch(controller,{
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                
                                 
                             }
                             
