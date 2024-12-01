@@ -37,10 +37,10 @@ if(!isset($_SESSION['id'])){
         </div>
     </header>
     <main class="informes_main">
-        <button class="btn-informe" data-type="dia">Informe Dia</button>
-        <button class="btn-informe" data-type="semana">Informe Semana</button>
-        <button class="btn-informe" data-type="año">Informe Año</button>
-        <button class="btn-informe" data-type="custom">Informe Personalizado</button>
+        <button class="btn-informe" data-type="dia" data-url="../../dev/modal/informeDia.html">Informe Dia</button>
+        <button class="btn-informe" data-type="semana" data-url="">Informe Semana</button>
+        <button class="btn-informe" data-type="año" data-url="">Informe Año</button>
+        <button class="btn-informe" data-type="custom" data-url="">Informe Personalizado</button>
     </main>
     
     
@@ -69,6 +69,24 @@ if(!isset($_SESSION['id'])){
     <!-- conteedor de las modales -->
     <section class="modal">
         <div class="modal_contenedor">
+            
+<form action="../../dev/modules/productos/productosController.php" method="POST" class="form" enctype="multipart/form-data">
+    <h2>Agregar Producto</h2>
+    <input type="text" name="nombreAgregarProducto" placeholder="Nombre:" required>
+    <input type="text" name="descripcionAgregarProducto" placeholder="Descripcion:">
+    <input type="number" name="precioAgregarProducto" step="0.01" placeholder="Precio:" min="1"  required>
+    <input type="number" name="stockAgregarProducto" placeholder="Stock:" min="0"  required>
+    <label for="imgAgregarProducto" class="custom-file-upload">
+        <span id="file-chosen">Ningún archivo seleccionado
+    </label>
+    <input type="file" id="imgAgregarProducto" name="imgAgregarProducto" accept="image/*" class="inputImg">
+    <div>
+        <input type="hidden" name="accion" value="agregarProducto">
+        <input type="submit" name="agregarProducto" value="Aceptar">
+        <button id="cerrarModal" class="cerrarModal">Cerrar</button>
+    </div>
+</form>
+            
         </div>
     </section>
 

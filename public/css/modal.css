@@ -242,3 +242,67 @@ input[type="file"] {
     position: sticky;
     bottom: 0;
 }
+.form2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    h2{
+        text-align: center;
+        padding-top: 1em;
+        margin-bottom: 2em;
+        font-weight: 900;
+    }
+    section{
+        margin-bottom: 2em;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        button{
+            background-color: var(--color3);
+            color: white;
+            border: none;
+            padding: 1em 0.5em;
+            border-radius: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        input[type="submit"]{
+            background-color: var(--colorverde);
+            color: white;
+            border: none;
+            padding: 1em 0.5em;
+            border-radius: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        input[type="date"]{
+            padding: 1em 0.5em;
+            border-radius: 12px;
+            margin-bottom: 0.5em;
+            border: none;
+            border-bottom: 1px solid var(--color9);
+            color: black;
+            font-weight: 500;
+        }
+        button:hover,input[type="submit"]:hover{
+            scale: 1.1;
+        }
+
+
+    }
+    div{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+}

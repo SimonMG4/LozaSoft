@@ -3,6 +3,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     overflow-x: hidden;
+    position: relative;
 }
 .informes_main{
     height: 71vh;
