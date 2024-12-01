@@ -19,7 +19,7 @@ if(!isset($_SESSION['id'])){
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 <title>PRODUCTOS</title>
 </head>
-<body class="productos_body">
+<body class="body">
     <header class="interfaz_header header">
         <div>
             <div class="div1">
@@ -88,7 +88,7 @@ if(!isset($_SESSION['id'])){
     </main>
     
     
-    <footer class="productos_footer">
+    <footer class="footer">
         <div class="div1">
             <img src="../../public/assets/favicon2.png" alt="">
             <div>

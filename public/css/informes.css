@@ -1,0 +1,43 @@
+.body{
+    background: url(../assets/fondo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+.informes_main{
+    height: 71vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    button{
+        background-color: var(--colorverde);
+        color: var(--color7);
+        font-size: 0.875rem;
+        font-weight: 500;
+        border-radius: 0.5rem;
+        text-transform: uppercase;
+        cursor: pointer;
+        border: none;
+        height: 60px;
+        padding: 0.2em 0.5em;
+        width: 200px;
+        box-shadow: rgb(255, 255, 255) 0px 22px 70px 4px;
+        
+    }
+    button:hover{
+        scale: 1.1;
+    }
+    button:nth-child(1) {
+        background-color: var(--color2);
+    }
+    button:nth-child(2) {
+        background-color: var(--color8);
+    }
+    button:nth-child(3) {
+        background-color: var(--colorverde);
+    }
+    button:nth-child(4) {
+        background-color: var(--color3);
+    }
+}

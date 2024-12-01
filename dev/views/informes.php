@@ -12,14 +12,14 @@ if(!isset($_SESSION['id'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../../public/assets/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../public/css/main.css">
-    <link rel="stylesheet" href="../../public/css/productos.css">
+    <link rel="stylesheet" href="../../public/css/informes.css">
     <link rel="stylesheet" href="../../public/css/modal.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 <title>PRODUCTOS</title>
 </head>
-<body class="productos_body">
+<body class="body">
     <header class="interfaz_header header">
         <div>
             <div class="div1">
@@ -37,11 +37,14 @@ if(!isset($_SESSION['id'])){
         </div>
     </header>
     <main class="informes_main">
-
+        <button class="btn-informe" data-type="dia">Informe Dia</button>
+        <button class="btn-informe" data-type="semana">Informe Semana</button>
+        <button class="btn-informe" data-type="año">Informe Año</button>
+        <button class="btn-informe" data-type="custom">Informe Personalizado</button>
     </main>
     
     
-    <footer class="productos_footer">
+    <footer class="footer">
         <div class="div1">
             <img src="../../public/assets/favicon2.png" alt="">
             <div>

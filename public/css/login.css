@@ -40,6 +40,7 @@
     font-size: 3.5vw;
     padding-top: 5vh;
     -webkit-text-stroke: 0.75px var(--color1);
+    text-shadow: 1px 1px 2px rgb(47, 0, 255), 0 0 1em rgb(0, 26, 255), 0 0 0.2em rgb(0, 60, 255);
 }
 .login_main{
     position: relative;
@@ -52,7 +53,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     border-radius: 0.5rem;
     padding: 1rem;
     background-color: var(--color1);
@@ -60,6 +60,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: rgb(255, 255, 255) 0px 13px 27px -5px, rgb(255, 255, 255) 0px 8px 16px -8px;
     z-index: 10;
 
 }
@@ -68,6 +69,8 @@
     font-weight: 900;
     margin-bottom: .5rem;
     color: var(--color7);
+    text-shadow: 1px 1px 2px var(--color3), 0 0 1em var(--color3), 0 0 0.2em var(--color3);
+
 }
 .login_form input{
     background-color: var(--color7);
