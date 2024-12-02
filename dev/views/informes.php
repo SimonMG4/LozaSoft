@@ -17,7 +17,7 @@ if(!isset($_SESSION['id'])){
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-<title>PRODUCTOS</title>
+<title>INFORMES</title>
 </head>
 <body class="body">
     <header class="interfaz_header header">
@@ -40,7 +40,7 @@ if(!isset($_SESSION['id'])){
         <button class="btn-informe" data-type="dia" data-url="../../dev/modal/informeDia.html">Informe Dia</button>
         <button class="btn-informe" data-type="semana" data-url="../../dev/modal/informeSemana.html"">Informe Semana</button>
         <button class="btn-informe" data-type="semana" data-url="../../dev/modal/informeMes.html"">Informe Mes</button>
-        <button class="btn-informe" data-type="año" data-url="../../dev/modal/informeAño.html"">Informe Año</button>
+        <button class="btn-informe" data-type="año" data-url="../../dev/modal/informeYear.html"">Informe Año</button>
         <button class="btn-informe" data-type="custom" data-url="../../dev/modal/informePersonalizado.html"">Informe Personalizado</button>
     </main>
     
