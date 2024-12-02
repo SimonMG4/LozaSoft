@@ -780,3 +780,95 @@ function editarVenta($actualizarVenta,$actualizarProductos,$nuevosProductos,$ids
 
     return $resultados;
 }
+
+//INFORMES
+function informeDia($date){
+    abrirConexion();
+    global $conexion;
+
+    $query1 = "
+    SELECT v.*, d.*
+    FROM ventas v
+    LEFT JOIN detalleVenta d ON v.id = d.id_venta
+    WHERE v.fecha = '$date'
+   ";
+    $respuesta1 = $conexion->query($query1);
+
+    $ventas = [];
+    $totalGananciaVentas = 0;
+
+    while ($fila = $respuesta1->fetch_assoc()) {
+
+        if (!isset($ventas[$fila['id']])) {
+            $ventas[$fila['id']] = [
+                'id' => $fila['id'],
+                'fecha' => $fila['fecha'],
+                'totalNeto' => $fila['total_ganancia'],
+                'totalBruto' => $fila['total_bruto'],
+                'detalles' => []  
+            ];
+        }
+
+        $ventas[$fila['id']]['detalles'][] = [
+            'idDetalleVenta' => $fila['id_detalle_venta'],
+            'id_producto' => $fila['id_producto'],
+            'cantidad' => $fila['cantidad'],
+            'total' => $fila['total']
+        ];
+
+        $totalGananciaVentas += $fila['total_ganancia'];
+    }
+
+    $ventas = array_values($ventas);
+
+
+
+
+    $query2 = "
+    SELECT c.*, d.*
+    FROM compras c
+    LEFT JOIN detalleCompra d ON c.id = d.id_compra
+    WHERE c.fecha = '$date'
+    ";
+    $respuesta2 = $conexion->query($query2);
+
+    $compras = [];
+    $totalPérdidasCompras = 0;
+    
+    while ($fila = $respuesta2->fetch_assoc()) {
+        
+        if (!isset($compras[$fila['id']])) {
+            $compras[$fila['id']] = [
+                'id' => $fila['id'],
+                'fecha' => $fila['fecha'],
+                'total' => $fila['total_perdida'],
+                'detalles' => []  
+            ];
+        }
+    
+        
+        $compras[$fila['id']]['detalles'][] = [
+            'idDetalleCompra' => $fila['id_detalle_compra'],
+            'nombre' => $fila['nombre_articulo'],
+            'cantidad' => $fila['cantidad'],
+            'precio' => $fila['precio_unitario'],
+            'total' => $fila['total']
+        ];
+    
+        
+        $totalPérdidasCompras += $fila['total_perdida'];
+    }
+    
+    $compras = array_values($compras);
+    
+    $totalGanancia = $totalGananciaVentas - $totalPérdidasCompras;
+
+    return [
+        'ventas' => array_values($ventas),  
+        'compras' => array_values($compras),  
+        'totalGanancia' => $totalGanancia   
+    ];
+    cerrarConexion();
+    
+
+}

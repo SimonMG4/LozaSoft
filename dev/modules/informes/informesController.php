@@ -3,6 +3,7 @@ session_start();
 include('../../config/modelo.php'); 
 header('Content-Type: application/json');
 
+date_default_timezone_set('America/Bogota');
 if (isset($_REQUEST['accion'])) { 
     $accion = $_REQUEST['accion'];
 
@@ -14,18 +15,19 @@ if (isset($_REQUEST['accion'])) {
                 if(empty($date)){
                     echo json_encode(['status' => 'noInfo']);
                 }else{
-                    echo $date;
+
                 }
             }
             else{
                 $date = new DateTime();
                 $date = $date->format("Y-m-d");
-                echo $date;
+                $sesion = informeDia($date);
+                echo json_encode($sesion);
             }
             break;
         case "informeSemana":
             if(isset($_POST['informeSemP'])){
-                //Si deseas agregar el semana personalizada
+                //Si el usuario desea una actualizacion de semana personalizada contacte los desarrolladores
             }else{
                 $date = new DateTime();
                 $numeroDiaSemana = $date->format('N'); //Obtiene el numero de dia (1=lunes...7=domingo etc)
