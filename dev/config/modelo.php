@@ -819,7 +819,6 @@ function informeDia($date){
         $totalGananciaVentas += $fila['total_ganancia'];
     }
 
-    $ventas = array_values($ventas);
 
 
 
@@ -859,7 +858,6 @@ function informeDia($date){
         $totalPérdidasCompras += $fila['total_perdida'];
     }
     
-    $compras = array_values($compras);
     
     $totalGanancia = $totalGananciaVentas - $totalPérdidasCompras;
 
@@ -871,4 +869,7 @@ function informeDia($date){
     cerrarConexion();
     
 
+}
+function informeSem($date1,$date2){
+    
 }

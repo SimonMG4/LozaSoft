@@ -15,6 +15,8 @@ if (isset($_REQUEST['accion'])) {
                 if(empty($date)){
                     echo json_encode(['status' => 'noInfo']);
                 }else{
+                    $sesion = informeDia($date);
+                    echo json_encode($sesion);
 
                 }
             }
