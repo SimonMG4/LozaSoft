@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
     $ventas = $informeData['ventas'];
     $compras = $informeData['compras'];
     $totalGanancia = $informeData['totalGanancia'];
+    $fecha = $informeData['fecha'];
 }
 ?>
 <!DOCTYPE html>
@@ -20,18 +21,43 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../public/css/main.css">
     <link rel="stylesheet" href="../../public/css/informes.css">
+    <link rel="shortcut icon" href="../../public/assets/favicon.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Informe</title>
 </head>
 <body class="informe_body">
+    <header class="interfaz_header header">
+        <div>
+            <div class="div1">
+                <img src="../../public/assets/favicon.png" alt="">
+                <p>ARTE Y LOZA</p>
+            </div>
+            <div class="div2">
+                <a href="productos.php">PRODUCTOS</a>
+                <a href="ventas.php">VENTAS</a>
+                <a href="compras.php">COMPRAS</a>
+                <a href="informes.php">INFORMES</a>
+            </div>
+
+            <button id="logOut" class="logOut">CERRAR SESION</button>
+        </div>
+    </header>
     <!-- Contenido adicional antes de la tabla -->
+     <div class="container_header">
+         <h2 class="informe_titulo">Informe de Ventas y Compras</h2>
+         <p class="informe_descripcion"><?php echo $fecha; ?></p>
+         <button class="btn-pdf"><img class="btn-pdf-img" src="../../public/assets/pdf.svg" alt=""></button>
+     </div>
     <div class="container">
-        <h2 class="informe_titulo">Informe de Ventas y Compras</h2>
-        <p class="informe_descripcion">A continuación se presenta un desglose de las ventas y compras realizadas, junto con la ganancia total obtenida.</p>
         
         <!-- Tabla de Ventas y Compras -->
         <table class="tabla_informe">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Fecha</th>
                     <th>Total Ganancia/Perdida</th>
                     <th>Total Bruto</th>
@@ -45,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
                 </tr>
                 <?php foreach ($ventas as $venta): ?>
                     <tr class="detalle-venta">
+                        <td><?php echo $venta['id']; ?></td>
                         <td><?php echo $venta['fecha']; ?></td>
                         <td><?php echo number_format($venta['totalNeto'], 2); ?> COP</td>
                         <td><?php echo number_format($venta['totalBruto'], 2); ?> COP</td>
@@ -86,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
                 </tr>
                 <?php foreach ($compras as $compra): ?>
                     <tr class="detalle-compra">
+                        <td><?php echo $compra['id']; ?></td>
                         <td><?php echo $compra['fecha']; ?></td>
                         <td><?php echo number_format($compra['total'], 2); ?> COP</td>
                         <td>-</td>
@@ -122,23 +150,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
                 <?php endforeach; ?>
 
                 <!-- Total Ganancia -->
-                <tr class="informe-total">
-                    <td colspan="3" class="text-right"><strong>Total Ganancia:</strong></td>
-                    <td><?php echo number_format($totalGanancia, 2); ?> COP</td>
-                </tr>
             </tbody>
         </table>
     </div>
+    <div class="informe-total">
+                    <td colspan="3" class="text-right"><strong>Total Ganancia:</strong></td>
+                    <td><?php echo number_format($totalGanancia, 2); ?> COP</td>
+    </div>
 
-    <script>
-        function toggleDetails(section) {
-            var details = document.getElementById(section);
-            if (details.style.display === "none" || details.style.display === "") {
-                details.style.display = "table-row"; 
-            } else {
-                details.style.display = "none"; 
-            }
-        }
-    </script>
+    <script src="../../public/js/main.js"></script>
+    <script src="../../dev/modules/informe/informe.js"></script>
 </body>
 </html>

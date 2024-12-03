@@ -39,23 +39,47 @@
         background-color: var(--color4);
     }
     button:nth-child(4) {
-        background-color: var(--color3);
+        background-color: var(--colorverde);
     }
 }
 
 
 /* General */
 .informe_body {
-    font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
-    margin: 0;
-    padding: 20px;
+    height: auto;
 }
-
+.container_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5em 0 .5em 0;
+    .btn-pdf{
+        border: 2px solid #999;
+        background-color: none;
+        border-radius: 12px;
+        background-color: white;
+        
+        .btn-pdf-img{
+            width: 4em;
+            height: 4em;
+            background-color: none;
+        }
+    }
+    .btn-pdf:hover{
+        scale: 1.02;
+        background-color: var(--color9);
+        cursor: pointer;
+    }
+}
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    max-height: 80vh;
+    overflow-y: scroll;
+    border-radius: 12px;
 }
 
 /* Títulos */
@@ -63,12 +87,15 @@
     font-size: 2rem;
     color: var(--color1);
     margin-bottom: 20px;
+    text-align: center;
+    
 }
 
 .informe_descripcion {
     font-size: 1.1rem;
     color: #333;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 /* Tabla principal */
@@ -79,7 +106,7 @@
 }
 
 .tabla_informe th, .tabla_informe td {
-    border: 1px solid #dee2e6;
+    border: 1px solid #b6cce2;
     padding: 10px;
     text-align: left;
 }
@@ -91,7 +118,6 @@
 }
 /* Detalles de ventas/compras */
 .details {
-    background-color: #f8f9fa;
     display: none;
 }
 
@@ -102,13 +128,13 @@
 }
 
 .tabla-detalle th, .tabla-detalle td {
-    border: 1px solid #dee2e6;
+    border: 1px solid #b6cce2;
     padding: 8px;
     text-align: left;
 }
 
 .tabla-detalle th {
-    background-color: var(--color3);
+    background-color: var(--colorverde);
     color: white;
     font-weight: bold;
 }
@@ -125,18 +151,24 @@
 }
 
 .btn-detalles:hover {
-    background-color:  var(--color3);
+    background-color:  var(--colorverde);
     scale: 1.01;
 }
 
 /* Sección de Total Ganancia */
 .informe-total {
-    background-color: var(--color3);
+    background-color: var(--colorverde);
     color: white;
     font-weight: bold;
     font-size: 1.2rem;
+    align-self: center;
+    justify-self: center;
+    max-width: 1100px;
+    padding: 20px;
+    margin: 1em 0 2em 0;
+    border-radius: 12px;
 }
 
 .informe-total .text-right {
-    text-align: right;
+    text-align: center;
 }

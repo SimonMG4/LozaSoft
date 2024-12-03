@@ -192,6 +192,41 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 text: "No hay registros de ventas o compras en la fecha seleccionada."
                                             });
 
+                                        }else if(data.status == 'true'){
+                                            if(type=='btn-informe-dia'){
+                                                const informeData = data.data;
+    
+                                                const form = document.createElement('form');
+                                                form.method = 'POST';
+                                                form.action = '../../dev/views/informe.php';
+                                                
+                                                const inputData = document.createElement('input');
+                                                inputData.type = 'hidden';
+                                                inputData.name = 'informeData';
+                                                inputData.value = JSON.stringify(informeData); 
+                                                form.appendChild(inputData);
+                                                
+                                                
+                                                document.body.appendChild(form);
+                                                form.submit();
+                                            }else{
+                                                const informeData = data.data;
+    
+                                                const form = document.createElement('form');
+                                                form.method = 'POST';
+                                                form.action = '../../dev/views/informe2.php';
+                                                
+                                                const inputData = document.createElement('input');
+                                                inputData.type = 'hidden';
+                                                inputData.name = 'informeData';
+                                                inputData.value = JSON.stringify(informeData); 
+                                                form.appendChild(inputData);
+                                                
+                                                
+                                                document.body.appendChild(form);
+                                                form.submit();
+
+                                            }
                                         }
                                     }
                                 })

@@ -860,6 +860,7 @@ function informeDia($date){
     $totalGanancia = $totalGananciaVentas - $totalPerdidasCompras;
     
     return [
+        'fecha'=> $date,
         'ventas' => array_values($ventas),  
         'compras' => array_values($compras),  
         'totalGanancia' => $totalGanancia   
@@ -878,7 +879,10 @@ function informeSem($date1, $date2) {
     $totalGananciaVentas=0;
     while ($fila = $respuesta1->fetch_assoc()) {
         $ventas[] = $fila;
-        $totalGananciaVentas+=$fila['total_ganancia'];
+        
+    }
+    foreach($ventas as $venta){
+        $totalGananciaVentas+=$venta['total_ganancia'];
     }
 
     $query2 = "SELECT * FROM compras WHERE fecha BETWEEN '$date1' AND '$date2'";
@@ -888,7 +892,10 @@ function informeSem($date1, $date2) {
     $totalPerdidasCompras=0;
     while ($fila = $respuesta2->fetch_assoc()) {
         $compras[] = $fila;
-        $totalPerdidasCompras+=$fila['total_perdida'];
+        
+    }
+    foreach($compras as $compra){
+        $totalPerdidasCompras+=$compra['total_perdida'];
     }
 
     $totalGanancia = $totalGananciaVentas - $totalPerdidasCompras;
@@ -896,6 +903,8 @@ function informeSem($date1, $date2) {
     cerrarConexion();
 
     return [
+        'fecha1' => $date1,
+        'fecha2' => $date2,
         'ventas' => $ventas,
         'compras' => $compras,
         'totalGanancia' => $totalGanancia 
