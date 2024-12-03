@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
         </table>
     </div>
     <div class="informe-total">
-        <td colspan="3" class="text-right"><strong>Total Ganancia:</strong></td>
+        <td><strong>Total Ganancia:</strong></td>
         <td><?php echo number_format($totalGanancia, 2); ?> COP</td>
     </div>
 

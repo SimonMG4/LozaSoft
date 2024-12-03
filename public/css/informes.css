@@ -167,8 +167,6 @@
     padding: 20px;
     margin: 1em 0 2em 0;
     border-radius: 12px;
-}
-
-.informe-total .text-right {
-    text-align: center;
+    display: flex;
+    gap: 1em;
 }
