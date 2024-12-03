@@ -48,6 +48,29 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     title: "Error",
                                                     text: "Por favor, Asegurate de haber ingresado la fecha antes de proceder."
                                                 });
+                                            }else if(data.status == 'false'){
+                                                Swal.fire({
+                                                    icon: "warning",
+                                                    title: "Registros",
+                                                    text: "No hay registros de ventas o compras en la fecha seleccionada."
+                                                });
+
+                                            }else if(data.status == 'true'){
+                                                const informeData = data.data;
+
+                                                const form = document.createElement('form');
+                                                form.method = 'POST';
+                                                form.action = '../../dev/views/informe.php';
+                                                
+                                                const inputData = document.createElement('input');
+                                                inputData.type = 'hidden';
+                                                inputData.name = 'informeData';
+                                                inputData.value = JSON.stringify(informeData); 
+                                                form.appendChild(inputData);
+                                                
+                                                
+                                                document.body.appendChild(form);
+                                                form.submit();
                                             }
                                         }
                                     })
@@ -96,6 +119,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     title: "Error",
                                                     text: "Por favor, Seleciona una opcion antes de proceder."
                                                 });
+                                            }else if(data.status == 'false'){
+                                                Swal.fire({
+                                                    icon: "warning",
+                                                    title: "Registros",
+                                                    text: "No hay registros de ventas o compras en la fecha seleccionada."
+                                                });
+
                                             }
                                         }
                                     })
@@ -131,6 +161,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     title: "Error",
                                                     text: "Por favor, Asegurate de haber ingresado el año antes de proceder."
                                                 });
+                                            }else if(data.status == 'false'){
+                                                Swal.fire({
+                                                    icon: "warning",
+                                                    title: "Registros",
+                                                    text: "No hay registros de ventas o compras en la fecha seleccionada."
+                                                });
+
                                             }
                                         }
                                     })
@@ -145,6 +182,18 @@ document.addEventListener('DOMContentLoaded', () => {
                                 fetch(controller,{
                                     method: 'POST',
                                     body: formData
+                                }).then(response=>response.json())
+                                .then(data=>{
+                                    if(data){
+                                        if(data.status == 'false'){
+                                            Swal.fire({
+                                                icon: "warning",
+                                                title: "Registros",
+                                                text: "No hay registros de ventas o compras en la fecha seleccionada."
+                                            });
+
+                                        }
+                                    }
                                 })
                                 
                                 
@@ -171,6 +220,20 @@ document.addEventListener('DOMContentLoaded', () => {
                                             title: "Error",
                                             text: "Por favor, Asegurate de haber Introducido las fechas antes de proceder."
                                         });
+                                    }else if(data.status == 'fecha>'){
+                                        Swal.fire({
+                                            icon: "error",
+                                            title: "Error",
+                                            text: "Por favor, Asegurate que la primera fecha no es mayor que la segunda."
+                                        });
+
+                                    }else if(data.status == 'false'){
+                                        Swal.fire({
+                                            icon: "warning",
+                                            title: "Registros",
+                                            text: "No hay registros de ventas o compras en la fecha seleccionada."
+                                        });
+
                                     }
                                 }
                             })
