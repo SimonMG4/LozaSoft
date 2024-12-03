@@ -110,7 +110,7 @@
 }
 
 .form input[type="submit"]:hover, .add-button:hover, .eliminarFila:hover {
-    transform: scale(1.1);
+    background-color: #df8456;
 }
 
 input[type="file"] {
@@ -161,6 +161,10 @@ input[type="file"] {
         width: 100%;
         margin-bottom: 0;
     }
+}
+.editarVentaContainer{
+    display: flex;
+    flex-direction: column;
 }
 .eliminarFila{
     align-self: flex-end;

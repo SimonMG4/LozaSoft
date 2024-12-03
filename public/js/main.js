@@ -881,8 +881,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                 for (let count = 0; count < data.detalles.length; count++) {
                                     const nuevaFila = `
                                     <div class="producto-fila">
+                                    <div class="editarVentaContainer">
                                     <button type="button" class="eliminarFila">X</button>
-                                    <div>
                                     <input type="text" class="product-search" name="productos[${count}][nombre]" placeholder="Nombre del Producto" required>
                                     <ul class="dropdown" style="display: none;"></ul>
                                     </div>
@@ -970,8 +970,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                         //El product-search funcionara como filtro para mostrar los productos por nombre
                                         const nuevaFila = `
                                         <div class="producto-fila">
+                                        <div class="editarVentaContainer">
                                         <button type="button" class="eliminarFila">X</button>
-                                        <div>
                                         <input type="text" class="product-search" placeholder="Nombre del Producto" required>
                                         <ul class="dropdown" style="display: none;"></ul>
                                         </div>
