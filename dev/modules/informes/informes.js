@@ -126,6 +126,22 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     text: "No hay registros de ventas o compras en la fecha seleccionada."
                                                 });
 
+                                            }else if (data.status == 'true'){
+                                                const informeData = data.data;
+            
+                                                const form = document.createElement('form');
+                                                form.method = 'POST';
+                                                form.action = '../../dev/views/informe2.php';
+                                                
+                                                const inputData = document.createElement('input');
+                                                inputData.type = 'hidden';
+                                                inputData.name = 'informeData';
+                                                inputData.value = JSON.stringify(informeData); 
+                                                form.appendChild(inputData);
+                                                
+                                                
+                                                document.body.appendChild(form);
+                                                form.submit();
                                             }
                                         }
                                     })
@@ -168,6 +184,22 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     text: "No hay registros de ventas o compras en la fecha seleccionada."
                                                 });
 
+                                            }else if (data.status == 'true'){
+                                                const informeData = data.data;
+            
+                                                const form = document.createElement('form');
+                                                form.method = 'POST';
+                                                form.action = '../../dev/views/informe2.php';
+                                                
+                                                const inputData = document.createElement('input');
+                                                inputData.type = 'hidden';
+                                                inputData.name = 'informeData';
+                                                inputData.value = JSON.stringify(informeData); 
+                                                form.appendChild(inputData);
+                                                
+                                                
+                                                document.body.appendChild(form);
+                                                form.submit();
                                             }
                                         }
                                     })
@@ -269,6 +301,22 @@ document.addEventListener('DOMContentLoaded', () => {
                                             text: "No hay registros de ventas o compras en la fecha seleccionada."
                                         });
 
+                                    }else if (data.status == 'true'){
+                                        const informeData = data.data;
+    
+                                        const form = document.createElement('form');
+                                        form.method = 'POST';
+                                        form.action = '../../dev/views/informe2.php';
+                                        
+                                        const inputData = document.createElement('input');
+                                        inputData.type = 'hidden';
+                                        inputData.name = 'informeData';
+                                        inputData.value = JSON.stringify(informeData); 
+                                        form.appendChild(inputData);
+                                        
+                                        
+                                        document.body.appendChild(form);
+                                        form.submit();
                                     }
                                 }
                             })

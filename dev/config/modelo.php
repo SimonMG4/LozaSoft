@@ -867,7 +867,6 @@ function informeDia($date){
     ];
     cerrarConexion();
 }
-
 function informeSem($date1, $date2) {
     abrirConexion();
     global $conexion;
@@ -911,39 +910,6 @@ function informeSem($date1, $date2) {
 
     ];
 }
-function informeMes($date1,$date2){ 
-    abrirConexion();
-    global $conexion;
-
-    $query1 = "SELECT * FROM ventas WHERE fecha BETWEEN '$date1' AND '$date2'";
-    $respuesta1 = $conexion->query($query1);
-
-    $ventas = [];
-    $totalGananciaVentas = 0;
-    while ($fila = $respuesta1->fetch_assoc()) {
-        $ventas[] = $fila;
-        $totalGananciaVentas += $fila['total_ganancia'];
-    }
-
-    $query2 = "SELECT * FROM compras WHERE fecha BETWEEN '$date1' AND '$date2'";
-    $respuesta2 = $conexion->query($query2);
-
-    $compras = [];
-    $totalPerdidasCompras = 0;
-    while ($fila = $respuesta2->fetch_assoc()) {
-        $compras[] = $fila;
-        $totalPerdidasCompras += $fila['total_perdida'];
-    }
-    $totalGanancia = $totalGananciaVentas - $totalPerdidasCompras;
-
-    cerrarConexion();
-
-    return [
-        'ventas' => $ventas,
-        'compras' => $compras,
-        'totalGanancia' => $totalGanancia
-    ];
-}
 function informeYear($date){
     abrirConexion();
     global $conexion;
@@ -955,7 +921,9 @@ function informeYear($date){
     $totalGananciaVentas = 0;
     while ($fila = $respuesta1->fetch_assoc()) {
         $ventas[] = $fila;
-        $totalGananciaVentas += $fila['total_ganancia'];
+    }
+    foreach($ventas as $venta){
+        $totalGananciaVentas+=$venta['total_ganancia'];
     }
 
     $query2 = "SELECT * FROM compras WHERE YEAR(fecha) = '$date'";
@@ -965,7 +933,10 @@ function informeYear($date){
     $totalPerdidasCompras = 0;
     while ($fila = $respuesta2->fetch_assoc()) {
         $compras[] = $fila;
-        $totalPerdidasCompras += $fila['total_perdida'];
+    }
+
+    foreach($compras as $compra){
+        $totalPerdidasCompras+=$compra['total_perdida'];
     }
 
     $totalGanancia = $totalGananciaVentas - $totalPerdidasCompras;
@@ -973,45 +944,9 @@ function informeYear($date){
     cerrarConexion();
 
     return [
+        'fecha' => $date,
         'ventas' => $ventas,
         'compras' => $compras,
         'totalGanancia' => $totalGanancia
     ];
-}
-function informePer($date1,$date2){
-    abrirConexion();
-    global $conexion;
-
-    $query1 = "SELECT * FROM ventas WHERE fecha BETWEEN '$date1' AND '$date2'";
-    $respuesta1 = $conexion->query($query1);
-
-    $ventas = [];
-    $totalGananciaVentas=0;
-    while ($fila = $respuesta1->fetch_assoc()) {
-        $ventas[] = $fila;
-        $totalGananciaVentas+=$fila['total_ganancia'];
-    }
-
-    $query2 = "SELECT * FROM compras WHERE fecha BETWEEN '$date1' AND '$date2'";
-    $respuesta2 = $conexion->query($query2);
-
-    $compras = [];
-    $totalPerdidasCompras=0;
-    while ($fila = $respuesta2->fetch_assoc()) {
-        $compras[] = $fila;
-        $totalPerdidasCompras+=$fila['total_perdida'];
-    }
-
-    $totalGanancia = $totalGananciaVentas - $totalPerdidasCompras;
-
-    cerrarConexion();
-
-    return [
-        'ventas' => $ventas,
-        'compras' => $compras,
-        'totalGanancia' => $totalGanancia 
-
-    ];
-
-
 }

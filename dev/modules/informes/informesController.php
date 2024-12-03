@@ -91,7 +91,7 @@ if (isset($_REQUEST['accion'])) {
                     $date1 = $date1->format("Y-m-d");
                     $date2 = $date2->format("Y-m-d");
 
-                    $sesion = informeMes($date1,$date2);
+                    $sesion = informeSem($date1,$date2);
 
                     if (isset($sesion['totalGanancia']) && $sesion['totalGanancia'] == '0') {
                         $response = ["status" => "false"];
@@ -118,7 +118,7 @@ if (isset($_REQUEST['accion'])) {
                 $date1 = $date1->format("Y-m-d");
                 $date2 = $date2->format("Y-m-d");
 
-                $sesion = informeMes($date1,$date2);
+                $sesion = informeSem($date1,$date2);
 
                 if (isset($sesion['totalGanancia']) && $sesion['totalGanancia'] == '0') {
                     $response = ["status" => "false"];
@@ -193,7 +193,7 @@ if (isset($_REQUEST['accion'])) {
                     $date1=$date1->format("Y-m-d");
                     $date2=$date2->format("Y-m-d");
 
-                    $sesion = informePer($date1, $date2);
+                    $sesion = informeSem($date1, $date2);
 
                     if (isset($sesion['totalGanancia']) && $sesion['totalGanancia'] == '0') {
                         $response = ["status" => "false"];
