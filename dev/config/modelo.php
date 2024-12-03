@@ -158,7 +158,7 @@ function tablaProductos3(){
     abrirConexion();
     global $conexion;
 
-    $query = $conexion->prepare("SELECT * FROM productos WHERE stock = 0");
+    $query = $conexion->prepare("SELECT * FROM productos WHERE stock = 0 AND activo = 1");
     $query->execute();
     $resultado=$query->get_result();
 

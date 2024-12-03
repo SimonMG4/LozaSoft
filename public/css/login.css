@@ -55,36 +55,48 @@
     align-items: center;
     border-radius: 0.5rem;
     padding: 1rem;
-    background-color: var(--color1);
+    background-color: rgb(238, 246, 249);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: rgb(255, 255, 255) 0px 13px 27px -5px, rgb(255, 255, 255) 0px 8px 16px -8px;
+    box-shadow: var(--colornegro) 0px 13px 27px -5px, var(--colornegro) 0px 8px 16px -8px;
     z-index: 10;
 
 }
 .login_form h2{
-    line-height: 1.75rem;
-    font-weight: 900;
-    margin-bottom: .5rem;
-    color: var(--color7);
-    text-shadow: 1px 1px 2px var(--color3), 0 0 1em var(--color3), 0 0 0.2em var(--color3);
+    font-size: 1.75rem;
+    line-height: 3rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--colornegro);
 
 }
-.login_form input{
+.credencialesContainer{
+    width: 100%;
     background-color: var(--color7);
+    border: 1.5px solid var(--color1);
+    margin-bottom: 1em;
     padding: 1rem;
-    padding-right: 3rem;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    width: 300px;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    margin-bottom: 1rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+
+    input:focus{
+        outline: none;
+    }
+}
+.credencialesContainer:focus-within {
+    border: 1.5px solid #2d79f3;
+  }
+.login_form input{
+    border: none;
+    background-color: none;
+    width: 85%;
+    height: 100%;
 }
 .login_form input::placeholder{
-    color: var(--color1);
+    color: var(--colornegro);
 }
 .login_form .submit{
     display: block;
@@ -92,7 +104,7 @@
   padding-bottom: 0.75rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
-  background-color: var(--color3);
+  background-color: var(--color8);
   color: var(--color7);
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -101,6 +113,7 @@
   text-transform: uppercase;
   cursor: pointer;
   border: none;
+  margin-bottom: 1.5em;
 }
 .login_form div{
     display: flex;
@@ -108,13 +121,13 @@
 }
 .login_form div a{
     text-decoration: none;
-    color: var(--color4);
+    color: var(--color8);
 }
 .login_form .submit:hover, .login_form div a:hover{
     transform: scale(1.1);
 }
 .login_form p{
-    color: var(--color5);
+    color: var(--colornegro);
 }
 .footer{
     cursor: default;

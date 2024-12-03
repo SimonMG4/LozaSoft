@@ -59,7 +59,7 @@
         border: 2px solid #999;
         background-color: none;
         border-radius: 12px;
-        background-color: white;
+        background-color: var(--colorblanco);
         
         .btn-pdf-img{
             width: 4em;
@@ -113,7 +113,7 @@
 
 .tabla_informe th {
     background-color: var(--color1);
-    color: white;
+    color: var(--colorblanco);
     font-weight: bold;
 }
 /* Detalles de ventas/compras */
@@ -135,7 +135,7 @@
 
 .tabla-detalle th {
     background-color: var(--colorverde);
-    color: white;
+    color: var(--colorblanco);
     font-weight: bold;
 }
 
@@ -143,7 +143,7 @@
 .btn-detalles {
     padding: 5px 15px;
     background-color: var(--color1);
-    color: white;
+    color: var(--colorblanco);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -158,7 +158,7 @@
 /* Sección de Total Ganancia */
 .informe-total {
     background-color: var(--colorverde);
-    color: white;
+    color: var(--colorblanco);
     font-weight: bold;
     font-size: 1.2rem;
     align-self: center;

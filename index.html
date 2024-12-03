@@ -25,8 +25,14 @@
 
         <form action="dev/modules/login/loginController.php" method="POST" class="login_form" id="loginForm">
             <h2>Iniciar Sesion</h2>
-            <input type="password" placeholder="Ingresa Usuario" required name="usuario" id="usuario">
-            <input type="password" placeholder="Ingresa Contraseña" required name="contraseña" id="contraseña">
+            <div class="credencialesContainer">
+                <img src="public/assets/user.svg" alt="">
+                <input type="password" placeholder="Ingresa Usuario" required name="usuario" id="usuario">
+            </div>
+            <div class="credencialesContainer">
+                <img src="public/assets/password.svg"" alt="">
+                <input type="password" placeholder="Ingresa Contraseña" required name="contraseña" id="contraseña">
+            </div>
             <input type="hidden" name="accion" value="iniciarSesion">
             <input class="submit" type="submit" value="Ingresar">
             <div>

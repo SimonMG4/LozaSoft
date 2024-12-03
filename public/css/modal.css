@@ -55,7 +55,7 @@
     }
     .custom-file-upload{
         font-weight: 500;
-        color: #000;
+        color: var(--colornegro);
     }
 }
 
@@ -72,7 +72,7 @@
     margin-bottom: 0.5em;
     border: none;
     border-bottom: 1px solid var(--color9);
-    color: black;
+    color: var(--colornegro);
     font-weight: 500;
 }
 
@@ -87,7 +87,7 @@
 
 .form input[type="submit"], .cerrarModal {
     background-color: var(--colorverde);
-    color: white;
+    color: var(--colorblanco);
     border: none;
     padding: 1em 0.5em;
     border-radius: 12px;
@@ -136,7 +136,7 @@ input[type="file"] {
 }
 .add-button{
     background-color: var(--color3);
-    color: #fff;
+    color: var(--colorblanco);
     padding: 1em 0;
     text-transform: uppercase;
     cursor: pointer;
@@ -169,8 +169,8 @@ input[type="file"] {
 .eliminarFila{
     align-self: flex-end;
     border: none;
-    background-color: red;
-    color: white;
+    background-color: var(--color2);
+    color: var(--colorblanco);
     border-radius: 12px;
     width: 20px;
     cursor: pointer;
@@ -181,12 +181,12 @@ input[type="file"] {
     list-style: none;
     margin: 0;
     padding: 0;
-    border: 1px solid #000;
+    border: 1px solid var(--colornegro);
     max-height: 120px;
     overflow-y: auto;
     display: none;
     position: absolute;
-    background: white;
+    background: var(--colorblanco);
     width: 100%;
     z-index: 1000;
     border-radius: 12px;
@@ -203,13 +203,13 @@ input[type="file"] {
         height: 20px;
     }
     p{
-        color: black;
+        color: var(--colornegro);
     }
   }
   .listItem:hover{
     background-color: #555;
     p{
-        color: white;
+        color: var(--colorblanco);
     }
   }
   .inputVerDescripcion{
@@ -220,7 +220,7 @@ input[type="file"] {
     margin-bottom: 0.5em;
     border: none;
     border-bottom: 1px solid var(--color9);
-    color: black;
+    color: var(--colornegro);
     font-weight: 500;
     overflow-y: auto;
   }
@@ -258,7 +258,7 @@ input[type="file"] {
     }
     input[type="submit"]{
         background-color: var(--colorverde);
-        color: white;
+        color: var(--colorblanco);
         border: none;
         padding: 1em 0.5em;
         border-radius: 12px;
@@ -280,7 +280,7 @@ input[type="file"] {
         width: 100%;
         button{
             background-color: var(--color3);
-            color: white;
+            color: var(--colorblanco);
             border: none;
             padding: 1em 0.5em;
             border-radius: 12px;
@@ -297,7 +297,7 @@ input[type="file"] {
             margin-bottom: 0.5em;
             border: none;
             border-bottom: 1px solid var(--color9);
-            color: black;
+            color: var(--colornegro);
             font-weight: 500;
         }
         select{
@@ -306,7 +306,7 @@ input[type="file"] {
             margin-bottom: 0.5em;
             border: none;
             border-bottom: 1px solid var(--color9);
-            color: black;
+            color: var(--colornegro);
             font-weight: 500;
             
         }
