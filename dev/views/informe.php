@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
                         </td>
                     </tr>
                     <tr id="venta_<?php echo $venta['id']; ?>" class="details" style="display:none;">
-                        <td colspan="4">
+                        <td colspan="5">
                             <table class="tabla-detalle">
                                 <thead>
                                     <tr>
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
                         </td>
                     </tr>
                     <tr id="compra_<?php echo $compra['id']; ?>" class="details" style="display:none;">
-                        <td colspan="4">
+                        <td colspan="5">
                             <table class="tabla-detalle">
                                 <thead>
                                     <tr>
