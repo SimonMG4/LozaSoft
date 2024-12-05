@@ -158,6 +158,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
                     <td><?php echo number_format($totalGanancia, 2); ?> COP</td>
     </div>
 
+    <script>
+        var informeData = <?php echo json_encode($informeData); ?>;
+    </script>
+
     <script src="../../public/js/main.js"></script>
     <script src="../../dev/modules/informe/informe.js"></script>
 </body>
