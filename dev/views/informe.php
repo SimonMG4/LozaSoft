@@ -45,15 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
             <button id="logOut" class="logOut">CERRAR SESION</button>
         </div>
     </header>
-    <!-- Contenido adicional antes de la tabla -->
-     <div class="container_header">
+         <div class="container_header">
          <h2 class="informe_titulo">Informe de Ventas y Compras</h2>
          <p class="informe_descripcion"><?php echo $fecha; ?></p>
          <button class="btn-pdf"><img class="btn-pdf-img" src="../../public/assets/pdf.svg" alt=""></button>
      </div>
     <div class="container">
         
-        <!-- Tabla de Ventas y Compras -->
         <table class="tabla_informe">
             <thead>
                 <tr>
@@ -65,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
                 </tr>
             </thead>
             <tbody>
-                <!-- Ventas -->
                 <tr class="titulo-seccion-informe">
                     <td colspan="4"><strong>Ventas:</strong></td>
                 </tr>
@@ -107,7 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
                     </tr>
                 <?php endforeach; ?>
 
-                <!-- Compras -->
                 <tr class="titulo-seccion-informe">
                     <td colspan="4"><strong>Compras:</strong></td>
                 </tr>
@@ -149,7 +145,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
                     </tr>
                 <?php endforeach; ?>
 
-                <!-- Total Ganancia -->
             </tbody>
         </table>
     </div>
