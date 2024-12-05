@@ -53,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
     <div class="container_header">
         <h2 class="informe_titulo">Informe de Ventas y Compras</h2>
         <p class="informe_descripcion"><?php if(isset($fecha)){echo $fecha;}else{echo $fecha1. "  Hasta  ". $fecha2;} ?></p>
-        <button class="btn-pdf"><img class="btn-pdf-img" src="../../public/assets/pdf.svg" alt=""></button>
     </div>
     <div class="container">
         <table class="tabla_informe">
