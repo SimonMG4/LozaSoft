@@ -53,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
     <div class="container_header">
         <h2 class="informe_titulo">Informe de Ventas y Compras</h2>
         <p class="informe_descripcion"><?php if(isset($fecha)){echo $fecha;}else{echo $fecha1. "  Hasta  ". $fecha2;} ?></p>
+        <button class="btn-pdf" pdf="2"><img class="btn-pdf-img" src="../../public/assets/pdf.svg" alt=""></button>
     </div>
     <div class="container">
         <table class="tabla_informe">
@@ -95,6 +96,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['informeData'])) {
         <td><strong>Total Ganancia:</strong></td>
         <td><?php echo number_format($totalGanancia, 2); ?> COP</td>
     </div>
+    <script>
+        var informeData = <?php echo json_encode($informeData); ?>;
+    </script>
 
     <script src="../../public/js/main.js"></script>
     <script src="../../dev/modules/informe/informe.js"></script>

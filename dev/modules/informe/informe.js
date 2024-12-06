@@ -17,7 +17,8 @@ function toggleDetails(section) {
 const btn_pdf = document.querySelector('.btn-pdf');
 
 if(btn_pdf){
-    btn_pdf.addEventListener('click',()=>{
+    btn_pdf.addEventListener('click',function(){
+        const controller = this.getAttribute('pdf');
         Swal.fire({
             icon: "question",
             title: "Generar PDF",
@@ -30,20 +31,47 @@ if(btn_pdf){
         }).then(result=>{
             if(result.isConfirmed){
                 if(informeData){
+                    if(controller == '1'){
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = '../../dev/modules/informe/downloadInforme.php';
+                                    
+                        const inputData = document.createElement('input');
+                        inputData.type = 'hidden';
+                        inputData.name = 'informeData';
+                        inputData.value = JSON.stringify(informeData); 
+                        form.appendChild(inputData);
+                                    
+                                    
+                        document.body.appendChild(form);
+                        form.submit();
+                    }else{
+                        const form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action = '../../dev/modules/informe/downloadInforme.php';
+
+                        const inputData = document.createElement('input');
+                        inputData.type = 'hidden';
+                        inputData.name = 'informeData';
+                        inputData.value = JSON.stringify(informeData); 
+                        const pdf2 = document.createElement('input');
+                        pdf2.type = 'hidden';
+                        pdf2.name = 'pdf2';
+                        pdf2.value = 'true'; 
+                        form.appendChild(inputData);
+                        form.appendChild(pdf2);
+                                    
+                                    
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
                     
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = '../../dev/modules/informe/downloadInforme.php';
-                                
-                    const inputData = document.createElement('input');
-                    inputData.type = 'hidden';
-                    inputData.name = 'informeData';
-                    inputData.value = JSON.stringify(informeData); 
-                    form.appendChild(inputData);
-                                
-                                
-                    document.body.appendChild(form);
-                    form.submit();
+
+                    
+
+
+                    
+                    
 
                 }
             }
