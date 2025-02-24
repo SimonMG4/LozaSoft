@@ -62,7 +62,7 @@ if (isset($_REQUEST['accion'])) {
 
         break;
         case 'eliminarCompra':
-            if(!isset($_SESSION['id']) || $_SESSION['id']!=2){
+            if(!isset($_SESSION['id']) || $_SESSION['id']!=1){
                 echo json_encode(['status' => 'noPermisos']);
 
             }else{

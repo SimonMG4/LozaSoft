@@ -19,6 +19,7 @@ if (isset($_REQUEST['accion'])) {
             //Valor del iva aplicado a la empresa, este valor se cambia segun cuanto iva sea
             $iva = 0.19;
             $fecha = $_POST['fechaAgregarVenta'];
+            $descuento= $_POST['descuentoAgregarVenta'];
             //Validamos que hayan productos, para una venta minimo debe haber 1 producto
             if (isset($_POST['productos'])) {
                 $productos = $_POST['productos'];
@@ -52,10 +53,11 @@ if (isset($_REQUEST['accion'])) {
                         $totalVenta += $total;
                     }
                 }
+                $totalVenta= $totalVenta-$descuento;
                 $totalNeto = ($totalVenta)-($totalVenta * $iva);
         
                 //Agregamos una venta
-                $sesion1 = agregarVenta($fecha, $totalNeto,$totalVenta);
+                $sesion1 = agregarVenta($fecha, $totalNeto,$totalVenta,$descuento);
                 if ($sesion1) {
                     $sesion2 = true;
         
@@ -93,7 +95,7 @@ if (isset($_REQUEST['accion'])) {
             break;
         
         case 'eliminarVenta':
-            if(!isset($_SESSION['id']) || $_SESSION['id']!=2){
+            if(!isset($_SESSION['id']) || $_SESSION['id']!=1){
                 echo json_encode(['status' => 'noPermisos']);
 
             }else{
@@ -122,6 +124,8 @@ if (isset($_REQUEST['accion'])) {
             $idVenta = $_POST['idVenta'];
             //Comprobamos que haya minimo un producto
 
+            $descuento = $_POST['descuentoEditarVenta'];
+
             $iva= 0.19;
             if(isset($_POST['productos'])){
                 $productos = $_POST['productos'];
@@ -138,6 +142,7 @@ if (isset($_REQUEST['accion'])) {
                     'fecha' => $fecha,
                     'totalNeto' => 0 ,
                     'totalVenta'=> 0,
+                    'descuento'=> $descuento
                 ];
     
                 foreach($productos as $producto){
@@ -166,7 +171,6 @@ if (isset($_REQUEST['accion'])) {
                     //Calculamos el total de toda la compra
                     $totalVenta += $totalProducto;
                     //Almacenamos el total de la compra en nuestro array asociativo de actualizar compra
-                    $actualizarVenta['totalVenta'] = $totalVenta;
 
 
                     //Si el producto trae el campo id, es porque es para actualizar
@@ -192,6 +196,8 @@ if (isset($_REQUEST['accion'])) {
                         ];
                     }
                 }
+                $totalVenta=$totalVenta-$descuento;
+                $actualizarVenta['totalVenta'] = $totalVenta;
                 $totalNeto = ($totalVenta)-($totalVenta * $iva);
                 $actualizarVenta['totalNeto'] = $totalNeto;
                 //Ejecutamos la function de editar compra con todos los arreglos

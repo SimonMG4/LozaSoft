@@ -24,23 +24,37 @@ function cerrarConexion(){
 
 // Insertar Credenciales en la base de datos
 function insertarCredenciales(){
-    $usuario = 'superAdmin';
-    $contraseña = 'arteyloza';
-    $contraseña_encriptada = password_hash($contraseña, PASSWORD_BCRYPT);
+abrirConexion();
+global $conexion;
 
-    abrirConexion();
-    global $conexion;
+$query = $conexion->query("SELECT COUNT(*) as total FROM admin");
+if (!$query) {
+    die("Error en la consulta: " . $conexion->error);
+}
 
-     $query = $conexion->prepare("INSERT INTO admin (usuario, contraseña) VALUES (?, ?)");
-     $query->bind_param("ss", $usuario, $contraseña_encriptada);
+$row = $query->fetch_assoc();
+if ($row['total'] == 0) {
+    $credenciales = [
+        ['admin', 'arteyloza'],
+        ['superAdmin', 'arteyloza']
+    ];
 
-     if ($query->execute()) {
-    echo "Credenciales guardadas correctamente.";
-     } else {
-    echo "Error al guardar las credenciales: " . $query->error;
-     }
 
-     cerrarConexion();
+    $query1 = $conexion->prepare("INSERT INTO admin (usuario, contraseña) VALUES (?, ?)");
+    if (!$query1) {
+        die("Error en la preparación del INSERT: " . $conexion->error);
+    }
+
+    foreach ($credenciales as $credencial) {
+        $usuario = $credencial[0];
+        $contraseña_encriptada = password_hash($credencial[1], PASSWORD_BCRYPT);
+        $query1->bind_param("ss", $usuario, $contraseña_encriptada);
+        $query1->execute();
+    }
+
+}
+
+cerrarConexion();
 }
 function actualizarContraseña($contraseña){
     abrirConexion();
@@ -950,3 +964,4 @@ function informeYear($date){
         'totalGanancia' => $totalGanancia
     ];
 }
+insertarCredenciales();

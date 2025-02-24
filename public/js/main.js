@@ -872,11 +872,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                 //Id de la compra
                                 const inputID = document.querySelector('.inputIdModulo');
 
+                                const descuento = document.getElementById('descuento');
+
                                 //Almacenamos en el inputID el id de la compra para saber a que venta hay que actualizar
                                 inputID.value = id;
 
                                 //Ponemos en el input de la fecha la fecha que nos devuelve el fetch
                                 fecha.value = data.venta[0].fecha;
+
+                                descuento.value = data.venta[0].descuento;
                                 //Se hace un ciclo para insertar una nuevaFila por cada articulo que nos devuelve el fetch
                                 for (let count = 0; count < data.detalles.length; count++) {
                                     const nuevaFila = `
